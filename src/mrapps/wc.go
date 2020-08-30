@@ -6,8 +6,11 @@ package main
 // go build -buildmode=plugin wc.go
 //
 
-import "../mr"
-import "unicode"
+//import "../mr"
+import (
+	"6.824_new/src/mr"
+	"unicode"
+)
 import "strings"
 import "strconv"
 
