@@ -102,8 +102,11 @@ func (e *ClientEnd) Call(svcMeth string, args interface{}, reply interface{}) bo
 	select {
 	case e.ch <- req:
 		// the request has been sent.
+		//fmt.Println("in func Call: the request has been sent.")
 	case <-e.done:
 		// entire Network has been destroyed.
+		//p, ok := (Value).(raft.AppendEntriesArgs)
+		//fmt.Println("in func Call: entire Network has been destroyed. args:", args)
 		return false
 	}
 
@@ -111,6 +114,7 @@ func (e *ClientEnd) Call(svcMeth string, args interface{}, reply interface{}) bo
 	// wait for the reply.
 	//
 	rep := <-req.replyCh
+
 	if rep.ok {
 		rb := bytes.NewBuffer(rep.reply)
 		rd := labgob.NewDecoder(rb)

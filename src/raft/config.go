@@ -12,6 +12,7 @@ package raft
 import (
 	"6.824_new/src/labrpc"
 	"log"
+	"reflect"
 )
 import "sync"
 import "testing"
@@ -171,11 +172,15 @@ func (cfg *config) start1(i int) {
 	applyCh := make(chan ApplyMsg)
 	go func() {
 		for m := range applyCh {
+			fmt.Println("in func start1, m:", m)
 			err_msg := ""
 			if m.CommandValid == false {
+				fmt.Println("in func start1, m.type error")
 				// ignore other types of ApplyMsg
 			} else {
+				fmt.Println("in func start1, m.type correct")
 				v := m.Command
+				fmt.Println("in func start1, type(v)", reflect.TypeOf(v))
 				cfg.mu.Lock()
 				for j := 0; j < len(cfg.logs); j++ {
 					if old, oldok := cfg.logs[j][m.CommandIndex]; oldok && old != v {
@@ -363,7 +368,7 @@ func (cfg *config) checkNoLeader() {
 }
 
 // how many servers think a log entry is committed?
-func (cfg *config) nCommitted(index int) (int, interface{}) {
+func (cfg *config) nCommitted(index int) (int, interface{}) {  //索引为index的日志条目，有多少节点已经提交了它？
 	count := 0
 	var cmd interface{} = nil
 	for i := 0; i < len(cfg.rafts); i++ {
@@ -373,9 +378,11 @@ func (cfg *config) nCommitted(index int) (int, interface{}) {
 
 		cfg.mu.Lock()
 		cmd1, ok := cfg.logs[i][index]
+		//fmt.Println("in func nCommitted, i:", i, "cmd1:", cmd1)
 		cfg.mu.Unlock()
 
 		if ok {
+			//fmt.Println("in func nCommitted, cmd:", cmd, "cmd1", cmd1)
 			if count > 0 && cmd != cmd1 {
 				cfg.t.Fatalf("committed values do not match: index %v, %v, %v\n",
 					index, cmd, cmd1)
@@ -440,25 +447,37 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 			starts = (starts + 1) % cfg.n
 			var rf *Raft
 			cfg.mu.Lock()
-			if cfg.connected[starts] {
+			if cfg.connected[starts] {  //节点starts是否在网络中
 				rf = cfg.rafts[starts]
 			}
 			cfg.mu.Unlock()
 			if rf != nil {
-				index1, _, ok := rf.Start(cmd)
-				if ok {
+				index1, _, ok := rf.Start(cmd)  //三个返回值分别为日志索引，任期，当前节点rf是否为leader
+				if ok {  //当前节点rf是leader，说明确定了日志条目cmd的索引，任期
 					index = index1
 					break
 				}
 			}
 		}
 
-		if index != -1 {
+		/*fmt.Println("cmd:", cmd, "index:", index)
+		for i := 0; i < 3; i++ {
+			tmp := cfg.rafts[i]
+			fmt.Println("in func one, raft:", i, "length of logs:", len(tmp.logs))
+			if len(tmp.logs) > 0 {
+				fmt.Println("in func one, logs[0]", tmp.logs[0])
+			}
+		}*/
+
+		if index != -1 {  //日志条目cmd是有索引的，说明leader已经提交了它
 			// somebody claimed to be the leader and to have
 			// submitted our command; wait a while for agreement.
+			fmt.Println("in func one, index:", index)
 			t1 := time.Now()
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
+
+				//fmt.Println("nd:", nd, "cmd:", cmd, "cmd1:", cmd1)
 				if nd > 0 && nd >= expectedServers {
 					// committed
 					if cmd1 == cmd {
@@ -467,7 +486,23 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 					}
 				}
 				time.Sleep(20 * time.Millisecond)
+
+				/*for i := 0; i < 3; i++ {
+					tmp := cfg.rafts[i]
+					fmt.Println("raft:", i, "length of log:", len(tmp.logs))
+					if len(tmp.logs) > 0 {
+						fmt.Println(tmp.logs[0])
+					}
+				}*/
 			}
+			fmt.Println("in func one, len of cfg.logs:", len(cfg.logs))
+			for i := 0; i < len(cfg.logs); i++ {
+				fmt.Println("cfg.logs: i = ", i)
+				for k, v := range cfg.logs[i] {
+					fmt.Println("k:", k, "v:", v)
+				}
+			}
+
 			if retry == false {
 				cfg.t.Fatalf("one(%v) failed to reach agreement", cmd)
 			}

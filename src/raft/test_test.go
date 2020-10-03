@@ -59,29 +59,64 @@ func TestReElection2A(t *testing.T) {
 
 	leader1 := cfg.checkOneLeader()
 
+	//should be deleted
+	fmt.Println("leader1", leader1);
+	fmt.Println("before disconnect leader1, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("before disconnect leader1, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("before disconnect leader1, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
+
 	// if the leader disconnects, a new one should be elected.
 	cfg.disconnect(leader1)
+	fmt.Println("after disconnect leader1, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("after disconnect leader1, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("after disconnect leader1, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
 	cfg.checkOneLeader()
 
 	// if the old leader rejoins, that shouldn't
 	// disturb the new leader.
 	cfg.connect(leader1)
+	fmt.Println("after connect leader1, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("after connect leader1, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("after connect leader1, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
 	leader2 := cfg.checkOneLeader()
+
+	//should be deleted
+	fmt.Println("leader2", leader2);
 
 	// if there's no quorum, no leader should
 	// be elected.
-	cfg.disconnect(leader2)
+	//time.Sleep(2 * RaftElectionTimeout)
 	cfg.disconnect((leader2 + 1) % servers)
+	cfg.disconnect(leader2)
+	fmt.Println("after disconnect two, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("after disconnect two, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("after disconnect two, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
 	time.Sleep(2 * RaftElectionTimeout)
-	cfg.checkNoLeader()
+	fmt.Println("after 2s, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("after 2s, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("after 2s, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
+	//fmt.Println("before checkNoLeader");
+	//cfg.checkNoLeader()
+	//fmt.Println("after checkNoLeader");
 
 	// if a quorum arises, it should elect a leader.
+	//fmt.Println("after checkNoLeader, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	//fmt.Println("after checkNoLeader, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	//fmt.Println("after checkNoLeader, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
 	cfg.connect((leader2 + 1) % servers)
-	cfg.checkOneLeader()
+	fmt.Println("after connect leader2 + 1, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("after connect leader2 + 1, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("after connect leader2 + 1, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
+	tmp := cfg.checkOneLeader()
+	fmt.Println("after connect leader2 + 1, leader:", tmp)
 
 	// re-join of last node shouldn't prevent leader from existing.
 	cfg.connect(leader2)
-	cfg.checkOneLeader()
+	fmt.Println("after connect leader2, rf:", (leader1) % servers, "state:", cfg.rafts[(leader1) % servers].state, "term:", cfg.rafts[(leader1) % servers].currentTerm)
+	fmt.Println("after connect leader2, rf:", (leader1 + 1) % servers, "state:", cfg.rafts[(leader1 + 1) % servers].state, "term:", cfg.rafts[(leader1 + 1) % servers].currentTerm)
+	fmt.Println("after connect leader2, rf:", (leader1 + 2) % servers, "state:", cfg.rafts[(leader1 + 2) % servers].state, "term:", cfg.rafts[(leader1 + 2) % servers].currentTerm)
+	tmp = cfg.checkOneLeader()
+	fmt.Println("after connect leader2, leader:", tmp)
 
 	cfg.end()
 }
@@ -94,7 +129,7 @@ func TestBasicAgree2B(t *testing.T) {
 	cfg.begin("Test (2B): basic agreement")
 
 	iters := 3
-	for index := 1; index < iters+1; index++ {
+	for index := 1; index < iters+1; index++ {  //日志索引从1到3
 		nd, _ := cfg.nCommitted(index)
 		if nd > 0 {
 			t.Fatalf("some have committed before Start()")
