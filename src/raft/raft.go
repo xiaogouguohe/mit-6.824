@@ -81,8 +81,8 @@ type Raft struct {
 	commitIndex int32
 	lastApplied int32
 
-	nextIndex[] int32
-	matchIndex[] int32
+	nextIndex []int32
+	matchIndex []int32
 
 	logs []LogEntry
 
@@ -92,6 +92,9 @@ type Raft struct {
 	electionInterval time.Duration
 
 	voteMu sync.RWMutex
+	nextIndexMu sync.RWMutex
+	matchIndexMu sync.RWMutex
+	logsMu sync.RWMutex
 
 	lastRecvTime int64
 
@@ -249,12 +252,13 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 	votedFor := rf.GetVotedFor()
 	state := rf.GetCertainState()
-	if state == FOLLOWER && (votedFor == -1 || votedFor == args.Candidate)/* && rf.lastApplied <= args.LastLogIndex*/ {  //这里一定要rf.state == "follower"
+
+
+	if state == FOLLOWER && (votedFor == -1 || votedFor == args.Candidate) && !rf.isLogOld(args) {  //这里一定要rf.state == "follower"
 		//fmt.Println("in func RequestVote: rf.Term == args.Term and rf has not vote")
 		voteGranted = true
 		rf.SetVotedFor(args.Candidate)
 		//atomic.StoreUint32(&rf.state, FOLLOWER)  //update已经做了
-
 	}
 
 	reply.VoteGranted = voteGranted
@@ -431,7 +435,7 @@ func (rf *Raft) LeaderElection() {
 		currentTerm, _ = rf.TurnToCandidate()
 		itself := rf.GetItself()
 
-		replyCount := make (chan int, len(rf.peers))
+		replyCount := make(chan int, len(rf.peers))
 		rand.Seed(time.Now().UnixNano())
 		timeout := time.Duration(time.Duration(
 			rand.Intn(500)+500) * time.Millisecond)
@@ -449,8 +453,8 @@ func (rf *Raft) LeaderElection() {
 				args := RequestVoteArgs{
 					Term:         currentTerm,
 					Candidate:    itself,
-					//LastLogIndex: 0,
-					//LastLogTerm:  0,
+					LastLogIndex: rf.GetLastLogIndex(),
+					LastLogTerm:  rf.GetLastLogTerm(),
 				}
 				var reply RequestVoteReply
 				ok := rf.sendRequestVote(voter, &args, &reply)  //向voter节点发送请求
@@ -649,12 +653,23 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Your initialization code here (2A, 2B, 2C).
 	rf.SetVoteState(0, -1)
-	//rf.logs = make(map[int][]string, 0)
 	rf.SetCertainState(FOLLOWER)
-	//rf.LastLogIndex = -1
-	//rf.commitIndex = -1
 
-	//rf.lastApplied = -1
+	rf.SetCommitIndex(-1)
+	rf.SetLastApplied(-1)
+
+
+	rf.nextIndexMu.Lock()
+	rf.nextIndex = make([]int32, len(rf.peers))
+	rf.nextIndexMu.Unlock()
+
+	rf.matchIndexMu.Lock()
+	rf.matchIndex = make([]int32, len(rf.peers))
+	rf.matchIndexMu.Unlock()
+
+	rf.logsMu.Lock()
+	rf.logs = make([]LogEntry, len(rf.peers))
+	rf.logsMu.Unlock()
 
 	rf.applyCh = applyCh
 
@@ -756,6 +771,39 @@ func (rf* Raft) UpdateTerm(term int) {
 func (rf *Raft) UpdateLastRecvTime() {
 	now := time.Now().UnixNano()
 	atomic.StoreInt64(&rf.lastRecvTime, now)
+}
+
+func (rf *Raft) isLogOld(args *RequestVoteArgs) bool {
+	currentTerm := rf.GetCurrentTerm()
+	logsLastIndex := rf.GetLastLogIndex()
+	return currentTerm < args.Term || (currentTerm == args.Term && logsLastIndex < args.LastLogIndex)
+}
+
+func (rf* Raft) GetLogsLength() int {
+	rf.logsMu.Lock()
+	defer rf.logsMu.Unlock()
+
+	return len(rf.logs)
+}
+
+func (rf* Raft) GetLastLogIndex() int32 {
+	return int32(rf.GetLogsLength() - 1)
+}
+
+func (rf* Raft) GetLastLogTerm() int32 {
+	index := rf.GetLastLogIndex()
+	if (index < 0) {
+		return -1
+	}
+	return int32(rf.logs[index].Term)
+}
+
+func (rf* Raft) SetCommitIndex(index int32) {
+	atomic.StoreInt32(&rf.commitIndex, index)
+}
+
+func (rf* Raft) SetLastApplied(lastApplied int32) {
+	atomic.StoreInt32(&rf.lastApplied, lastApplied)
 }
 
 func (rf* Raft) SetElectionInterfal() {
