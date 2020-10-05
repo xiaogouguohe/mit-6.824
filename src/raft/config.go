@@ -12,7 +12,7 @@ package raft
 import (
 	"6.824_new/src/labrpc"
 	"log"
-	"reflect"
+	//"reflect"
 )
 import "sync"
 import "testing"
@@ -172,15 +172,15 @@ func (cfg *config) start1(i int) {
 	applyCh := make(chan ApplyMsg)
 	go func() {
 		for m := range applyCh {
-			fmt.Println("in func start1, m:", m)
+			//fmt.Println("in func start1, m:", m)
 			err_msg := ""
 			if m.CommandValid == false {
-				fmt.Println("in func start1, m.type error")
+				//fmt.Println("in func start1, m.type error")
 				// ignore other types of ApplyMsg
 			} else {
-				fmt.Println("in func start1, m.type correct")
+				//fmt.Println("in func start1, m.type correct")
 				v := m.Command
-				fmt.Println("in func start1, type(v)", reflect.TypeOf(v))
+				//fmt.Println("in func start1, type(v)", reflect.TypeOf(v))
 				cfg.mu.Lock()
 				for j := 0; j < len(cfg.logs); j++ {
 					if old, oldok := cfg.logs[j][m.CommandIndex]; oldok && old != v {
@@ -472,7 +472,7 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 		if index != -1 {  //日志条目cmd是有索引的，说明leader已经提交了它
 			// somebody claimed to be the leader and to have
 			// submitted our command; wait a while for agreement.
-			fmt.Println("in func one, index:", index)
+			//fmt.Println("in func one, index:", index)
 			t1 := time.Now()
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
@@ -489,19 +489,19 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 
 				/*for i := 0; i < 3; i++ {
 					tmp := cfg.rafts[i]
-					fmt.Println("raft:", i, "length of log:", len(tmp.logs))
+					//fmt.Println("raft:", i, "length of log:", len(tmp.logs))
 					if len(tmp.logs) > 0 {
-						fmt.Println(tmp.logs[0])
+						//fmt.Println(tmp.logs[0])
 					}
 				}*/
 			}
-			fmt.Println("in func one, len of cfg.logs:", len(cfg.logs))
-			for i := 0; i < len(cfg.logs); i++ {
+			//fmt.Println("in func one, len of cfg.logs:", len(cfg.logs))
+			/*for i := 0; i < len(cfg.logs); i++ {
 				fmt.Println("cfg.logs: i = ", i)
 				for k, v := range cfg.logs[i] {
 					fmt.Println("k:", k, "v:", v)
 				}
-			}
+			}*/
 
 			if retry == false {
 				cfg.t.Fatalf("one(%v) failed to reach agreement", cmd)

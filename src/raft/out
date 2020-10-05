@@ -1,78 +1,8 @@
 Test (2B): basic agreement ...
-in func leaderElection, rf: 0 term: 1 win election
-in func commitLogs, rf: 2 commitIndex: -1 lastLogIndex -1 lastApplied: -1
-in func commitLogs, rf: 1 commitIndex: -1 lastLogIndex -1 lastApplied: -1
-in func one, index: 1
-in func commitLogs, rf: 2 commitIndex: -1 lastLogIndex 0 lastApplied: -1
-in func commitLogs, rf: 0 commitIndex: 0 lastLogIndex 0 lastApplied: -1
-in func start1, m: {true 100 1}
-in func start1, m.type correct
-in func start1, type(v) int
-in func commitLogs, rf: 1 commitIndex: -1 lastLogIndex 0 lastApplied: -1
-in func commitLogs, rf: 2 commitIndex: 0 lastLogIndex 0 lastApplied: -1
-in func commitLogs, rf: 1 commitIndex: 0 lastLogIndex 0 lastApplied: -1
-in func start1, m: {true 100 1}
-in func start1, m.type correct
-in func start1, type(v) int
-in func start1, m: {true 100 1}
-in func start1, m.type correct
-in func start1, type(v) int
-in func one, index: 2
-in func commitLogs, rf: 1 commitIndex: 0 lastLogIndex 1 lastApplied: 0
-in func commitLogs, rf: 2 commitIndex: 0 lastLogIndex 1 lastApplied: 0
-in func commitLogs, rf: 0 commitIndex: 1 lastLogIndex 1 lastApplied: 0
-in func start1, m: {true 200 2}
-in func start1, m.type correct
-in func start1, type(v) int
-in func commitLogs, rf: 2 commitIndex: 1 lastLogIndex 1 lastApplied: 0
-in func start1, m: {true 200 2}
-in func start1, m.type correct
-in func start1, type(v) int
-in func commitLogs, rf: 1 commitIndex: 1 lastLogIndex 1 lastApplied: 0
-in func start1, m: {true 200 2}
-in func start1, m.type correct
-in func start1, type(v) int
-in func one, index: 3
-in func commitLogs, rf: 0 commitIndex: 2 lastLogIndex 2 lastApplied: 1
-in func commitLogs, rf: 2 commitIndex: 1 lastLogIndex 2 lastApplied: 1
-in func start1, m: {true 300 3}
-in func start1, m.type correct
-in func start1, type(v) int
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 1
-in func start1, m: {true 300 3}
-in func start1, m.type correct
-in func start1, type(v) int
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func commitLogs, rf: 2 commitIndex: 2 lastLogIndex 2 lastApplied: 2
-in func one, len of cfg.logs: 3
-cfg.logs: i =  0
-k: 1 v: 100
-k: 2 v: 200
-k: 3 v: 300
-cfg.logs: i =  1
-k: 1 v: 100
-k: 2 v: 200
-cfg.logs: i =  2
-k: 1 v: 100
-k: 2 v: 200
-k: 3 v: 300
---- FAIL: TestBasicAgree2B (2.96s)
-    config.go:507: one(300) failed to reach agreement
-FAIL
+  ... Passed --   1.2  3   16    4324    3
+Test (2B): RPC byte count ...
+  ... Passed --   2.8  3   48  113808   11
+Test (2B): agreement despite follower disconnection ...
+2020/10/05 20:30:33 apply error: commit index=2 server=1 106 != server=2 102
 exit status 1
-FAIL	6.824_new/src/raft	2.960s
+FAIL	6.824_new/src/raft	9.047s
