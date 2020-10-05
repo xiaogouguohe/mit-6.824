@@ -201,7 +201,7 @@ type AppendEntriesArgs struct {
 	Term int
 	LeaderId int
 	PrevLogIndex int32
-	PrevLogTerm uint32
+	PrevLogTerm int32
 	Entries []LogEntry
 	LeaderCommit int32
 
@@ -267,13 +267,8 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	//fmt.Println("in func AppendEntries, begin")
-	//rf.mu.Lock()
-	//defer rf.mu.Unlock()
-
-	//fmt.Println("in func AppendEntries: rf:", rf.me, "rf.term:", rf.currentTerm, "leader:", args.LeaderId, "leader.Term", args.Term)
-
+	//fmt.Println("in func AppendEntries: rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "leader:", args.LeaderId, "leader.Term", args.Term)
 	rf.UpdateTerm(args.Term)
-
 	currentTerm, _ := rf.GetVoteState()
 	reply.Term = currentTerm
 
@@ -282,38 +277,36 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.Succ = false
 		return
 	}
-
 	rf.UpdateLastRecvTime()
-
 	atomic.StoreUint32(&rf.state, FOLLOWER)
-
 	reply.Succ = true
 
-	//还要上锁
-	/*if args.PrevLogIndex >= len(rf.logs) || //leader.logs[args.PrevLogIndex]已经超出rf.logs范围
-		(args.PrevLogIndex >= 0 && args.PrevLogTerm != rf.logs[args.PrevLogIndex].Term) { //leader.logs[args.PrevLogIndex]和rf.logs同样索引的任期不同
-		reply.Succ = false //可能还有欠缺，返回给leader处理？
-		reply.CommitIndex = rf.commitIndex
-	} else if args.Entries != nil {
-		//fmt.Println("in func AppendEntries, rf:", rf.me, "args.Entries not empty")
-		rf.logs = append(rf.logs[:args.PrevLogIndex + 1], args.Entries...)
-		if len(rf.logs) - 1 < args.LeaderCommit {
-			rf.commitIndex = len(rf.logs) - 1
-		} else {
-			rf.commitIndex = args.LeaderCommit
-		}
+	lastLogIndex := rf.GetLastLogIndex()
+	lastLogTerm := rf.GetLastLogTerm()
+	commitIndex := rf.GetCommitIndex()
+
+	if args.PrevLogIndex > lastLogIndex || args.LeaderCommit > lastLogIndex {
+		//fmt.Println("in func AppendEntries, args.PervLogIndex > lastLogIndex, args.PrevLogIndex:", args.PrevLogIndex, "lastLogIndex:", lastLogIndex)
+		reply.Succ = false
+		reply.CommitIndex = commitIndex
+		reply.Term = args.Term
+	} else if args.PrevLogIndex >= 0 && args.PrevLogTerm != lastLogTerm {
+		//fmt.Println("in func AppendEntries, args.PrevLogIndex >= 0 && args.PrevLogTerm != lastLogTerm, args.PrevLogTerm:",
+			//args.PrevLogTerm, "lastLogTerm:", lastLogTerm)
+		reply.Succ = false
+		reply.CommitIndex = commitIndex
+		reply.Term = args.Term
+	} else {
+		//fmt.Println("in func AppendEntries, match")
 		reply.Succ = true
-		reply.CommitIndex = rf.commitIndex
-		go rf.commitLogs()
+		reply.CommitIndex = args.LeaderCommit
+		reply.Term = args.Term
 
-	} else { //heartbeat
-		reply.Succ = true
-		reply.CommitIndex = rf.commitIndex
-		go rf.commitLogs()
-	}*/
+		rf.AppendLogs(args.PrevLogIndex + 1, args.Entries)
+		rf.SetCommitIndex(args.LeaderCommit)
 
-
-
+		//go rf.commitLogs()  //会不会提交到一半被覆盖？
+	}
 }
 //
 // example code to send a RequestVote RPC to a server.
@@ -502,6 +495,7 @@ func (rf *Raft) LeaderElection() {
 	}
 	//
 	if currentTerm == rf.GetCurrentTerm() && rf.GetCertainState() == CANDIDATE {
+		//fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "win election")
 		rf.SetCertainState(LEADER)
 		rf.heartbeat2()
 	}
@@ -515,39 +509,42 @@ func (rf *Raft) heartbeat2() {
 		return
 	}
 
-	currentTerm, _ := rf.GetVoteState()
+	//currentTerm, _ := rf.GetVoteState()
 
 	//fmt.Println("in func heartbeat2: rf", rf.me, "send heartbeat in term", rf.currentTerm)
 
 	itself := rf.GetItself()
+
+	replyCh := make(chan int32, len(rf.peers))
+
+	go func() {
+		<-time.After(HEARTBEAT_INTERVAL / 2)
+		replyCh <- -2
+		//fmt.Println("in func heartbeat2's goroutine: -1 into replyCh")
+	}()
+
 	for i := range(rf.peers) {
 		if i == itself {
 			continue
 		}
-		//fmt.Println("in func heartbeat2, leader term is:", rf.currentTerm, "heartbeat sender is:", rf.me, "heartbeat receiver is:", i)
-		//fmt.Println("in func heartbeat2, len(rf.nextIndex):", len(rf.nextIndex), "len(rf.matchIndex):", len(rf.matchIndex), "len(rf.logs):", len(rf.logs))
-		//args.PrevLogIndex = rf.nextIndex[i] - 1 //上一条日志的索引
-		//if (len(args.Entries) > 0) {
-		//args.Entries = rf.logs[rf.nextIndex[i]:]  //需要提交的日志
-		//}
-		//fmt.Println("in func heartbeat2, i:", i, "len(rf.logs):", len(rf.logs), "rf.nextIndex[i]:", rf.nextIndex[i], "args.Entries:", args.Entries)
-
-		/*if args.PrevLogIndex >= 0 { //存在上一条日志
-			args.PrevLogTerm = rf.logs[args.PrevLogIndex].Term //上一条日志的任期
-		}
-
-		args.LeaderCommit = rf.commitIndex //leader当前提交的最后一条日志的索引（也就是说，可能存在leader的有些日志还没有提交）*/
 
 		go func(server int) {
 			for {
-				select{
-				case <- time.After(HEARTBEAT_INTERVAL):
+				//select{
+				//case <- time.After(HEARTBEAT_INTERVAL):
 					if rf.killed() || rf.GetCertainState() != LEADER {
 						break
 					}
-					var args AppendEntriesArgs
-					args.Term = currentTerm
-					args.LeaderId = itself
+
+
+					args := AppendEntriesArgs{
+						Term:         rf.GetCurrentTerm(), //会不会因为在协程之间，任期发生变化，从而导致不一致？
+						LeaderId:     rf.GetItself(),
+						PrevLogIndex: rf.GetLastLogIndex(),
+						PrevLogTerm:  rf.GetLastLogTerm(),
+						Entries:      rf.GetLogsBehindNextIndex(server),
+						LeaderCommit: rf.GetCommitIndex(),
+					}
 
 					var reply AppendEntriesReply
 
@@ -561,10 +558,49 @@ func (rf *Raft) heartbeat2() {
 					//fmt.Println("in func heartbeat2's goroutine, ok:", ok)
 					//rf.handleAppendEntriesReply(server, &reply) //这里可能处理很久
 					rf.UpdateTerm(reply.Term)
-				}
+					if reply.Succ {
+						//fmt.Println("in func heartbeat2's goroutine, server:", server, "into replyCh")
+						replyCh <- reply.CommitIndex
+					}
+					time.Sleep(HEARTBEAT_INTERVAL)
+				//}
 			}
 		}(i)
 	}
+
+	go func() {
+		for {
+			if rf.killed() || rf.GetCertainState() != LEADER {
+				break
+			}
+			replyCnt := 1
+			majority := len(rf.peers) / 2 + 1  //设置多数值  //可嫩还要给len枷锁
+			for {
+				v := <- replyCh
+				//fmt.Println("in func heartbeat2, rf:", rf.me, "v:", v)
+				if v == -2 {
+					break
+				} else if v < rf.GetCommitIndex(){
+					continue
+				} else {
+					replyCnt++
+				}
+				if replyCnt >= majority {
+					break
+				}
+			}
+
+			if replyCnt >= majority {
+				commitIndex := rf.GetCommitIndex()
+				lastLogIndex := rf.GetLastLogIndex()
+				//fmt.Println("in func heartbeat2's go routine, commitIndex:", commitIndex, " lastLogIndex:", lastLogIndex)
+				if commitIndex < lastLogIndex {
+					rf.SetCommitIndex(commitIndex + 1)
+				}
+				//go rf.commitLogs()
+			}
+		}
+	}()
 
 }
 
@@ -612,26 +648,28 @@ func (rf *Raft) handleAppendEntriesReply(server int, reply *AppendEntriesReply) 
 	}
 }
 
-/*func (rf *Raft) commitLogs() {
-	rf.mu.Lock()
-	defer rf.mu.Unlock()
-
+func (rf *Raft) commitLogs() {
 	//fmt.Println("in func commitLogs, rf:", rf.me, "rf.commitIndex:", rf.commitIndex, "len(rf.logs):", len(rf.logs), "rf.lastApplied:", rf.lastApplied)
-	if (rf.commitIndex > len(rf.logs) - 1) {
-		rf.commitIndex = len(rf.logs) - 1
+	commitIndex := rf.GetCommitIndex()
+	lastLogIndex := rf.GetLastLogIndex()
+	lastApplied := rf.GetLastApplied()
+
+	if (commitIndex > lastLogIndex) {
+		rf.SetCommitIndex(lastLogIndex)
+		commitIndex = lastLogIndex
 	}
 
-	for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
+	for i := lastApplied + 1; i <= commitIndex; i++ {
 		//fmt.Println("in func commitLogs, rf:", rf.me, "command", rf.logs[i].Command, "commandIndex:", i)
 		rf.applyCh <- ApplyMsg{
-			CommandIndex: i,
+			CommandIndex: int(i),
 			Command: rf.logs[i].Command,
 			CommandValid: true,
 		}
 	}
 
-	rf.lastApplied = rf.commitIndex
-}*/
+	rf.SetLastApplied(commitIndex)
+}
 //
 // the service or tester wants to create a Raft server. the ports
 // of all the Raft servers (including this one) are in peers[]. this
@@ -668,7 +706,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.matchIndexMu.Unlock()
 
 	rf.logsMu.Lock()
-	rf.logs = make([]LogEntry, len(rf.peers))
+	rf.logs = make([]LogEntry, 0)
 	rf.logsMu.Unlock()
 
 	rf.applyCh = applyCh
@@ -692,6 +730,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 			now := time.Now().UnixNano()
 			prev := atomic.LoadInt64(&rf.lastRecvTime)
 			if time.Duration(now - prev) * time.Nanosecond >= rf.electionInterval {
+				//fmt.Println("in func Make's goroutine, rf:", rf.me, "term:", rf.GetCurrentTerm(), "launch Election")
 				rf.LeaderElection()
 			}
 		}
@@ -780,8 +819,8 @@ func (rf *Raft) isLogOld(args *RequestVoteArgs) bool {
 }
 
 func (rf* Raft) GetLogsLength() int {
-	rf.logsMu.Lock()
-	defer rf.logsMu.Unlock()
+	rf.logsMu.RLock()
+	defer rf.logsMu.RUnlock()
 
 	return len(rf.logs)
 }
@@ -802,8 +841,41 @@ func (rf* Raft) SetCommitIndex(index int32) {
 	atomic.StoreInt32(&rf.commitIndex, index)
 }
 
+func (rf* Raft) GetLastApplied() int32 {
+	return atomic.LoadInt32(&rf.lastApplied)
+}
+
 func (rf* Raft) SetLastApplied(lastApplied int32) {
 	atomic.StoreInt32(&rf.lastApplied, lastApplied)
+}
+
+func (rf *Raft) GetNextIndex(server int) int32 {
+	rf.nextIndexMu.RLock()
+	defer rf.nextIndexMu.RUnlock()
+
+	return rf.nextIndex[server]
+}
+
+func (rf* Raft) GetLogs(server int, beginIndex int32) []LogEntry {
+	rf.logsMu.RLock()
+	defer rf.logsMu.RUnlock()
+
+	return rf.logs[beginIndex:]
+}
+
+func (rf* Raft) GetLogsBehindNextIndex(server int) []LogEntry {
+	return rf.GetLogs(server, rf.GetNextIndex(server))
+}
+
+func (rf *Raft) GetCommitIndex() int32 {
+	return atomic.LoadInt32(&rf.commitIndex)
+}
+
+func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
+	rf.logsMu.Lock()
+	defer rf.logsMu.Unlock()
+
+	rf.logs = append(rf.logs[:index], entries...)
 }
 
 func (rf* Raft) SetElectionInterfal() {
