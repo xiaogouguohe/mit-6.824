@@ -190,7 +190,7 @@ func TestFailAgree2B(t *testing.T) {
 
 	// disconnect one follower from the network.
 	leader := cfg.checkOneLeader()
-	fmt.Println("leader:", leader)
+	//fmt.Println("leader:", leader)
 	cfg.disconnect((leader + 1) % servers)
 
 	// the leader and remaining follower should be
@@ -224,10 +224,14 @@ func TestFailNoAgree2B(t *testing.T) {
 	cfg.one(10, servers, false)
 
 	// 3 of 5 followers disconnect
+	//fmt.Println("in func TestFailNoAgree2B, before disconnect")
 	leader := cfg.checkOneLeader()
 	cfg.disconnect((leader + 1) % servers)
 	cfg.disconnect((leader + 2) % servers)
 	cfg.disconnect((leader + 3) % servers)
+	//fmt.Println("in func TestFailNoAgree2B, after disconnect")
+
+	time.Sleep(1 * time.Second)
 
 	index, _, ok := cfg.rafts[leader].Start(20)
 	if ok != true {
@@ -411,67 +415,175 @@ func TestBackup2B(t *testing.T) {
 
 	cfg.begin("Test (2B): leader backs up quickly over incorrect follower logs")
 
-	cfg.one(rand.Int(), servers, true)
+	cmd := 0
+	//cfg.one(rand.Int(), servers, true)
+	cfg.one(cmd, servers, true)
+	cmd++
+	/*fmt.Println("cmd:", cmd) //1
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}*/
 
 	// put leader and one follower in a partition
 	leader1 := cfg.checkOneLeader()
+	//fmt.Println("leader1:", leader1)
+	//fmt.Println("before disconnect leader1 + 2, leader1 + 3, leader1 + 4")
 	cfg.disconnect((leader1 + 2) % servers)
 	cfg.disconnect((leader1 + 3) % servers)
 	cfg.disconnect((leader1 + 4) % servers)
+	//fmt.Println("after disconnect leader1 + 2, leader1 + 3, leader1 + 4")
 
 	// submit lots of commands that won't commit
 	for i := 0; i < 50; i++ {
-		cfg.rafts[leader1].Start(rand.Int())
+		//cfg.rafts[leader1].Start(rand.Int())
+		cfg.rafts[leader1].Start(cmd)
+		cmd++
 	}
 
 	time.Sleep(RaftElectionTimeout / 2)
+	/*fmt.Println("cmd:", cmd) //51
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "term", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"lastLogIndex:", cfg.rafts[i].GetLastLogIndex(), "commitIndex:", cfg.rafts[i].GetCommitIndex(), "lastLogTerm:", cfg.rafts[i].GetLastLogTerm())
+	}*/
 
+	//fmt.Println("before disconnect leader1, leader1 + 1")
 	cfg.disconnect((leader1 + 0) % servers)
 	cfg.disconnect((leader1 + 1) % servers)
+	//fmt.Println("after disconnect leader1, leader1 + 1")
 
 	// allow other partition to recover
+	//fmt.Println("before connect leader1 + 2, leader1 + 3, leader1 + 4")
 	cfg.connect((leader1 + 2) % servers)
 	cfg.connect((leader1 + 3) % servers)
 	cfg.connect((leader1 + 4) % servers)
+	//fmt.Println("after connect leader1 + 2, leader1 + 3, leader1 + 4")
 
 	// lots of successful commands to new group.
 	for i := 0; i < 50; i++ {
-		cfg.one(rand.Int(), 3, true)
+		//cfg.one(rand.Int(), 3, true)
+		cfg.one(cmd, 3, true)
+		cmd++
 	}
+	/*fmt.Println("cmd:", cmd) //101
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "term", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"lastLogIndex:", cfg.rafts[i].GetLastLogIndex(), "commitIndex:", cfg.rafts[i].GetCommitIndex(), "lastLogTerm:", cfg.rafts[i].GetLastLogTerm())
+	}*/
 
 	// now another partitioned leader and one follower
 	leader2 := cfg.checkOneLeader()
+	//fmt.Println("leader2:", leader2)
 	other := (leader1 + 2) % servers
 	if leader2 == other {
 		other = (leader2 + 1) % servers
 	}
+	//fmt.Println("other:", other)
+	//fmt.Println("before disconnect other")
+
 	cfg.disconnect(other)
+	//fmt.Println("after disconnect other")
 
 	// lots more commands that won't commit
 	for i := 0; i < 50; i++ {
-		cfg.rafts[leader2].Start(rand.Int())
+		//cfg.rafts[leader2].Start(rand.Int())
+		cfg.rafts[leader2].Start(cmd)
+		cmd++
 	}
-
 	time.Sleep(RaftElectionTimeout / 2)
+	/*fmt.Println("cmd:", cmd) //151
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "term", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"lastLogIndex:", cfg.rafts[i].GetLastLogIndex(), "commitIndex:", cfg.rafts[i].GetCommitIndex(), "lastLogTerm:", cfg.rafts[i].GetLastLogTerm())
+	}*/
 
 	// bring original leader back to life,
+	//fmt.Println("before disconnect all")
 	for i := 0; i < servers; i++ {
 		cfg.disconnect(i)
 	}
+	//fmt.Println("after disconnect all")
+	//fmt.Println("before connect leader1, leader1 + 1, other")
 	cfg.connect((leader1 + 0) % servers)
 	cfg.connect((leader1 + 1) % servers)
 	cfg.connect(other)
+	//fmt.Println("after connect leader1, leader1 + 1, other")
+
+	//time.Sleep(1000 * time.Millisecond)
+	/*for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "term", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"lastLogIndex:", cfg.rafts[i].GetLastLogIndex(), "commitIndex:", cfg.rafts[i].GetCommitIndex(), "lastLogTerm:", cfg.rafts[i].GetLastLogTerm())
+	}*/
+	//fmt.Println("leader1:", leader1, "leader1.logLength:", cfg.rafts[leader1].GetLogsLength())
+	//fmt.Println("leader1:", leader1)
+	//fmt.Println("leader1+1:", leader1 + 1, "leader1+1.logLength:", cfg.rafts[(leader1 + 1) % servers].GetLogsLength())
+	//fmt.Println("leader1+1:", leader1 + 1)
+	//fmt.Println("other:", other)
+
+	//time.Sleep(2000 * time.Millisecond)
+	/*fmt.Println("after 2000ms")
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "term", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"lastLogIndex:", cfg.rafts[i].GetLastLogIndex(), "commitIndex:", cfg.rafts[i].GetCommitIndex(), "lastLogTerm:", cfg.rafts[i].GetLastLogTerm())
+	}*/
 
 	// lots of successful commands to new group.
-	for i := 0; i < 50; i++ {
-		cfg.one(rand.Int(), 3, true)
+	//time.Sleep(1000 * time.Millisecond)
+	for i := 0; i < 1; i++ {
+		//cfg.one(rand.Int(), 3, true)
+		cfg.one(cmd, 3, true)
+		cmd++
 	}
+	/*fmt.Println("cmd:", cmd) //201
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "term", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"lastLogIndex:", cfg.rafts[i].GetLastLogIndex(), "commitIndex:", cfg.rafts[i].GetCommitIndex(), "lastLogTerm:", cfg.rafts[i].GetLastLogTerm())
+	}*/
 
+	//time.Sleep(1000 * time.Millisecond)
 	// now everyone
+	//fmt.Println("before all connect")
 	for i := 0; i < servers; i++ {
 		cfg.connect(i)
 	}
-	cfg.one(rand.Int(), servers, true)
+	//fmt.Println("after all connect")
+	//time.Sleep(1 * time.Second)
+	/*for i := 0; i < 5; i++ {
+		fmt.Println("rf:", i, "logs:", cfg.rafts[i].logs)
+	}*/
+	//cfg.one(rand.Int(), servers, true)
+	/*for i := 0; i < servers; i++ {
+		fmt.Println("rf:", cfg.rafts[i].me, "rf.Term:", cfg.rafts[i].GetCurrentTerm(), "rf.state:", cfg.rafts[i].GetCertainState(),
+			"rf.commitIndex:", cfg.rafts[i].GetCommitIndex(), "rf.lastApplied:",cfg.rafts[i].GetLastApplied())
+	}*/
+
+	/*for i := 0; i < len(cfg.logs); i++ {
+		fmt.Println("cfg.logs: i = ", i)
+		for k, v := range cfg.logs[i] {
+			fmt.Println("k:", k, "v:", v)
+		}
+	}*/
+	cfg.one(cmd, servers, true)
+	cmd++
+	//fmt.Println("cmd:", cmd)
 
 	cfg.end()
 }

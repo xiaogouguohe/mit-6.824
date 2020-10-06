@@ -233,8 +233,13 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 	//fmt.Println("in func RequestVote: voter:", rf.me, "rf.term:", rf.currentTerm, "rf.votedFor", rf.votedFor, "candidate:", args.Candidate, "candidate.Term:", args.Term)
 	//currentTerm, votedFor := rf.GetVoteState()
 
+	/*fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate,
+		"rf.Term", rf.GetCurrentTerm(), "candidate.Term:", args.Term,
+		"rf.lastLogIndex:", rf.GetLastLogIndex(), "rf.logsLen:", rf.GetLogsLength(), "candidate.lastLogIndex:", args.LastLogIndex,
+		"rf.lastLogTerm:", rf.GetLastLogTerm(), "candidate.lastLogTerm", args.LastLogTerm)*/
+
 	if currentTerm > args.Term /*|| (currentTerm == args.Term && state == LEADER)*/ { //选举人任期更早，淘汰
-		//fmt.Println("in func RequestVote: rf.Term > args.Term")
+		//fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate, "rf.Term > args.Term")
 		reply.VoteGranted = false
 		return
 	}
@@ -242,12 +247,14 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 	rf.UpdateLastRecvTime()
 
 	if rf.isLogNew(args) {
+		//fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate, "rf.logs new")
 		reply.VoteGranted = false
 		return
 	}
 
 	votedFor := rf.GetVotedFor()
 	if votedFor == -1 || votedFor == args.Candidate {
+		//fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate, "vote success")
 		rf.SetVotedFor(args.Candidate)
 		reply.VoteGranted = true
 	}
@@ -384,6 +391,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	term := rf.GetCurrentTerm()
 	state := rf.GetCertainState()
 	index := rf.GetLogsLength()
+	//fmt.Println("in func Start, cmd:", command, "rf:", rf.me, "index:", index)
 	if state != LEADER {
 		return int(index) + 1, term, false
 	}
@@ -398,6 +406,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 
 	rf.AppendLogs(int32(index), logEntries)
 
+	//fmt.Println("in func Start, cmd:", command, "rf:", rf.me, "index:", index)
 	return int(index) + 1, term, true
 }
 
@@ -429,6 +438,8 @@ func (rf *Raft) LeaderElection() {
 	for {
 		state := rf.GetCertainState()
 		if (rf.killed() || state != CANDIDATE) {
+			//fmt.Println("ini func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
+				//rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not candidate anymore")
 			return
 		}
 
@@ -458,9 +469,11 @@ func (rf *Raft) LeaderElection() {
 				}
 				var reply RequestVoteReply
 				ok := rf.sendRequestVote(voter, &args, &reply)  //向voter节点发送请求
-				for !ok {
+				okCnt := 0
+				for !ok && okCnt < 100 {
 					time.Sleep(10 * time.Millisecond)
 					ok = rf.sendRequestVote(voter, &args, &reply)
+					okCnt++
 				}
 
 				/*if term, _ := rf.GetVoteState(); term != args.Term {    //在期间任期发生变化，本次选举失效
@@ -479,7 +492,7 @@ func (rf *Raft) LeaderElection() {
 		}
 
 		votedCnt := 1
-		majority := len(rf.peers) / 2 + 1  //设置多数值  //可嫩还要给len枷锁
+		majority := len(rf.peers) / 2 + 1  //设置多数值
 		for {
 			v := <- replyCount
 			if v != -1 {
@@ -492,9 +505,11 @@ func (rf *Raft) LeaderElection() {
 			}
 		}
 
-		if votedCnt >= majority {
+		if votedCnt >= majority/* && votedCnt > 1 */{
 			break
 		}
+		//fmt.Println("ini func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
+			//rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
 		rand.Seed(time.Now().UnixNano())
 		timeout = time.Duration(time.Duration(
 			rand.Intn(500)+500) * time.Millisecond)
@@ -502,7 +517,8 @@ func (rf *Raft) LeaderElection() {
 	}
 	//
 	if currentTerm == rf.GetCurrentTerm() && rf.GetCertainState() == CANDIDATE {
-		//fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "win election")
+		//fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "commitIndex:",
+			//rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "win election")
 		rf.SetCertainState(LEADER)
 		rf.heartbeat2()
 	}
@@ -524,16 +540,23 @@ func (rf *Raft) heartbeat2() {
 
 	replyCh := make(chan int32, len(rf.peers))
 
-	go func() {
-		<-time.After(HEARTBEAT_INTERVAL / 2)
-		replyCh <- -2
-		//fmt.Println("in func heartbeat2's goroutine: -1 into replyCh")
-	}()
-
 	for i := range(rf.peers) {
 		if i == itself {
 			continue
 		}
+
+		go func() {
+			for {
+				if rf.killed() || rf.GetCertainState() != LEADER {
+					break
+				}
+				select{
+				case <-time.After(HEARTBEAT_INTERVAL / 2):
+					replyCh <- -2
+					//fmt.Println("in func heartbeat2's goroutine: -2 into replyCh")
+				}
+			}
+		}()
 
 		go func(server int) {
 			for {
@@ -543,7 +566,8 @@ func (rf *Raft) heartbeat2() {
 						break
 					}
 
-					//fmt.Println("in func heartbeat2's go routine, server:", server, "nextIndex:", rf.nextIndex)
+					//fmt.Println("in func heartbeat2's go routine, sender:", rf.me, "server:", server,
+						//"nextIndex:", rf.GetNextIndex(server), "commitIndex:", rf.GetCommitIndex())
 					args := AppendEntriesArgs{
 						Term:         rf.GetCurrentTerm(), //会不会因为在f协程之间，任期发生变化，从而导致不一致？
 						LeaderId:     rf.GetItself(),
@@ -557,10 +581,13 @@ func (rf *Raft) heartbeat2() {
 
 					ok := rf.sendAppendEntries(server, &args, &reply)
 
-					if !ok {
+					okCnt := 0
+					if !ok && okCnt < 100 {
 						time.Sleep(10 * time.Millisecond)
 						ok = rf.sendAppendEntries(server, &args, &reply)
+						okCnt++
 					}
+					//fmt.Println("in func heartbeat2's go routine, sender:", rf.me, "server:", server, "okCnt:", okCnt, "ok:", ok)
 
 					//fmt.Println("in func heartbeat2's goroutine, ok:", ok)
 					rf.UpdateTerm(reply.Term)
@@ -568,10 +595,11 @@ func (rf *Raft) heartbeat2() {
 						//fmt.Println("in func heartbeat2's goroutine, server:", server, "into replyCh")
 						replyCh <- reply.CommitIndex
 						rf.SetNextIndex(server, int32(rf.GetLogsLength()))
+						time.Sleep(HEARTBEAT_INTERVAL)
 					} else {
 						rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
+						time.Sleep(10 * time.Millisecond)
 					}
-					time.Sleep(HEARTBEAT_INTERVAL)
 				//}
 			}
 		}(i)
@@ -586,7 +614,7 @@ func (rf *Raft) heartbeat2() {
 			majority := len(rf.peers) / 2 + 1  //设置多数值  //可嫩还要给len枷锁
 			for {
 				v := <- replyCh
-				//fmt.Println("in func heartbeat2, rf:", rf.me, "v:", v)
+				//fmt.Println("in func heartbeat2, rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "v:", v)
 				if v == -2 {
 					break
 				} else if v < rf.GetCommitIndex(){
@@ -602,7 +630,8 @@ func (rf *Raft) heartbeat2() {
 			if replyCnt >= majority {
 				commitIndex := rf.GetCommitIndex()
 				lastLogIndex := rf.GetLastLogIndex()
-				//fmt.Println("in func heartbeat2's go routine, commitIndex:", commitIndex, " lastLogIndex:", lastLogIndex)
+				//fmt.Println("in func heartbeat2's go routine, rf:", rf.me, "rf.Term", rf.GetCurrentTerm(),
+					//"commitIndex:", commitIndex, " lastLogIndex:", lastLogIndex)
 				if commitIndex < lastLogIndex {
 					rf.SetCommitIndex(commitIndex + 1)
 					go rf.commitLogs()

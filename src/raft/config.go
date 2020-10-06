@@ -172,7 +172,7 @@ func (cfg *config) start1(i int) {
 	applyCh := make(chan ApplyMsg)
 	go func() {
 		for m := range applyCh {
-			//fmt.Println("in func start1, m:", m)
+			//fmt.Println("in func start1, m:", m, "server:", i)
 			err_msg := ""
 			if m.CommandValid == false {
 				//fmt.Println("in func start1, m.type error")
@@ -180,7 +180,7 @@ func (cfg *config) start1(i int) {
 			} else {
 				//fmt.Println("in func start1, m.type correct")
 				v := m.Command
-				//fmt.Println("in func start1, type(v)", reflect.TypeOf(v))
+				//fmt.Println("in func start1, v", v)
 				cfg.mu.Lock()
 				for j := 0; j < len(cfg.logs); j++ {
 					if old, oldok := cfg.logs[j][m.CommandIndex]; oldok && old != v {
@@ -438,6 +438,7 @@ func (cfg *config) wait(index int, n int, startTerm int) interface{} {
 // if retry==false, calls Start() only once, in order
 // to simplify the early Lab 2B tests.
 func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
+	//fmt.Println("in func one, cmd:", cmd)
 	t0 := time.Now()
 	starts := 0
 	for time.Since(t0).Seconds() < 10 {
@@ -476,6 +477,7 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 			t1 := time.Now()
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
+				//fmt.Println("in func one, nd:", nd, "cmd1:", cmd1, "cmd:", cmd, "index:", index)
 
 				//fmt.Println("nd:", nd, "cmd:", cmd, "cmd1:", cmd1)
 				if nd > 0 && nd >= expectedServers {
