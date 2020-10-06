@@ -190,6 +190,7 @@ func TestFailAgree2B(t *testing.T) {
 
 	// disconnect one follower from the network.
 	leader := cfg.checkOneLeader()
+	fmt.Println("leader:", leader)
 	cfg.disconnect((leader + 1) % servers)
 
 	// the leader and remaining follower should be

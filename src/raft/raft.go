@@ -226,12 +226,14 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 	currentTerm := rf.GetCurrentTerm()
 	reply.Term = currentTerm
 
-	voteGranted := false
+	//voteGranted := false
+
+	//state := rf.GetCertainState()
 
 	//fmt.Println("in func RequestVote: voter:", rf.me, "rf.term:", rf.currentTerm, "rf.votedFor", rf.votedFor, "candidate:", args.Candidate, "candidate.Term:", args.Term)
 	//currentTerm, votedFor := rf.GetVoteState()
 
-	if currentTerm > args.Term { //选举人任期更早，淘汰
+	if currentTerm > args.Term /*|| (currentTerm == args.Term && state == LEADER)*/ { //选举人任期更早，淘汰
 		//fmt.Println("in func RequestVote: rf.Term > args.Term")
 		reply.VoteGranted = false
 		return
@@ -239,7 +241,18 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 	rf.UpdateLastRecvTime()
 
-	if currentTerm < args.Term {
+	if rf.isLogNew(args) {
+		reply.VoteGranted = false
+		return
+	}
+
+	votedFor := rf.GetVotedFor()
+	if votedFor == -1 || votedFor == args.Candidate {
+		rf.SetVotedFor(args.Candidate)
+		reply.VoteGranted = true
+	}
+
+	/*if currentTerm < args.Term && !rf.isLogNew(args) {
 		//fmt.Println("in func RequestVote: rf.Term < args.Term")
 		voteGranted = true
 		rf.SetVoteState(args.Term, args.Candidate)
@@ -250,18 +263,14 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 		return
 	}
 
-	votedFor := rf.GetVotedFor()
-	state := rf.GetCertainState()
-
-
-	if state == FOLLOWER && (votedFor == -1 || votedFor == args.Candidate) && !rf.isLogOld(args) {  //这里一定要rf.state == "follower"
-		//fmt.Println("in func RequestVote: rf.Term == args.Term and rf has not vote")
+	if state == FOLLOWER && (votedFor == -1 || votedFor == args.Candidate) && rf.isLogNew(args) {  //这里一定要rf.state == "follower"
+		fmt.Println("in func RequestVote: rf:", rf.me, "args.Term", args.Term, "rf.Term == args.Term and rf has not vote")
 		voteGranted = true
 		rf.SetVotedFor(args.Candidate)
 		//atomic.StoreUint32(&rf.state, FOLLOWER)  //update已经做了
 	}
 
-	reply.VoteGranted = voteGranted
+	reply.VoteGranted = voteGranted*/
 
 }
 
@@ -534,7 +543,7 @@ func (rf *Raft) heartbeat2() {
 						break
 					}
 
-
+					//fmt.Println("in func heartbeat2's go routine, server:", server, "nextIndex:", rf.nextIndex)
 					args := AppendEntriesArgs{
 						Term:         rf.GetCurrentTerm(), //会不会因为在f协程之间，任期发生变化，从而导致不一致？
 						LeaderId:     rf.GetItself(),
@@ -616,7 +625,7 @@ func (rf *Raft) commitLogs() {
 	}
 
 	for i := lastApplied + 1; i <= commitIndex; i++ {
-		//fmt.Println("in func commitLogs, rf:", rf.me, "command", rf.logs[i].Command, "commandIndex:", i)
+		//fmt.Println("in func commitLogs, rf:", rf.me, "commandIndex:", i, "command", rf.logs[i].Command)
 		rf.applyCh <- ApplyMsg{
 			CommandIndex: int(i + 1),
 			Command: rf.logs[i].Command,
@@ -768,10 +777,14 @@ func (rf *Raft) UpdateLastRecvTime() {
 	atomic.StoreInt64(&rf.lastRecvTime, now)
 }
 
-func (rf *Raft) isLogOld(args *RequestVoteArgs) bool {
-	currentTerm := rf.GetCurrentTerm()
-	lastLogIndex := rf.GetLastLogIndex()
-	return currentTerm < args.Term || (currentTerm == args.Term && lastLogIndex < args.LastLogIndex)
+func (rf *Raft) isLogNew(args *RequestVoteArgs) bool {
+	//currentTerm := rf.GetCurrentTerm()
+	lastLogIndex := int32(rf.GetLastLogIndex())
+	lastLogTerm := int32(rf.GetLastLogTerm())
+	/*fmt.Println("in func isLogNew, rf:", rf.me, "args.Candidate:", args.Candidate,  "args.Term:", args.Term,
+		"lastLogTerm:", lastLogTerm, "args.LastLogTerm:", args.LastLogTerm,
+		"lastLogIndex:", lastLogIndex, "args.lastLogIndex:", args.LastLogIndex)*/
+	return lastLogTerm > args.LastLogTerm || (lastLogTerm == args.LastLogTerm && lastLogIndex > args.LastLogIndex)
 }
 
 func (rf* Raft) GetLogsLength() int {
@@ -853,6 +866,7 @@ func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 	rf.logsMu.Lock()
 	defer rf.logsMu.Unlock()
 
+	//fmt.Println("in func AppendLogs: rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "entries:", entries)
 	rf.logs = append(rf.logs[:index], entries...)
 
 }
