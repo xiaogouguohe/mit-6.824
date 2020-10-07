@@ -254,7 +254,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 	votedFor := rf.GetVotedFor()
 	if votedFor == -1 || votedFor == args.Candidate {
-		//fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate, "vote success")
+		//fmt.Println("in func RequestVote, rf:", drf.me, "candidate:", args.Candidate, "vote success")
 		rf.SetVotedFor(args.Candidate)
 		reply.VoteGranted = true
 	}
@@ -390,10 +390,10 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 
 	term := rf.GetCurrentTerm()
 	state := rf.GetCertainState()
-	index := rf.GetLogsLength()
+	//index := rf.GetLogsLength()
 	//fmt.Println("in func Start, cmd:", command, "rf:", rf.me, "index:", index)
 	if state != LEADER {
-		return int(index) + 1, term, false
+		return -1, term, false
 	}
 
 	//cmd, _ := Encode(command)
@@ -404,7 +404,8 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	logEntries := []LogEntry{logEntry}
 	//fmt.Println("term:", rf.currentTerm, "cmd:", cmd)
 
-	rf.AppendLogs(int32(index), logEntries)
+	//rf.AppendLogs(int32(index), logEntries)  //同时拿到同一个index，相互覆盖
+	index := rf.PushBackLogs(logEntries) - 1
 
 	//fmt.Println("in func Start, cmd:", command, "rf:", rf.me, "index:", index)
 	return int(index) + 1, term, true
@@ -898,6 +899,14 @@ func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 	//fmt.Println("in func AppendLogs: rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "entries:", entries)
 	rf.logs = append(rf.logs[:index], entries...)
 
+}
+
+func (rf* Raft) PushBackLogs(entries []LogEntry) int32 {
+	rf.logsMu.Lock()
+	defer rf.logsMu.Unlock()
+
+	rf.logs = append(rf.logs, entries...)
+	return int32(len(rf.logs))
 }
 
 func (rf* Raft) SetElectionInterfal() {

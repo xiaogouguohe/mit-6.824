@@ -290,6 +290,7 @@ loop:
 			// leader moved on really quickly
 			continue
 		}
+		//fmt.Println("term:", term)
 
 		iters := 5
 		var wg sync.WaitGroup
@@ -298,11 +299,14 @@ loop:
 			wg.Add(1)
 			go func(i int) {
 				defer wg.Done()
+				//fmt.Println("i:", i)
 				i, term1, ok := cfg.rafts[leader].Start(100 + i)
 				if term1 != term {
+					//fmt.Println("term not equal, term:", term, "term1:", term1)
 					return
 				}
 				if ok != true {
+					//fmt.Println("not ok")
 					return
 				}
 				is <- i
@@ -315,6 +319,7 @@ loop:
 		for j := 0; j < servers; j++ {
 			if t, _ := cfg.rafts[j].GetState(); t != term {
 				// term changed -- can't expect low RPC counts
+				//fmt.Println("term change, term:", term, "t:", t)
 				continue loop
 			}
 		}
@@ -322,8 +327,10 @@ loop:
 		failed := false
 		cmds := []int{}
 		for index := range is {
+			//fmt.Println("index:", index)
 			cmd := cfg.wait(index, servers, term)
 			if ix, ok := cmd.(int); ok {
+				//fmt.Println("ix:", ix)
 				if ix == -1 {
 					// peers have moved on to later terms
 					// so we can't expect all Start()s to
