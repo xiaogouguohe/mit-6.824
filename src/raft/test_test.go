@@ -290,6 +290,7 @@ loop:
 			// leader moved on really quickly
 			continue
 		}
+		//fmt.Println("term:", term)
 
 		iters := 5
 		var wg sync.WaitGroup
@@ -298,11 +299,14 @@ loop:
 			wg.Add(1)
 			go func(i int) {
 				defer wg.Done()
+				//fmt.Println("i:", i)
 				i, term1, ok := cfg.rafts[leader].Start(100 + i)
 				if term1 != term {
+					//fmt.Println("term not equal, term:", term, "term1:", term1)
 					return
 				}
 				if ok != true {
+					//fmt.Println("not ok")
 					return
 				}
 				is <- i
@@ -315,6 +319,7 @@ loop:
 		for j := 0; j < servers; j++ {
 			if t, _ := cfg.rafts[j].GetState(); t != term {
 				// term changed -- can't expect low RPC counts
+				//fmt.Println("term change, term:", term, "t:", t)
 				continue loop
 			}
 		}
@@ -322,8 +327,10 @@ loop:
 		failed := false
 		cmds := []int{}
 		for index := range is {
+			//fmt.Println("index:", index)
 			cmd := cfg.wait(index, servers, term)
 			if ix, ok := cmd.(int); ok {
+				//fmt.Println("ix:", ix)
 				if ix == -1 {
 					// peers have moved on to later terms
 					// so we can't expect all Start()s to
@@ -709,11 +716,16 @@ func TestPersist12C(t *testing.T) {
 
 	// crash and re-start all
 	for i := 0; i < servers; i++ {
+		//fmt.Println("before start1 i:", i)
 		cfg.start1(i)
+		//fmt.Println("after start1 i:", i)
 	}
 	for i := 0; i < servers; i++ {
+		//fmt.Println("before disconnect i:", i)
 		cfg.disconnect(i)
+		//fmt.Println("after disconnect i:", i)
 		cfg.connect(i)
+		//fmt.Println("after connect i:", i)
 	}
 
 	cfg.one(12, servers, true)
@@ -922,8 +934,9 @@ func TestFigure8Unreliable2C(t *testing.T) {
 
 	cfg.begin("Test (2C): Figure 8 (unreliable)")
 
-	cfg.one(rand.Int()%10000, 1, true)
-
+	//cfg.one(rand.Int()%10000, 1, true)
+	cfg.one(10000, 1, true)
+	
 	nup := servers
 	for iters := 0; iters < 1000; iters++ {
 		if iters == 200 {
@@ -937,15 +950,15 @@ func TestFigure8Unreliable2C(t *testing.T) {
 			}
 		}
 
-		if (rand.Int() % 1000) < 100 {
+		if (rand.Int() % 1000) < 100 { //10%的概率
 			ms := rand.Int63() % (int64(RaftElectionTimeout/time.Millisecond) / 2)
-			time.Sleep(time.Duration(ms) * time.Millisecond)
+			time.Sleep(time.Duration(ms) * time.Millisecond) //sleep0~500ms
 		} else {
 			ms := (rand.Int63() % 13)
-			time.Sleep(time.Duration(ms) * time.Millisecond)
+			time.Sleep(time.Duration(ms) * time.Millisecond) //sleep0~12ms
 		}
 
-		if leader != -1 && (rand.Int()%1000) < int(RaftElectionTimeout/time.Millisecond)/2 {
+		if leader != -1 && (rand.Int()%1000) < int(RaftElectionTimeout/time.Millisecond)/2 { //50%概率
 			cfg.disconnect(leader)
 			nup -= 1
 		}
