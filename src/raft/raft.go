@@ -18,6 +18,8 @@ package raft
 //
 
 import (
+	"6.824_new/src/labgob"
+	//"src/labgob"
 	"6.824_new/src/labrpc"
 	"bytes"
 	"encoding/gob"
@@ -94,7 +96,7 @@ type Raft struct {
 	voteMu sync.RWMutex
 	nextIndexMu sync.RWMutex
 	matchIndexMu sync.RWMutex
-	logsMu sync.RWMutex
+	//logsMu sync.RWMutex
 
 	lastRecvTime int64
 
@@ -147,13 +149,54 @@ func (rf *Raft) persist() {
 	// e.Encode(rf.yyy)
 	// data := w.Bytes()
 	// rf.persister.SaveRaftState(data)
+	//fmt.Println("in func persist, begin, rf:", rf.me)
+
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	//term, votedFor := rf.GetVoteState()
+	//logs := rf.GetLogs(0)
+
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.logs)
+
+	data := w.Bytes()
+	rf.persister.SaveRaftState(data)
 }
 
+func (rf *Raft) PersistTermAndVotedFor() {
+	//fmt.Println("in func PersistTerm, rf:", rf.me, "term:", rf.currentTerm)
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	logs := rf.GetLogs(0)
+
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(logs)
+
+	data := w.Bytes()
+	rf.persister.SaveRaftState(data)
+}
+
+func (rf *Raft) PersistLogs() {
+	//fmt.Println("in func PersistLogs, rf:", rf.me, "logs:", rf.logs)
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+	term, votedFor := rf.GetVoteState()
+
+	e.Encode(term)
+	e.Encode(votedFor)
+	e.Encode(rf.logs)
+
+	data := w.Bytes()
+	rf.persister.SaveRaftState(data)
+}
 
 //
 // restore previously persisted state.
 //
 func (rf *Raft) readPersist(data []byte) {
+	//fmt.Println("in func readPersist, rf:", rf.me, "Term:", rf.GetCurrentTerm(), "data:", data)
 	if data == nil || len(data) < 1 { // bootstrap without any state?
 		return
 	}
@@ -170,10 +213,23 @@ func (rf *Raft) readPersist(data []byte) {
 	//   rf.xxx = xxx
 	//   rf.yyy = yyy
 	// }
+
+	r := bytes.NewBuffer(data)
+	d := labgob.NewDecoder(r)
+	var term int
+	var votedFor int
+	var logs []LogEntry
+
+	if d.Decode(&term) != nil || d.Decode(&votedFor) != nil || d.Decode(&logs) != nil {
+		//fmt.Println("in func readPersist, decode error")
+		return
+	} else {
+		rf.SetVoteState(term, votedFor)
+		rf.AppendLogs(0, logs)
+		//fmt.Println("in func readPersist, after decode, term:", rf.GetCurrentTerm(), "votedFor:", rf.GetVotedFor(), "logs:", rf.GetLogs(0))
+	}
+
 }
-
-
-
 
 //
 // example RequestVote RPC arguments structure.
@@ -226,18 +282,6 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 	currentTerm := rf.GetCurrentTerm()
 	reply.Term = currentTerm
 
-	//voteGranted := false
-
-	//state := rf.GetCertainState()
-
-	//fmt.Println("in func RequestVote: voter:", rf.me, "rf.term:", rf.currentTerm, "rf.votedFor", rf.votedFor, "candidate:", args.Candidate, "candidate.Term:", args.Term)
-	//currentTerm, votedFor := rf.GetVoteState()
-
-	/*fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate,
-		"rf.Term", rf.GetCurrentTerm(), "candidate.Term:", args.Term,
-		"rf.lastLogIndex:", rf.GetLastLogIndex(), "rf.logsLen:", rf.GetLogsLength(), "candidate.lastLogIndex:", args.LastLogIndex,
-		"rf.lastLogTerm:", rf.GetLastLogTerm(), "candidate.lastLogTerm", args.LastLogTerm)*/
-
 	if currentTerm > args.Term /*|| (currentTerm == args.Term && state == LEADER)*/ { //选举人任期更早，淘汰
 		//fmt.Println("in func RequestVote, rf:", rf.me, "candidate:", args.Candidate, "rf.Term > args.Term")
 		reply.VoteGranted = false
@@ -258,27 +302,6 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 		rf.SetVotedFor(args.Candidate)
 		reply.VoteGranted = true
 	}
-
-	/*if currentTerm < args.Term && !rf.isLogNew(args) {
-		//fmt.Println("in func RequestVote: rf.Term < args.Term")
-		voteGranted = true
-		rf.SetVoteState(args.Term, args.Candidate)
-		atomic.StoreUint32(&rf.state, FOLLOWER)
-
-		reply.Term = args.Term
-		reply.VoteGranted = true
-		return
-	}
-
-	if state == FOLLOWER && (votedFor == -1 || votedFor == args.Candidate) && rf.isLogNew(args) {  //这里一定要rf.state == "follower"
-		fmt.Println("in func RequestVote: rf:", rf.me, "args.Term", args.Term, "rf.Term == args.Term and rf has not vote")
-		voteGranted = true
-		rf.SetVotedFor(args.Candidate)
-		//atomic.StoreUint32(&rf.state, FOLLOWER)  //update已经做了
-	}
-
-	reply.VoteGranted = voteGranted*/
-
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
@@ -679,18 +702,19 @@ func (rf *Raft) commitLogs() {
 
 func Make(peers []*labrpc.ClientEnd, me int,
 	persister *Persister, applyCh chan ApplyMsg) *Raft {
+	//fmt.Println("in func Make, rf:", me)
 	rf := &Raft{}
 	rf.peers = peers
 	rf.persister = persister
 	rf.me = me
 
 	// Your initialization code here (2A, 2B, 2C).
-	rf.SetVoteState(0, -1)
+	//rf.SetVoteState(0, -1)
+	rf.readPersist(persister.ReadRaftState())
 	rf.SetCertainState(FOLLOWER)
 
 	rf.SetCommitIndex(-1)
 	rf.SetLastApplied(-1)
-
 
 	rf.nextIndexMu.Lock()
 	rf.nextIndex = make([]int32, len(rf.peers))
@@ -700,9 +724,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.matchIndex = make([]int32, len(rf.peers))
 	rf.matchIndexMu.Unlock()
 
-	rf.logsMu.Lock()
+	/*rf.logsMu.Lock()
 	rf.logs = make([]LogEntry, 0)
-	rf.logsMu.Unlock()
+	rf.logsMu.Unlock()*/
 
 	rf.applyCh = applyCh
 
@@ -747,13 +771,18 @@ func (rf* Raft) GetVoteState() (int, int) {
 func (rf *Raft) SetVoteState(term int, votedFor int) {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
+
 	if rf.currentTerm < term {
 		rf.currentTerm = term
 		rf.votedFor = votedFor
 	}
+
+	 //rf.PersistTermAndVotedFor()
+	//rf.persist()
 }
 
 func (rf* Raft) GetCurrentTerm() int {
+
 	rf.voteMu.RLock()
 	defer rf.voteMu.RUnlock()
 	return rf.currentTerm
@@ -769,6 +798,8 @@ func (rf *Raft) SetVotedFor(votedFor int) {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
 	rf.votedFor = votedFor
+
+	//rf.persist()
 }
 
 func (rf *Raft) TurnToCandidate() (int, int) {
@@ -776,6 +807,7 @@ func (rf *Raft) TurnToCandidate() (int, int) {
 	defer rf.voteMu.Unlock()
 	rf.currentTerm++;
 	rf.votedFor = rf.me
+	//rf.persist()
 	return rf.currentTerm, rf.votedFor
 }
 
@@ -800,6 +832,7 @@ func (rf* Raft) UpdateTerm(term int) {
 		rf.votedFor = -1;
 		atomic.StoreUint32(&rf.state, FOLLOWER)
 	}
+	//rf.persist()
 }
 
 func (rf *Raft) UpdateLastRecvTime() {
@@ -818,15 +851,15 @@ func (rf *Raft) isLogNew(args *RequestVoteArgs) bool {
 }
 
 func (rf* Raft) GetLogsLength() int {
-	rf.logsMu.RLock()
-	defer rf.logsMu.RUnlock()
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
 
 	return len(rf.logs)
 }
 
 func (rf* Raft) GetLastLogIndex() int32 {
-	rf.logsMu.RLock()
-	defer rf.logsMu.RUnlock()
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
 
 	return int32(rf.GetLogsLength() - 1)
 }
@@ -877,15 +910,19 @@ func (rf* Raft) SetNextIndex(server int, index int32) {
 	}
 }
 
-func (rf* Raft) GetLogs(server int, beginIndex int32) []LogEntry {
-	rf.logsMu.RLock()
-	defer rf.logsMu.RUnlock()
+func (rf* Raft) GetLogs(beginIndex int32) []LogEntry {
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
 
 	return rf.logs[beginIndex:]
 }
 
+/*func (rf *Raft) SetLogs() []LogEntry {
+
+}*/
+
 func (rf* Raft) GetLogsBehindNextIndex(server int) []LogEntry {
-	return rf.GetLogs(server, rf.GetNextIndex(server))
+	return rf.GetLogs(rf.GetNextIndex(server))
 }
 
 func (rf *Raft) GetCommitIndex() int32 {
@@ -893,19 +930,21 @@ func (rf *Raft) GetCommitIndex() int32 {
 }
 
 func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
-	rf.logsMu.Lock()
-	defer rf.logsMu.Unlock()
+	rf.voteMu.Lock()
+	defer rf.voteMu.Unlock()
 
 	//fmt.Println("in func AppendLogs: rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "entries:", entries)
 	rf.logs = append(rf.logs[:index], entries...)
+	//rf.persist()
 
 }
 
 func (rf* Raft) PushBackLogs(entries []LogEntry) int32 {
-	rf.logsMu.Lock()
-	defer rf.logsMu.Unlock()
+	rf.voteMu.Lock()
+	defer rf.voteMu.Unlock()
 
 	rf.logs = append(rf.logs, entries...)
+	//rf.persist()
 	return int32(len(rf.logs))
 }
 
