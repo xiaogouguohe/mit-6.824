@@ -731,6 +731,7 @@ func TestPersist12C(t *testing.T) {
 	cfg.one(12, servers, true)
 
 	leader1 := cfg.checkOneLeader()
+	//fmt.Println("leader1:", leader1)
 	cfg.disconnect(leader1)
 	cfg.start1(leader1)
 	cfg.connect(leader1)
@@ -738,10 +739,12 @@ func TestPersist12C(t *testing.T) {
 	cfg.one(13, servers, true)
 
 	leader2 := cfg.checkOneLeader()
+	//fmt.Println("leader2:", leader2)
 	cfg.disconnect(leader2)
 	cfg.one(14, servers-1, true)
 	cfg.start1(leader2)
 	cfg.connect(leader2)
+	//fmt.Println("after connect leader2")
 
 	cfg.wait(4, servers, -1) // wait for leader2 to join before killing i3
 
@@ -936,7 +939,8 @@ func TestFigure8Unreliable2C(t *testing.T) {
 
 	//cfg.one(rand.Int()%10000, 1, true)
 	cfg.one(10000, 1, true)
-	
+
+	cnt := 0
 	nup := servers
 	for iters := 0; iters < 1000; iters++ {
 		if iters == 200 {
@@ -944,11 +948,18 @@ func TestFigure8Unreliable2C(t *testing.T) {
 		}
 		leader := -1
 		for i := 0; i < servers; i++ {
-			_, _, ok := cfg.rafts[i].Start(rand.Int() % 10000)
-			if ok && cfg.connected[i] {
+			//_, _, ok := cfg.rafts[i].Start(rand.Int() % 10000)
+			_, _, ok := cfg.rafts[i].Start(cnt)
+			cnt++
+			if ok && cfg.connected[i] {  //找到当前leader，断开连接
 				leader = i
 			}
 		}
+
+		/*for i := 0; i < servers; i++ {
+			fmt.Println("rf:", i, "term:", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+				"logs:", cfg.rafts[i].GetLogs(0))
+		}*/
 
 		if (rand.Int() % 1000) < 100 { //10%的概率
 			ms := rand.Int63() % (int64(RaftElectionTimeout/time.Millisecond) / 2)
@@ -960,6 +971,7 @@ func TestFigure8Unreliable2C(t *testing.T) {
 
 		if leader != -1 && (rand.Int()%1000) < int(RaftElectionTimeout/time.Millisecond)/2 { //50%概率
 			cfg.disconnect(leader)
+			//fmt.Println("disconnect", leader)
 			nup -= 1
 		}
 
@@ -967,6 +979,7 @@ func TestFigure8Unreliable2C(t *testing.T) {
 			s := rand.Int() % servers
 			if cfg.connected[s] == false {
 				cfg.connect(s)
+				//fmt.Println("connect", s)
 				nup += 1
 			}
 		}
@@ -978,7 +991,15 @@ func TestFigure8Unreliable2C(t *testing.T) {
 		}
 	}
 
-	cfg.one(rand.Int()%10000, servers, true)
+	//fmt.Println("after connect all")
+	//fmt.Println("sleep for 2s")
+	//time.Sleep(2 *time.Second)
+	/*for i := 0; i < servers; i++ {
+		fmt.Println("rf:", i, "term:", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"commitIndex:", cfg.rafts[i].GetCommitIndex(), "logs:", cfg.rafts[i].GetLogs(0))
+	}*/
+	//cfg.one(rand.Int()%10000, servers, true)
+	cfg.one(20000, servers, true)
 
 	cfg.end()
 }

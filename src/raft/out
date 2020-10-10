@@ -1,1889 +1,364 @@
-Test (2B): basic agreement ...
-  ... Passed --   1.2  3   16    4356    3
-Test (2B): RPC byte count ...
-  ... Passed --   2.8  3   48  113808   11
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   5.0  3   79   21693    7
-Test (2B): no agreement if too many followers disconnect ...
-  ... Passed --   5.4  5  144   32765    3
-Test (2B): concurrent Start()s ...
-  ... Passed --   1.8  3   28    7832    6
-Test (2B): rejoin of partitioned leader ...
-  ... Passed --   7.2  3   86   22552    4
-Test (2B): leader backs up quickly over incorrect follower logs ...
-  ... Passed --  19.6  5  844  336045   53
-Test (2B): RPC counts aren't too high ...
-  ... Passed --   3.8  3   66   18810   12
-Test (2B): basic agreement ...
-  ... Passed --   1.2  3   16    4356    3
-Test (2B): RPC byte count ...
-  ... Passed --   2.7  3   48  113808   11
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   5.3  3   81   22420    7
-Test (2B): no agreement if too many followers disconnect ...
-  ... Passed --   5.0  5  138   31722    3
-Test (2B): concurrent Start()s ...
-  ... Passed --   1.8  3   26    7266    6
-Test (2B): rejoin of partitioned leader ...
-  ... Passed --   7.2  3   94   25381    4
-Test (2B): leader backs up quickly over incorrect follower logs ...
-  ... Passed --  20.5  5  666  214590   54
-Test (2B): RPC counts aren't too high ...
-  ... Passed --   3.4  3   60   17112   12
-Test (2B): basic agreement ...
-  ... Passed --   1.2  3   16    4356    3
-Test (2B): RPC byte count ...
-  ... Passed --   2.7  3   48  113716   11
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   6.1  3   89   24848    7
-Test (2B): no agreement if too many followers disconnect ...
-  ... Passed --   5.4  5  150   34102    3
-Test (2B): concurrent Start()s ...
-  ... Passed --   1.6  3   26    7214    6
-Test (2B): rejoin of partitioned leader ...
-  ... Passed --   7.6  3   86   22932    4
-Test (2B): leader backs up quickly over incorrect follower logs ...
-  ... Passed --  20.3  5  780  280835   53
-Test (2B): RPC counts aren't too high ...
-  ... Passed --   3.2  3   56   15980   12
-Test (2B): basic agreement ...
-  ... Passed --   1.0  3   16    4348    3
-Test (2B): RPC byte count ...
-  ... Passed --   2.8  3   48  113808   11
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   5.9  3   84   23052    7
-Test (2B): no agreement if too many followers disconnect ...
-  ... Passed --   5.5  5  132   30272    3
-Test (2B): concurrent Start()s ...
-  ... Passed --   1.5  3   22    6090    6
-Test (2B): rejoin of partitioned leader ...
-  ... Passed --   7.3  3   93   25213    4
-Test (2B): leader backs up quickly over incorrect follower logs ...
-  ... Passed --  22.4  5  931  369790   55
-Test (2B): RPC counts aren't too high ...
-  ... Passed --   3.6  3   64   18244   12
-Test (2B): basic agreement ...
-  ... Passed --   1.1  3   16    4356    3
-Test (2B): RPC byte count ...
-  ... Passed --   2.8  3   48  113808   11
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   5.8  3   88   24572    7
-Test (2B): no agreement if too many followers disconnect ...
-  ... Passed --   5.0  5  133   31089    3
-Test (2B): concurrent Start()s ...
-  ... Passed --   1.6  3   26    7214    6
-Test (2B): rejoin of partitioned leader ...
-  ... Passed --   5.5  3   66   17315    4
-Test (2B): leader backs up quickly over incorrect follower logs ...
-  ... Passed --  17.8  5  592  194144   53
-Test (2B): RPC counts aren't too high ...
-  ... Passed --   3.8  3   66   18810   12
-Test (2B): basic agreement ...
-  ... Passed --   1.2  3   16    4324    3
-Test (2B): RPC byte count ...
---- FAIL: TestRPCBytes2B (4.56s)
-    config.go:509: one(-_b6pLKifPhS1jsReIGwjr4htUQop5lV_JZSJ82uQs5iWRnoDx4Bwydl6edUhphUxvrMhXebAMs10TeagdUTv79MUzdcweQehRAakdZ9UQRUEyPRre9xHYOatcOtYJ6SQoGu7R6IKiGEA3FcoW2hVIp-r_arz8IumZaW-JU2BK0dFLi0qnjDybNKYIUGu6pn_wQxruXc6tQ9Hgx5we3LIZ8BlthFhpEF_W8QtZfAKmtc-1vhlZXmhgU0viwjPHShZPRxszK8HiuqBaj5smawHlxppm2h0eNz5BzsLX4DXVraU5FHMN7bI4eoq4BCUMMA64TcrCJu8YvEd_7raY6BIRdje3C3T2Z3B9cUJcT1A8rnf15XzeA3QS83TsHsruZwZ4iUmsfX3z1PNWOhLK5Ou1E2iL-8sfJ6cuRyn3iMbIbrljx9gqkbpoe6Dd5L6OY5ajofsV7U6RAqiFAB7VKGk_Ct_uosYbPHmSWl_pgFBLoRqgjrgcunjSh9Fzapf1keGlFVJocNWjRufajTBKYC8kP0OUveGDL7r_Tl5LMqszYNQAmDPkaj2lRquJ533F5gPTTcd90EsI_PzWrYBbc-fCr1TzgU0QznN_ZZrqnBRS1dastM--7YKO5B7Oq_86Ly2NVhtXmS3WJQe00ThtGwvyGBLo4kG9vHazkXULsYtILE155ED7Pb78a3pwl4fPAaSPYgeel3-YAoWb-LAGwyxjTmN60x5Awgf3DE7CCOgDZlebhtH2lgf_4PfSvxOvUOy4oTX3N7hwOacxbHm-mvL5qvJrNQT9pHxhbzujwg-6kpTo4wm3e7rvQFD6d_T_yo3o-PjAkfyDHA8TSc_HpbwYgs3RXOg4cR-tPuzqaPfC_7dci_PufuKNX1sriuLvIEL1jMOA_OaqeabysBAM_cOmgsws6c9G0m9ZqySUE7Pv9dDR9wIIbr5ra77Yui0YtQoiCvqHroy9W-Tqm-teOHi5kZQZZhh_hwjsWAfbaI_rgwEHFYeHP2PIUGlUCxQT_7-GLehlPtOsfS1EUawc0fUULNVpuYG8-CaH7LXa1LswPRBUTD3PQRztOmJ5ZAJWwt5kPemoywKIwom9svQSJSRlAkW4_IiNRsLUt_tvDETHfAjijH6X5HIN6PgGAU9f8EvSvXBaNUt6OMdAC6Rh4VHIs1uSyzcrEHj6_iEiUnRTM9ThfHCBrjinSm02-F-ipnO02aLkJGhmGfAQ7WKpi4zYic2GVjr5lzuxPSlg4ZDtp2WfC7TftIdJi-ZhFqdHFl6-dBy2bJBIYH6s-0lE1OyBe0a9s_xiqUo_LfAYku1h58er_hN-zrf88xdWwQjpnhTuSwnkluZG5kl7QgiwMMN6VgcNBjUwceAd0YnwaLR32cVjA0u293tTD1pm1gZBBcn9vntswy7NB8XVlMnkIhYuf374afUlK6VDozrhgAbzrQSsZWIrZolJpDMSTyjkF2a5ziAqmvsIKEadrYsBsu3u7yqY3xRe3UQpIm3eCZbuVAS5-GjjOhialaC0ImkWCZxfIgUSVGbDxhT7yuizmgQ7KNkngNwLfDWsg8-1PZSVPwkbJxnMGUhbBqcXI9FpaC4TXG3HCXqDDhUSuuoK-W3bWTfZ7s9gL88sqjzqzZpXAP6m-wzAg1XeXg3ylDH9_vONe49C0ZELrQV4b2WcVgAqTiNGiDmEV1lEl8RxoYfIH6oAf6xix9sE2cvD4o-Ir2khCyyYtiswJb6_lNZl0EZohLkm22xBIdRWWU2_nlNbeQRYp3BBSkMgV9ED1WYwvN6NYvmLX2NudqXhy8rhJi2rF07EmdcSb6_4bh026TQuH4qkIWIrc6Fo74W856aa_kHJQ1cy5Xmf71Xc8pS4SR_91R_CrXMuhJ9GRe2Xj0Pr38_s7pvAcEG-feDc1dz8Up-BbwOWP2nLUcgJAdsbCZjBkqwaPlF7QcGI8GhI3lR9p5By6Npkb6Pu26jrDxN9SOhvcF41WTL8ydaOGgOzZ3bkQpX1Wsd7Ml-WepvI7hugwAG23_D9yNx2fLcCshEh0bu4VBgt3SOjxpy5I0KinOhH-4c0qewCChkTMm140Y6ZYElmp_rlPk5RQXN7XmtUIzzBIl3h4AaKR4oa8lw4Ic1ENPFtd51Ox3ZVTF5kqdCjF6-v7IjPoQ2i-ugDzJ67RKOzWGV1wRRL6gIkfmrpBABnShly4iYTW3WveZ-xvE6OYQ8XGyFcVdk_usjCd5r7-LCMQ6KZmj2-HU_NoKDVukVMQVqpUmct03dKNCAuyoHCUhVSk35uPQMqYCJwkbj2OzjMHcZnPt37pxg-Teg5iM4mE_AvT4wMLz3NlPnWQi2jIQayfyen62vVWwv6Ns1Mj0peiL63ECzB5w1IdHI8KHk3nIDCTcf5y8AsrDhW4NZzrTIAaQH4dRqxErFX-5nPgW_uc6iu7ohwWInAxFyxLDMO3L7ydA7O8XazumzuY4qnYbe1AGIow02qdBvzCUIrYcanICUmaXjxkN9744tMTDvX2MQet0AEiuIMpW_0ttgZXAMYoeQ99kEKkj4JBZ6ECou2O1d17c10IuIRvxUBywq8OqMRd-oQQgQNCenF4pDejP100usMl2X62JrsYBeJ-3Cx8fyQO58Jz5ZUX5XazC71IQwWADhilKrx5dKytCqmGSNN9WwITqYyQWQIdNd1dX3su1DUtTBroZndtbvO-eLNcP_y3t41pS0H7fB5rvP9cZZ5k23kHvwLDQilftpe5C9ZZvRKWohIPgO7P-tw6KZnUy-fVZmsVhlbv5CHMk9_NiScIS6gcBh0RSiyERQxYs7ktS3hLE3kLIF25mFDw6fuHcXxmebVqqC4r71Ki18FByyHvGT_4We7SRjW_vpzxDzwxgyb3v_spyum52vR_kvteeD_BzTUTjOkMTSVoxYlGlSR9zT8T-_CzNPECDinyMdyQMTkuqjyzjzJRnhEs5nCbVUcgfjW_IyB6z0mzhOXjjpTPJ2pxkU07J_2TNpV3SiKl7rtpsbu0O-su5JBEDa_N3e7AsIaWnumVKHCQKAS1mVibJSCTpAmjieE2LckrsfODb6S9i23kKyMTB2fY6JWBK_cBojP81Wyh9oyAEnwIN9bu2aFk1__DavnnmkGGdG4AfDYn1j0nVwi8pcxeDyYsum1ngRYdgTn809oRHOo2UuCiHZbvzbwErHhhwcp99fhQSXntcYJxLUHLLxFW2QYMsOtf-fOumQej83xWm8_I0qR8nomtLh0rJtnzy_B7K_eMUIJ4RtSvIThTlcDCBw38_RkJ72pWYugmPPdWt38JulVqONHAx5cEBAIhw1Xb9dZ-7z-UZtsmmq8vFoS8tbPmlKs-VERaYU_XPXsLfAnxV74uh3wgz_jJ0nHWu_YgZM4JN0qspda5pG3tMwG222ryqxEDMsaDt3yQhLefcVXlSzMTsgPlrtYHppZCBvW9p89I-RhpCMPxr4ieEwKxVxoC9OMW-Pi_PlEGRw-hRB_Hbbj3BCY55dh_eZyVzaBfHhd77x2_BWqGszq0K7h7gSSH2CbzJbgOgmVywymG8FLWgyTKJhMVfVISHWEmRURoUi1I7WJdG3enLzvHs2nVjbhmEnURkWKV5uUniqGRkD9kS8solgti337vBud975ELsUnyaHUKoiEBM5nxp2IEO7Gns_LKuWIQEXY7TRq5F5M4_xWedrjSoX2rMXotBaZDy1OdjYgs0WjnVTKUh55Msggwl9iKM0JNXdzENZ89RM-Rhz8is2sI7ODvEf9l9B23R4Bp3B2WnLAZ4dtXS7ZsnVmyNiyxhOyjLPINOSozEDIsA6z5TXu7FzzlJYmQ42X8qC5YROFOrs6zPd26DbaZPsXMP2JUKx_vKUPsR19nwyQ5uY_vXeKZ7-H0xxAvco8sR9NP_IFWYLoEd8Z4_ipdEktfgCxCFRau7eFjqMusgt51v8Ux33vq5i-ZR54ER4U6yJAG4g2fsfkOoWEDLG2LnXz-oo1T6-KZiN1rs9A1pj9dMhwfeAQzrxxallMoCe18QY0NaFLCIZVSTtMSJIN4YNksr2Z3YM1IvSsz9qAs1pCE6VXyhs0JhQGu07DpDnw-IQ2zzRpqScaAeAp9qgVzc-wucVbPu5OwApBmNJthe4X8Oh8l4E64pO5xncEtQyqlgXL5V_AsdaJA3N1HD8nYh1HZ2X4XGrBOmYbKsy3UiD8bSpSj3kcdmuR7JuSgbuhAgitZqrEKLlLoVK5h4txo-1QHkSmA5ee9uAWJwpNowkjDjiuZ7Mipt_R1mczp1TvvYC1wUtK9lxZ3TWpc7RN5osuK-F7i-_8cVKEtiHeUYgBAkge8ENhhelww3aW907RVTR4l2aQe6FS0qs4XaA3ixObXLkJOEdYTGQWHfqSTp1i3ctw7FrkwnnD30MP8H0ZI9N92MbkZlJDP9RyzzFcEIOa1TYB3jJspQ664rSGQs6bW71yacPF8DyuPuNVYe-bSl9HlyBT93o9Pgg5-PpOmiHJ80dZPEHJDtEYArWTQrqJIjOT0scGkrlNte-V5U4qlxD8Sx2TSK_hxm297ZaXrZDvG8CV25OEZr9ev1TxxE2dJvfZRiqrW_R3wEz32cAmM2V_N3gAtgVebkto6dxiYoyl6HxhUZAK4w9sHtwCCZVbbhLvHg8olnvVU4fL6wN-K3bzvtfsJPeQO_X0Dt02oBgWUGQ3nCbn6d-WbmcjhAadZfMXocn2fXA_Zr3RCGPtvPrG8tWdTbszom4z_BecxPFckI3GkM0ZtPJpF64NkealKD7_QiKphcE3-XwdevVeiu4zKcvWS-JZoWGo_DC61HEAJOXC3xtBSWS42tbALd5rLH8eJyu68txA-Q3sBNNRjg62scPH8Ue1ieGjryLD3nXM8hiYyQ6XSx7r8HlPgjP4LdIJyJ_pVVu0QKXkjq5h-okacicKZHpsu4ygvTG3XWN95KboOs_mNuawudggAYW2K-PRNE7CBRcLzfNa1uaAmdgM7pDhXz) failed to reach agreement
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   5.6  3   88   24510    7
-Test (2B): no agreement if too many followers disconnect ...
-  ... Passed --   5.1  5  135   30783    3
-Test (2B): concurrent Start()s ...
-  ... Passed --   1.6  3   24    6652    6
-Test (2B): rejoin of partitioned leader ...
-  ... Passed --   7.0  3   80   21289    4
-Test (2B): leader backs up quickly over incorrect follower logs ...
-  ... Passed --  16.9  5  586  202242   53
-Test (2B): RPC counts aren't too high ...
-  ... Passed --   3.7  3   66   18678   12
-Test (2B): basic agreement ...
-  ... Passed --   1.2  3   16    4356    3
-Test (2B): RPC byte count ...
-  ... Passed --   2.8  3   48  113712   11
-Test (2B): agreement despite follower disconnection ...
-  ... Passed --   5.0  3   80   22269    7
-Test (2B): no agreement if too many followers disconnect ...
-panic: test timed out after 10m0s
-
-goroutine 43504 [running]:
-testing.(*M).startAlarm.func1()
-	/usr/local/go/src/testing/testing.go:1377 +0xdf
-created by time.goFunc
-	/usr/local/go/src/time/sleep.go:168 +0x44
-
-goroutine 1 [chan receive, 5 minutes]:
-testing.(*T).Run(0xc0000cbb00, 0x5fa128, 0x11, 0x603e08, 0x47ef01)
-	/usr/local/go/src/testing/testing.go:961 +0x377
-testing.runTests.func1(0xc0000cb700)
-	/usr/local/go/src/testing/testing.go:1202 +0x78
-testing.tRunner(0xc0000cb700, 0xc00004ddc0)
-	/usr/local/go/src/testing/testing.go:909 +0xc9
-testing.runTests(0xc00000c800, 0x764ae0, 0x12, 0x12, 0x0)
-	/usr/local/go/src/testing/testing.go:1200 +0x2a7
-testing.(*M).Run(0xc0000ba000, 0x0)
-	/usr/local/go/src/testing/testing.go:1117 +0x176
-main.main()
-	_testmain.go:78 +0x135
-
-goroutine 14516 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000131320, 0xc00012a360, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 9 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020420, 0xc0000a45a0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8103 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000235bc0, 0xc0004ba5a0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020480, 0xc0000a45a0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 13 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0000204e0, 0xc0000a45a0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10813 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00053e840, 0xc00056a000, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 1280 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1500, 0xc00040ea20, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11803 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00058ede0, 0xc0002c2fc0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 208 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016b200, 0xc00040e000, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15697 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0000206c0, 0xc00054b0e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 19234 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002348a0, 0xc0007fe900, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 62 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001305a0, 0xc00021e000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 16026 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ae8a0, 0xc00054b7a0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 6944 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a12c0, 0xc00021f8c0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4278 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c0660, 0xc00040f9e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18136 [chan receive, 5 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc00000dd60, 0x5fa542, 0x12, 0x5a08a0, 0xc0005dcc40, 0x5a08e0, 0xc000168d80, 0x604530)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendAppendEntries(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:388
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc00056bc20, 0xc0005d4070, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:606 +0x260
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 7181 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005bacc0, 0xc0000a5b00, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 5110 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c49c0, 0xc0000a5680, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 5056 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c48a0, 0xc0000a5680, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8546 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020c00, 0xc0004bb200, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32499 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0004520f0, 0x5ad7e0, 0xc0003d1490, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c300, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 21700 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eb084, 0xc000080f00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetLogsLength(0xc0007eafc0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:854 +0xc3
-6.824_new/src/raft.(*Raft).GetLastLogIndex(0xc0007eafc0, 0xc000000000)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:864 +0x81
-6.824_new/src/raft.(*Raft).heartbeat2.func3(0xc0007eafc0, 0xc000080f80)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:656 +0xdf
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:632 +0x133
-
-goroutine 60 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000130540, 0xc00021e000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18454 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002344e0, 0xc00056bd40, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 12076 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ba300, 0xc0002c3560, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 58 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001304e0, 0xc00021e000, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14518 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a0000, 0xc00012a360, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 1077 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234f00, 0xc0000a4000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 516 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4c60, 0xc00040e5a0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11329 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dfbc0, 0xc0002c3440, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7390 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000131860, 0xc00021f9e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21646 [chan send, 3 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eafc0, 0xc000080f80)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 18095 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0000b2730, 0x5ad7e0, 0xc0001438b0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000788000, 0xc4ed, 0xc63f, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 7698 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1ce0, 0xc0004ba120, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3752 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a18c0, 0xc00040f320, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 514 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4c00, 0xc00040e5a0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7177 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005bac00, 0xc0000a5b00, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 274 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016b260, 0xc00040e000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17916 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000021c20, 0xc00056ac60, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 276 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016b2c0, 0xc00040e000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10609 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000364660, 0xc0004bb680, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32492 [chan receive]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eb200, 0xc000716700)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:578 +0x3a
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 1364 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c15c0, 0xc00040ea20, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10889 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d8660, 0xc0004bb9e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 12078 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ba360, 0xc0002c3560, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3543 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016ac60, 0xc0000a4120, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 1075 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234ea0, 0xc0000a4000, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10613 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000364720, 0xc0004bb680, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21623 [chan send, 5 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eaea0, 0xc000754080)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 1276 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1440, 0xc00040ea20, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 464 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4ba0, 0xc00040e5a0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 518 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4cc0, 0xc00040e5a0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 520 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4d20, 0xc00040e5a0, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 1278 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c14a0, 0xc00040ea20, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3754 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a1920, 0xc00040f320, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7251 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000365680, 0xc0004ba000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4758 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dff20, 0xc0000a4fc0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3541 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016ac00, 0xc0000a4120, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 938 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016a540, 0xc00040e6c0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 1079 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234f60, 0xc0000a4000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8548 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020c60, 0xc0004bb200, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7676 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1bc0, 0xc0004ba120, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10833 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00053e900, 0xc00056a000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18843 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005afce0, 0xc00056b320, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 940 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016a5a0, 0xc00040e6c0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18452 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234480, 0xc00056bd40, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14773 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000581740, 0xc00054a000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7388 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000131800, 0xc00021f9e0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8107 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000235ce0, 0xc0004ba5a0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21587 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf64, 0xc00002c500, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetVoteState(0xc0007eaea0, 0x0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:766 +0xd2
-6.824_new/src/raft.(*Raft).GetState(0xc0007eaea0, 0x1, 0xc000086c00)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:128 +0x2b
-6.824_new/src/raft.(*config).checkOneLeader(0xc0007eab40, 0x5acc60)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:318 +0x83
-6.824_new/src/raft.TestFailNoAgree2B(0xc0000cbb00)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/test_test.go:228 +0xfb
-testing.tRunner(0xc0000cbb00, 0x603e08)
-	/usr/local/go/src/testing/testing.go:909 +0xc9
-created by testing.(*T).Run
-	/usr/local/go/src/testing/testing.go:960 +0x350
-
-goroutine 4691 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234300, 0xc00040fe60, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10611 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003646c0, 0xc0004bb680, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 5106 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4900, 0xc0000a5680, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7674 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1b60, 0xc0004ba120, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4760 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dff80, 0xc0000a4fc0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21622 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf60, 0x0, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).Lock(0xc0007eaf58)
-	/usr/local/go/src/sync/rwmutex.go:103 +0x88
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eaea0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eaea0, 0xc000754080, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:617 +0x289
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 10891 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d86c0, 0xc0004bb9e0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 936 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016a4e0, 0xc00040e6c0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11805 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00058ee40, 0xc0002c2fc0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32489 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x5f5e100)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eb200, 0xc000716700, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:622 +0x2f6
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 1362 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1560, 0xc00040ea20, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3545 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016acc0, 0xc0000a4120, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17914 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000021bc0, 0xc00056ac60, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4274 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c05a0, 0xc00040f9e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32505 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf5c, 0x5a8600, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc0007eaf58)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc0007eaf58)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eaea0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).AppendEntries(0xc0007eaea0, 0xc000773d00, 0xc0008346d0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:310 +0x3c
-reflect.Value.call(0xc00005e240, 0xc0000f4618, 0x13, 0x5f79e6, 0x4, 0xc0007e5bb8, 0x3, 0x3, 0xc0007e5a80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005e240, 0xc0000f4618, 0x13, 0xc0007e5bb8, 0x3, 0x3, 0x5dfd80, 0x58eb4f, 0x7)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc0003b0f00, 0x5fa547, 0xd, 0x5ad7e0, 0xc0003d1470, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185d40, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc000253940, 0x5ad7e0, 0xc0003d1470, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185d40, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc000253940, 0x5ad7e0, 0xc0003d1470, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185d40, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 11058 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002de360, 0xc0002c2b40, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21147 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fe3c0, 0xc0007ff680, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4282 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c0720, 0xc00040f9e0, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8510 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020b40, 0xc0004bb200, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4280 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c06c0, 0xc00040f9e0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 12074 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ba2a0, 0xc0002c3560, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11331 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dfc20, 0xc0002c3440, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 20848 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a0060, 0xc0007ea120, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18847 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005afda0, 0xc00056b320, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14989 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c0840, 0xc00054a6c0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11062 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002de420, 0xc0002c2b40, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4006 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016b680, 0xc00021e120, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4002 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016b5c0, 0xc00021e120, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4004 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00016b620, 0xc00021e120, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17912 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000021b60, 0xc00056ac60, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7249 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000365620, 0xc0004ba000, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4276 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c0600, 0xc00040f9e0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14987 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c07e0, 0xc00054a6c0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7386 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001317a0, 0xc00021f9e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10893 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d8720, 0xc0004bb9e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4689 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002342a0, 0xc00040fe60, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4693 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234360, 0xc00040fe60, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3845 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000494540, 0xc00021e6c0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3847 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004945a0, 0xc00021e6c0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18093 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0000b2730, 0x5ad7e0, 0xc0001438b0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c000, 0x62, 0xb8, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 11060 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002de3c0, 0xc0002c2b40, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 3849 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000494600, 0xc00021e6c0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8508 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020ae0, 0xc0004bb200, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15727 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000131260, 0xc00012a7e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18001 [semacquire, 6 minutes]:
-sync.runtime_SemacquireMutex(0xc00056baa4, 0xc0005d4000, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetLogsLength(0xc00056b9e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:854 +0xc3
-6.824_new/src/raft.(*Raft).GetLastLogIndex(0xc00056b9e0, 0xc000000000)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:864 +0x81
-6.824_new/src/raft.(*Raft).heartbeat2.func3(0xc00056b9e0, 0xc0005d4000)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:656 +0xdf
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:632 +0x133
-
-goroutine 21620 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf64, 0x44bd00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetCurrentTerm(0xc0007eaea0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:786 +0xc0
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eaea0, 0xc000754080, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:596 +0x88
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 8245 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005afaa0, 0xc0004ba900, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8243 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005afa40, 0xc0004ba900, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14769 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000581680, 0xc00054a000, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18416 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002343c0, 0xc00056bd40, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17952 [semacquire, 6 minutes]:
-sync.runtime_SemacquireMutex(0xc00056baa0, 0x0, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).Lock(0xc00056ba98)
-	/usr/local/go/src/sync/rwmutex.go:103 +0x88
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc00056b9e0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc00056b9e0, 0xc0005d4000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:617 +0x289
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 32488 [runnable]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eb200, 0xc000716700)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:578 +0x3a
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 11717 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000494c60, 0xc00012a240, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14991 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c08a0, 0xc00054a6c0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18456 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234540, 0xc00056bd40, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 5108 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4960, 0xc0000a5680, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21698 [chan send, 3 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eafc0, 0xc000080f80)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 3756 [chan receive, 9 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a1980, 0xc00040f320, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 4762 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d8000, 0xc0000a4fc0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21621 [chan send, 5 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eaea0, 0xc000754080)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 14831 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fee40, 0xc00054a240, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32496 [chan receive]:
-6.824_new/src/raft.(*Raft).heartbeat2.func3(0xc0007eb200, 0xc000716700)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:640 +0x55
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:632 +0x133
-
-goroutine 12130 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ba420, 0xc0002c3560, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8512 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020ba0, 0xc0004bb200, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21673 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0004520f0, 0x5ad7e0, 0xc0003d0de0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000022480, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 8241 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005af9e0, 0xc0004ba900, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 5112 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001c4d80, 0xc0000a5680, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 12080 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ba3c0, 0xc0002c3560, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21149 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fe420, 0xc0007ff680, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17985 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00058f560, 0xc00056b7a0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11295 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dfb60, 0xc0002c3440, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7680 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1c80, 0xc0004ba120, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21653 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf5c, 0x0, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc0007eaf58)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc0007eaf58)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eaea0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).RequestVote(0xc0007eaea0, 0xc000697840, 0xc000765680)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:280 +0x3c
-reflect.Value.call(0xc00005eae0, 0xc0000f46d0, 0x13, 0x5f79e6, 0x4, 0xc00060dbb8, 0x3, 0x3, 0xc00060da80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005eae0, 0xc0000f46d0, 0x13, 0xc00060dbb8, 0x3, 0x3, 0x5a09a0, 0xc00007d560, 0x5bd980)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc0003b0f00, 0x5f9d2a, 0xb, 0x5ad7e0, 0xc0003d0de0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042cf00, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc000253940, 0x5ad7e0, 0xc0003d0de0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042cf00, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc000253940, 0x5ad7e0, 0xc0003d0de0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042cf00, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 32493 [chan receive, 3 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc000253ee0, 0x5fa542, 0x12, 0x5a08a0, 0xc000773dc0, 0x5a08e0, 0xc0008346e0, 0x583d8f)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendAppendEntries(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:388
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eb200, 0xc000716700, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:606 +0x260
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 6946 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a1320, 0xc00021f8c0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 6948 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a1380, 0xc00021f8c0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7253 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003656e0, 0xc0004ba000, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17655 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d9560, 0xc00054bc20, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18094 [semacquire, 6 minutes]:
-sync.runtime_SemacquireMutex(0xc00056ba9c, 0x46c200, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc00056ba98)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc00056ba98)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc00056b9e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).RequestVote(0xc00056b9e0, 0xc0003139a0, 0xc000168d70)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:280 +0x3c
-reflect.Value.call(0xc00005eae0, 0xc0004a7558, 0x13, 0x5f79e6, 0x4, 0xc00022dbb8, 0x3, 0x3, 0xc00022da80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005eae0, 0xc0004a7558, 0x13, 0xc00022dbb8, 0x3, 0x3, 0x639800, 0x639800, 0x5bd980)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc000510580, 0x5f9d2a, 0xb, 0x5ad7e0, 0xc0001438b0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c000, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc00000da20, 0x5ad7e0, 0xc0001438b0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c000, 0x62, 0xb8, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc00000da20, 0x5ad7e0, 0xc0001438b0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c000, 0x62, 0xb8, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 11293 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dfb00, 0xc0002c3440, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7678 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002c1c20, 0xc0004ba120, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 16022 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ae7e0, 0xc00054b7a0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21324 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005aea80, 0xc0007ffb00, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15248 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004ff4a0, 0xc00054afc0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 16028 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ae900, 0xc00054b7a0, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 7179 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005bac60, 0xc0000a5b00, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15701 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020780, 0xc00054b0e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18450 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234420, 0xc00056bd40, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 8105 [chan receive, 8 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000235c20, 0xc0004ba5a0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32482 [chan receive, 3 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc000253ee0, 0x5f9d25, 0x10, 0x5a09a0, 0xc000780cc0, 0x5a09e0, 0xc000759f80, 0x45d521)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendRequestVote(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:382
-6.824_new/src/raft.(*Raft).LeaderElection.func2(0xc000759820, 0x4, 0xc0007eb200, 0xc0001a4ea0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:495 +0x12c
-created by 6.824_new/src/raft.(*Raft).LeaderElection
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:486 +0xaf
-
-goroutine 11333 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002dfc80, 0xc0002c3440, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18964 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002de960, 0xc00056be60, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 10815 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00053e8a0, 0xc00056a000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 14771 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005816e0, 0xc00054a000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17987 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00058f5c0, 0xc00056b7a0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21326 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005aeae0, 0xc0007ffb00, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11719 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000494cc0, 0xc00012a240, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21098 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000749020, 0xc0007fed80, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11721 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000494d20, 0xc00012a240, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 11807 [chan receive, 7 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00058eea0, 0xc0002c2fc0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21624 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf64, 0x44bd00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetCurrentTerm(0xc0007eaea0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:786 +0xc0
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eaea0, 0xc000754080, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:596 +0x88
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 21588 [select]:
-6.824_new/src/labrpc.MakeNetwork.func1(0xc0004520f0)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:158 +0x160
-created by 6.824_new/src/labrpc.MakeNetwork
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:156 +0x138
-
-goroutine 21639 [chan receive, 5 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc000253980, 0x5f9d25, 0x10, 0x5a09a0, 0xc00045bcc0, 0x5a09e0, 0xc000521260, 0xc0003bd7c8)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendRequestVote(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:382
-6.824_new/src/raft.(*Raft).LeaderElection.func2(0xc00056c138, 0x2, 0xc0007eafc0, 0xc000028360, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:495 +0x12c
-created by 6.824_new/src/raft.(*Raft).LeaderElection
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:486 +0xaf
-
-goroutine 17949 [chan send, 6 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc00056b9e0, 0xc0005d4000)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 14829 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fede0, 0xc00054a240, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15244 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004ff3e0, 0xc00054afc0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32504 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0004520f0, 0x5ad7e0, 0xc0003d1470, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185d40, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 14529 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003a15c0, 0xc00012a360, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15246 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004ff440, 0xc00054afc0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 19240 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002349c0, 0xc0007fe900, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21102 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0007490e0, 0xc0007fed80, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32494 [runnable]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eb200, 0xc000716700)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:578 +0x3a
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 14849 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004feea0, 0xc00054a240, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15699 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020720, 0xc00054b0e0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21619 [chan send, 5 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eaea0, 0xc000754080)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 16024 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ae840, 0xc00054b7a0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17653 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d9500, 0xc00054bc20, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15809 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0001312c0, 0xc00012a7e0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15282 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004ff500, 0xc00054afc0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17651 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0003d94a0, 0xc00054bc20, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15284 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004ff560, 0xc00054afc0, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17967 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc00058f500, 0xc00056b7a0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18193 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fe240, 0xc00012ab40, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21595 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000021020, 0xc0007eab40, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18125 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fe180, 0xc00012ab40, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 15811 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000131380, 0xc00012a7e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18127 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fe1e0, 0xc00012ab40, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 16020 [chan receive, 6 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005ae780, 0xc00054b7a0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18845 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005afd40, 0xc00056b320, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 32498 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf5c, 0x0, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc0007eaf58)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc0007eaf58)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eaea0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).RequestVote(0xc0007eaea0, 0xc000780ca0, 0xc000759f70)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:280 +0x3c
-reflect.Value.call(0xc00005eae0, 0xc0000f46d0, 0x13, 0x5f79e6, 0x4, 0xc000609bb8, 0x3, 0x3, 0xc000609a80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005eae0, 0xc0000f46d0, 0x13, 0xc000609bb8, 0x3, 0x3, 0x639800, 0x639800, 0x5bd980)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc0003b0f00, 0x5f9d2a, 0xb, 0x5ad7e0, 0xc0003d1470, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c240, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc000253940, 0x5ad7e0, 0xc0003d1470, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c240, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc000253940, 0x5ad7e0, 0xc0003d1470, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c240, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 18131 [chan receive, 6 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc00000dd60, 0x5f9d25, 0x10, 0x5a09a0, 0xc000313640, 0x5a09e0, 0xc000168860, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendRequestVote(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:382
-6.824_new/src/raft.(*Raft).LeaderElection.func2(0xc0001169d8, 0x2, 0xc00056bc20, 0xc000080c80, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:495 +0x12c
-created by 6.824_new/src/raft.(*Raft).LeaderElection
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:486 +0xaf
-
-goroutine 21151 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0004fe480, 0xc0007ff680, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17951 [chan send, 6 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc00056b9e0, 0xc0005d4000)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 21598 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x285a3340)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.Make.func1(0xc0007eb200)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:742 +0x42
-created by 6.824_new/src/raft.Make
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:736 +0x21a
-
-goroutine 21328 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0005aeb40, 0xc0007ffb00, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 17950 [semacquire, 6 minutes]:
-sync.runtime_SemacquireMutex(0xc00056baa4, 0x44bd00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetCurrentTerm(0xc00056b9e0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:786 +0xc0
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc00056b9e0, 0xc0005d4000, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:596 +0x88
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 19236 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234900, 0xc0007fe900, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 19238 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234960, 0xc0007fe900, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 20844 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000495f20, 0xc0007ea120, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21597 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000021080, 0xc0007eab40, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21674 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf5c, 0x5a8600, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc0007eaf58)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc0007eaf58)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eaea0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).AppendEntries(0xc0007eaea0, 0xc0005dedc0, 0xc00031d4a0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:310 +0x3c
-reflect.Value.call(0xc00005e240, 0xc0000f4618, 0x13, 0x5f79e6, 0x4, 0xc000609bb8, 0x3, 0x3, 0xc000609a80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005e240, 0xc0000f4618, 0x13, 0xc000609bb8, 0x3, 0x3, 0x5dfd80, 0x58eb4f, 0x7)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc0003b0f00, 0x5fa547, 0xd, 0x5ad7e0, 0xc0003d0de0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000022480, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc000253940, 0x5ad7e0, 0xc0003d0de0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000022480, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc000253940, 0x5ad7e0, 0xc0003d0de0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000022480, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 18912 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002de8a0, 0xc00056be60, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 19242 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000234a20, 0xc0007fe900, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21589 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020f00, 0xc0007eab40, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 18096 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc00056ba9c, 0x5a8600, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc00056ba98)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc00056ba98)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc00056b9e0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).AppendEntries(0xc00056b9e0, 0xc0005dc140, 0xc000168430)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:310 +0x3c
-reflect.Value.call(0xc00005e240, 0xc0004a7488, 0x13, 0x5f79e6, 0x4, 0xc0007bbbb8, 0x3, 0x3, 0xc0007bba80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005e240, 0xc0004a7488, 0x13, 0xc0007bbbb8, 0x3, 0x3, 0x7f73424d6e60, 0xc00007d560, 0x5bd980)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc000510580, 0x5fa547, 0xd, 0x5ad7e0, 0xc0001438b0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000788000, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc00000da20, 0x5ad7e0, 0xc0001438b0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000788000, 0xc4ed, 0xc63f, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc00000da20, 0x5ad7e0, 0xc0001438b0, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000788000, 0xc4ed, 0xc63f, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 32507 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eb07c, 0x0, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc0007eb078)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc0007eb078)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eafc0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).AppendEntries(0xc0007eafc0, 0xc0003ce1c0, 0xc000834900)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:310 +0x3c
-reflect.Value.call(0xc00005e240, 0xc0000f4730, 0x13, 0x5f79e6, 0x4, 0xc00080bbb8, 0x3, 0x3, 0xc00080ba80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005e240, 0xc0000f4730, 0x13, 0xc00080bbb8, 0x3, 0x3, 0x5dfd80, 0x58eb4f, 0x7)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc0003b0f80, 0x5fa547, 0xd, 0x5ad7e0, 0xc0003d1490, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185e60, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc000253be0, 0x5ad7e0, 0xc0003d1490, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185e60, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc000253be0, 0x5ad7e0, 0xc0003d1490, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185e60, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 18962 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc0002de900, 0xc00056be60, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21596 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x24004f00)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.Make.func1(0xc0007eb0e0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:742 +0x42
-created by 6.824_new/src/raft.Make
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:736 +0x21a
-
-goroutine 21592 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x2001f840)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.Make.func1(0xc0007eaea0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:742 +0x42
-created by 6.824_new/src/raft.Make
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:736 +0x21a
-
-goroutine 21100 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000749080, 0xc0007fed80, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21593 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020fc0, 0xc0007eab40, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21625 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf64, 0x771900, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetLogsLength(0xc0007eaea0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:854 +0xc3
-6.824_new/src/raft.(*Raft).GetLastLogIndex(0xc0007eaea0, 0xc000000000)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:864 +0x81
-6.824_new/src/raft.(*Raft).heartbeat2.func3(0xc0007eaea0, 0xc000754080)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:656 +0xdf
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:632 +0x133
-
-goroutine 21594 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x21dafe00)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.Make.func1(0xc0007eafc0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:742 +0x42
-created by 6.824_new/src/raft.Make
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:736 +0x21a
-
-goroutine 21699 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eb084, 0x44bd00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetCurrentTerm(0xc0007eafc0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:786 +0xc0
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eafc0, 0xc000080f80, 0x4)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:596 +0x88
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 20846 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000495f80, 0xc0007ea120, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21648 [chan send, 3 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eafc0, 0xc000080f80)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 21590 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x2662a900)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.Make.func1(0xc0007ead80)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:742 +0x42
-created by 6.824_new/src/raft.Make
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:736 +0x21a
-
-goroutine 21647 [chan receive, 5 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc000253980, 0x5fa542, 0x12, 0x5a08a0, 0xc0005dc380, 0x5a08e0, 0xc000521670, 0x583d8f)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendAppendEntries(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:388
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eafc0, 0xc000080f80, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:606 +0x260
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 21697 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eb080, 0x0, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).Lock(0xc0007eb078)
-	/usr/local/go/src/sync/rwmutex.go:103 +0x88
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eafc0, 0x2)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eafc0, 0xc000080f80, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:617 +0x289
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 21591 [chan receive, 5 minutes]:
-6.824_new/src/raft.(*config).start1.func1(0xc000020f60, 0xc0007eab40, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:174 +0x6f
-created by 6.824_new/src/raft.(*config).start1
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:173 +0x461
-
-goroutine 21644 [chan send, 3 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eafc0, 0xc000080f80)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 21617 [chan send, 5 minutes]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eaea0, 0xc000754080)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:579 +0x54
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-
-goroutine 21645 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eb084, 0x44bd00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetCurrentTerm(0xc0007eafc0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:786 +0xc0
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eafc0, 0xc000080f80, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:596 +0x88
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 21618 [semacquire, 5 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eaf64, 0x44bd00, 0x0)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*RWMutex).RLock(...)
-	/usr/local/go/src/sync/rwmutex.go:50
-6.824_new/src/raft.(*Raft).GetCurrentTerm(0xc0007eaea0, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:786 +0xc0
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eaea0, 0xc000754080, 0x0)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:596 +0x88
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 21615 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0004520f0, 0x5ad7e0, 0xc0003d0de0, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042cf00, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 32491 [chan receive, 3 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc000253ec0, 0x5fa542, 0x12, 0x5a08a0, 0xc000773980, 0x5a08e0, 0xc0008344b0, 0x10)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendAppendEntries(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:388
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eb200, 0xc000716700, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:606 +0x260
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 32495 [sleep]:
-runtime.goparkunlock(...)
-	/usr/local/go/src/runtime/proc.go:310
-time.Sleep(0x5f5e100)
-	/usr/local/go/src/runtime/time.go:105 +0x157
-6.824_new/src/raft.(*Raft).heartbeat2.func2(0xc0007eb200, 0xc000716700, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:622 +0x2f6
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:585 +0xf3
-
-goroutine 32500 [semacquire, 3 minutes]:
-sync.runtime_SemacquireMutex(0xc0007eb07c, 0x0, 0x1)
-	/usr/local/go/src/runtime/sema.go:71 +0x47
-sync.(*Mutex).lockSlow(0xc0007eb078)
-	/usr/local/go/src/sync/mutex.go:138 +0xfc
-sync.(*Mutex).Lock(...)
-	/usr/local/go/src/sync/mutex.go:81
-sync.(*RWMutex).Lock(0xc0007eb078)
-	/usr/local/go/src/sync/rwmutex.go:98 +0x97
-6.824_new/src/raft.(*Raft).UpdateTerm(0xc0007eafc0, 0x3)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:827 +0x3d
-6.824_new/src/raft.(*Raft).RequestVote(0xc0007eafc0, 0xc000780ee0, 0xc000834100)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:280 +0x3c
-reflect.Value.call(0xc00005eae0, 0xc0000f47e8, 0x13, 0x5f79e6, 0x4, 0xc000677bb8, 0x3, 0x3, 0xc000677a80, 0x4b7f8d, ...)
-	/usr/local/go/src/reflect/value.go:460 +0x5f6
-reflect.Value.Call(0xc00005eae0, 0xc0000f47e8, 0x13, 0xc000677bb8, 0x3, 0x3, 0x5dfd80, 0x58eb4f, 0x7)
-	/usr/local/go/src/reflect/value.go:321 +0xb4
-6.824_new/src/labrpc.(*Service).dispatch(0xc0003b0f80, 0x5f9d2a, 0xb, 0x5ad7e0, 0xc0003d1490, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c300, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:501 +0x682
-6.824_new/src/labrpc.(*Server).dispatch(0xc000253be0, 0x5ad7e0, 0xc0003d1490, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c300, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:425 +0x4a3
-6.824_new/src/labrpc.(*Network).processReq.func1(0xc000253be0, 0x5ad7e0, 0xc0003d1490, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c300, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:245 +0x60
-created by 6.824_new/src/labrpc.(*Network).processReq
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:244 +0x141
-
-goroutine 32497 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0004520f0, 0x5ad7e0, 0xc0003d1470, 0x5f9d25, 0x10, 0x639800, 0x5a09a0, 0xc00042c240, 0x60, 0xb6, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 32506 [select]:
-6.824_new/src/labrpc.(*Network).processReq(0xc0004520f0, 0x5ad7e0, 0xc0003d1490, 0x5fa542, 0x12, 0x639800, 0x5a08a0, 0xc000185e60, 0xda, 0x109, ...)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:256 +0x258
-created by 6.824_new/src/labrpc.MakeNetwork.func1
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:162 +0xae
-
-goroutine 32481 [chan receive, 3 minutes]:
-6.824_new/src/labrpc.(*ClientEnd).Call(0xc000253ec0, 0x5f9d25, 0x10, 0x5a09a0, 0xc000780a80, 0x5a09e0, 0xc000759df0, 0xc0007387c8)
-	/home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:116 +0x2d6
-6.824_new/src/raft.(*Raft).sendRequestVote(...)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:382
-6.824_new/src/raft.(*Raft).LeaderElection.func2(0xc000759820, 0x4, 0xc0007eb200, 0xc0001a4ea0, 0x1)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:495 +0x12c
-created by 6.824_new/src/raft.(*Raft).LeaderElection
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:486 +0xaf
-
-goroutine 32490 [runnable]:
-6.824_new/src/raft.(*Raft).heartbeat2.func1(0xc0007eb200, 0xc000716700)
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:578 +0x3a
-created by 6.824_new/src/raft.(*Raft).heartbeat2
-	/home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:572 +0xbd
-exit status 2
-FAIL	6.824_new/src/raft	600.024s
+Test (2C): basic persistence ...
+  ... Passed --  11.0  3  178   50493    6
+Test (2C): more persistence ...
+  ... Passed --  35.3  5 1223  281331   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   6.4  3  102   28922    6
+Test (2C): Figure 8 ...
+  ... Passed --  33.5  5  865  172463   22
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1228  361350  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  39.7  5  702  206786   10
+Test (2C): churn ...
+  ... Passed --  16.2  5  712  211270  242
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5 1139  372796  258
+PASS
+ok  	6.824_new/src/raft	167.265s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  10.2  3  202   61587    8
+Test (2C): more persistence ...
+  ... Passed --  33.9  5 1306  333975   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   6.8  3  109   30052    5
+Test (2C): Figure 8 ...
+  ... Passed --  34.7  5  845  165485   24
+Test (2C): unreliable agreement ...
+  ... Passed --   9.1  5 1212  360692  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  43.2  5  656  278204  427
+Test (2C): churn ...
+  ... Passed --  19.0  5 2744 1930845  782
+Test (2C): unreliable churn ...
+  ... Passed --  16.4  5  663  155747   89
+PASS
+ok  	6.824_new/src/raft	173.239s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  10.2  3  205   59036    6
+Test (2C): more persistence ...
+  ... Passed --  34.7  5 1263  306410   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   7.4  3  121   33785    6
+Test (2C): Figure 8 ...
+  ... Passed --  40.4  5  824  140993   15
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1207  359035  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (41.52s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  19.0  5 2413 2661452  766
+Test (2C): unreliable churn ...
+  ... Passed --  16.3  5  760  211898  133
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	178.512s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  11.0  3  203   58058    6
+Test (2C): more persistence ...
+  ... Passed --  35.6  5 1351  352922   20
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   2.9  3   54   14944    4
+Test (2C): Figure 8 ...
+  ... Passed --  34.0  5  700  125697   24
+Test (2C): unreliable agreement ...
+  ... Passed --   8.7  5 1205  358959  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  39.1  5  636  184557  196
+Test (2C): churn ...
+  ... Passed --  16.4  5 2372  887308  724
+Test (2C): unreliable churn ...
+  ... Passed --  16.7  5  569  164796  136
+PASS
+ok  	6.824_new/src/raft	164.449s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  14.6  3  336  103435    9
+Test (2C): more persistence ...
+  ... Passed --  36.1  5 1235  312458   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.3  3   83   23672    5
+Test (2C): Figure 8 ...
+  ... Passed --  30.3  5  635  119898   20
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1207  356524  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (41.56s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  18.2  5 1804 1819722  582
+Test (2C): unreliable churn ...
+  ... Passed --  16.1  5  598  164487   86
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	170.011s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  15.9  3  272   82157    8
+Test (2C): more persistence ...
+--- FAIL: TestPersist22C (17.34s)
+    config.go:515: one(16) failed to reach agreement
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.0  3   80   22526    5
+Test (2C): Figure 8 ...
+  ... Passed --  29.0  5  526   94711   18
+Test (2C): unreliable agreement ...
+  ... Passed --   8.7  5 1203  359325  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (43.65s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  17.9  5 1441  441611  416
+Test (2C): unreliable churn ...
+  ... Passed --  16.3  5 1519  573531  377
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	153.756s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --   6.9  3  144   40704    6
+Test (2C): more persistence ...
+  ... Passed --  37.2  5 1342  324561   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.7  3   73   20314    4
+Test (2C): Figure 8 ...
+  ... Passed --  31.1  5  756  144593   29
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1216  361707  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (39.36s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.6  5 1506  478279  403
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5  443   90462   48
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	161.211s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  16.4  3  371  116161    9
+Test (2C): more persistence ...
+  ... Passed --  41.0  5 1556  407335   22
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   7.4  3  158   49161    6
+Test (2C): Figure 8 ...
+  ... Passed --  32.1  5  593  107278   12
+Test (2C): unreliable agreement ...
+  ... Passed --   8.9  5 1219  360125  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  34.0  5  494  112766   12
+Test (2C): churn ...
+  ... Passed --  16.6  5 1029  383082  375
+Test (2C): unreliable churn ...
+  ... Passed --  16.9  5  993  312065  292
+PASS
+ok  	6.824_new/src/raft	173.351s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  13.2  3  271   81899    8
+Test (2C): more persistence ...
+  ... Passed --  42.4  5 1535  385859   20
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   3.2  3   52   14728    4
+Test (2C): Figure 8 ...
+  ... Passed --  33.3  5  750  142666   26
+Test (2C): unreliable agreement ...
+  ... Passed --   8.5  5 1187  355496  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  39.6  5  721  171467  142
+Test (2C): churn ...
+  ... Passed --  18.4  5 2752 1904889  766
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5 1127  339304  257
+PASS
+ok  	6.824_new/src/raft	174.786s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --   9.0  3  192   54693    6
+Test (2C): more persistence ...
+  ... Passed --  36.8  5 1192  264062   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   3.0  3   51   14439    4
+Test (2C): Figure 8 ...
+  ... Passed --  37.0  5  969  198429   32
+Test (2C): unreliable agreement ...
+  ... Passed --   9.1  5 1221  362728  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (45.74s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  17.0  5 1366  472735  446
+Test (2C): unreliable churn ...
+  ... Passed --  16.3  5 1243  756750  304
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	174.078s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  10.8  3  225   68644    8
+Test (2C): more persistence ...
+  ... Passed --  31.9  5 1264  335972   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.1  3   78   22272    4
+Test (2C): Figure 8 ...
+  ... Passed --  30.1  5  635  124117   25
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1214  361627  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (44.61s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.3  5 1512  507114  507
+Test (2C): unreliable churn ...
+  ... Passed --  18.3  5 1189 1082163  285
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	164.919s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  13.8  3  234   67313    7
+Test (2C): more persistence ...
+  ... Passed --  33.9  5 1357  333378   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   6.2  3   96   26814    5
+Test (2C): Figure 8 ...
+  ... Passed --  31.4  5  773  146239   23
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1205  359060  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (44.39s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.2  5 1623  731602  455
+Test (2C): unreliable churn ...
+  ... Passed --  18.2  5 1232 1293418  281
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	172.883s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --   7.7  3  128   35976    6
+Test (2C): more persistence ...
+  ... Passed --  43.3  5 1460  377282   22
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.5  3   95   26976    5
+Test (2C): Figure 8 ...
+  ... Passed --  31.1  5  718  128615   15
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1222  361951  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (39.88s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.3  5 1855  664368  642
+Test (2C): unreliable churn ...
+  ... Passed --  16.8  5 1545  509538  331
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	169.366s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  11.7  3  218   62721    7
+Test (2C): more persistence ...
+  ... Passed --  37.1  5 1361  311950   21
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.8  3   95   26637    5
+Test (2C): Figure 8 ...
+  ... Passed --  35.0  5  978  189647   28
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1211  358352  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (42.41s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  20.8  5 1850  601932  579
+Test (2C): unreliable churn ...
+  ... Passed --  17.2  5  717  220837  184
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	178.766s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  16.4  3  310   94603    9
+Test (2C): more persistence ...
+  ... Passed --  28.8  5  881  206557   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.8  3   83   23516    5
+Test (2C): Figure 8 ...
+  ... Passed --  28.9  5  592  113833   21
+Test (2C): unreliable agreement ...
+  ... Passed --   8.9  5 1236  364706  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  37.7  5  511  134761   70
+Test (2C): churn ...
+  ... Passed --  16.5  5 1285  434861  581
+Test (2C): unreliable churn ...
+  ... Passed --  17.0  5 1050  322849  280
+PASS
+ok  	6.824_new/src/raft	158.960s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  13.3  3  290   90251    8
+Test (2C): more persistence ...
+  ... Passed --  30.9  5 1260  327565   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.8  3   99   27748    5
+Test (2C): Figure 8 ...
+  ... Passed --  32.6  5  774  159635   27
+Test (2C): unreliable agreement ...
+  ... Passed --   9.2  5 1234  365766  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (44.55s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  18.9  5 1746  598996  615
+Test (2C): unreliable churn ...
+  ... Passed --  17.6  5  529  139163   93
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	172.767s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  15.4  3  327   97003    7
+Test (2C): more persistence ...
+  ... Passed --  44.8  5 1440  321238   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   8.6  3  167   51094    6
+Test (2C): Figure 8 ...
+  ... Passed --  32.6  5  801  152703   27
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1228  363758  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  41.9  5  703  214804  150
+Test (2C): churn ...
+  ... Passed --  16.2  5 1088  374603  214
+Test (2C): unreliable churn ...
+  ... Passed --  16.8  5 1316  409546  261
+PASS
+ok  	6.824_new/src/raft	185.281s
+sleep for a while
+
+Test (2C): basic persistence ...
+signal: interrupt
+FAIL	6.824_new/src/raft	4.901s
