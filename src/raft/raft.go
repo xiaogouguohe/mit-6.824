@@ -96,7 +96,7 @@ type Raft struct {
 	voteMu sync.RWMutex
 	nextIndexMu sync.RWMutex
 	matchIndexMu sync.RWMutex
-	//logsMu sync.RWMutex
+	logsMu sync.RWMutex
 
 	lastRecvTime int64
 
@@ -709,8 +709,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.me = me
 
 	// Your initialization code here (2A, 2B, 2C).
-	//rf.SetVoteState(0, -1)
-	rf.readPersist(persister.ReadRaftState())
+	rf.SetVoteState(0, -1)
+	//rf.readPersist(persister.ReadRaftState())
 	rf.SetCertainState(FOLLOWER)
 
 	rf.SetCommitIndex(-1)
@@ -724,9 +724,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.matchIndex = make([]int32, len(rf.peers))
 	rf.matchIndexMu.Unlock()
 
-	/*rf.logsMu.Lock()
+	rf.logsMu.Lock()
 	rf.logs = make([]LogEntry, 0)
-	rf.logsMu.Unlock()*/
+	rf.logsMu.Unlock()
 
 	rf.applyCh = applyCh
 
@@ -851,15 +851,15 @@ func (rf *Raft) isLogNew(args *RequestVoteArgs) bool {
 }
 
 func (rf* Raft) GetLogsLength() int {
-	rf.voteMu.RLock()
-	defer rf.voteMu.RUnlock()
+	rf.logsMu.RLock()
+	defer rf.logsMu.RUnlock()
 
 	return len(rf.logs)
 }
 
 func (rf* Raft) GetLastLogIndex() int32 {
-	rf.voteMu.RLock()
-	defer rf.voteMu.RUnlock()
+	rf.logsMu.RLock()
+	defer rf.logsMu.RUnlock()
 
 	return int32(rf.GetLogsLength() - 1)
 }
@@ -911,8 +911,8 @@ func (rf* Raft) SetNextIndex(server int, index int32) {
 }
 
 func (rf* Raft) GetLogs(beginIndex int32) []LogEntry {
-	rf.voteMu.RLock()
-	defer rf.voteMu.RUnlock()
+	rf.logsMu.RLock()
+	defer rf.logsMu.RUnlock()
 
 	return rf.logs[beginIndex:]
 }
@@ -930,8 +930,8 @@ func (rf *Raft) GetCommitIndex() int32 {
 }
 
 func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
-	rf.voteMu.Lock()
-	defer rf.voteMu.Unlock()
+	rf.logsMu.Lock()
+	defer rf.logsMu.Unlock()
 
 	//fmt.Println("in func AppendLogs: rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "entries:", entries)
 	rf.logs = append(rf.logs[:index], entries...)
@@ -940,8 +940,8 @@ func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 }
 
 func (rf* Raft) PushBackLogs(entries []LogEntry) int32 {
-	rf.voteMu.Lock()
-	defer rf.voteMu.Unlock()
+	rf.logsMu.Lock()
+	defer rf.logsMu.Unlock()
 
 	rf.logs = append(rf.logs, entries...)
 	//rf.persist()
