@@ -336,16 +336,17 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		reply.CommitIndex = commitIndex
 		reply.Term = args.Term
 	} else {
-		//fmt.Println("in func AppendEntries, match, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "args.PrevLogIndex:", args.PrevLogIndex,
-			//"args.Entries:", args.Entries)
+		//fmt.Println("in func AppendEntries, match, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state", rf.GetCertainState(),
+		//	"args.PrevLogIndex:", args.PrevLogIndex, "args.Entries:", args.Entries)
 		reply.Succ = true
 		reply.CommitIndex = args.LeaderCommit
 		reply.Term = args.Term
 
 		rf.AppendLogs(args.PrevLogIndex + 1, args.Entries)
 		rf.SetCommitIndex(args.LeaderCommit)
-
-		go rf.commitLogs()  //会不会提交到一半被覆盖？
+		if rf.GetLastApplied() < rf.GetCommitIndex() {
+			go rf.commitLogs()  //会不会提交到一半被覆盖？
+		}
 	}
 }
 //
@@ -430,7 +431,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	//rf.AppendLogs(int32(index), logEntries)  //同时拿到同一个index，相互覆盖
 	index := rf.PushBackLogs(logEntries) - 1
 
-	//fmt.Println("in func Start, cmd:", command, "rf:", rf.me, "index:", index)
+	//fmt.Println("in func Start, rf:", rf.me, "term:", rf.currentTerm, "index:", index, "cmd", command)
 	return int(index) + 1, term, true
 }
 
@@ -603,6 +604,8 @@ func (rf *Raft) heartbeat2() {
 					}
 
 					var reply AppendEntriesReply
+					//commitIndex := rf.GetCommitIndex()
+					//lastLogIndex := rf.GetLastLogIndex()
 
 					ok := rf.sendAppendEntries(server, &args, &reply)
 
@@ -635,6 +638,8 @@ func (rf *Raft) heartbeat2() {
 			if rf.killed() || rf.GetCertainState() != LEADER {
 				break
 			}
+			//commitIndex := rf.GetCommitIndex()
+			//lastLogIndex := rf.GetLastLogIndex()  //不太准确，寄希望于这个能在森的AppendEntries之前执行
 			replyCnt := 1
 			majority := len(rf.peers) / 2 + 1  //设置多数值  //可嫩还要给len枷锁
 			for {
@@ -652,9 +657,9 @@ func (rf *Raft) heartbeat2() {
 				}
 			}
 
-			if replyCnt >= majority {
+			if replyCnt >= majority && majority > 1{
 				commitIndex := rf.GetCommitIndex()
-				lastLogIndex := rf.GetLastLogIndex()
+				lastLogIndex := rf.GetLastLogIndex()  //不太准确，寄希望于这个能在森的AppendEntries之前执行
 				//fmt.Println("in func heartbeat2's go routine, rf:", rf.me, "rf.Term", rf.GetCurrentTerm(),
 					//"commitIndex:", commitIndex, " lastLogIndex:", lastLogIndex)
 				if commitIndex < lastLogIndex {
@@ -671,7 +676,11 @@ func (rf *Raft) commitLogs() {
 	commitIndex := rf.GetCommitIndex()
 	lastLogIndex := rf.GetLastLogIndex()
 	lastApplied := rf.GetLastApplied()
-	//fmt.Println("in func commitLogs, rf:", rf.me, "commitIndex:", commitIndex, "lastLogIndex", lastLogIndex, "lastApplied:", rf.lastApplied)
+	//term := rf.GetCurrentTerm()
+	//logs := rf.GetLogs(0)
+	//state := rf.GetCertainState()
+	//fmt.Println("in func commitLogs, rf:", rf.me, "state", state, "term", term, "commitIndex:", commitIndex,
+	//	"lastLogIndex", lastLogIndex, "lastApplied:", rf.lastApplied, "logs:", logs)
 
 	if (commitIndex > lastLogIndex) {
 		rf.SetCommitIndex(lastLogIndex)
@@ -688,6 +697,7 @@ func (rf *Raft) commitLogs() {
 	}
 
 	rf.SetLastApplied(commitIndex)
+	//rf.SetCommitIndex(commitIndex + 1)
 }
 //
 // the service or tester wants to create a Raft server. the ports

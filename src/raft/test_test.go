@@ -936,7 +936,8 @@ func TestFigure8Unreliable2C(t *testing.T) {
 
 	//cfg.one(rand.Int()%10000, 1, true)
 	cfg.one(10000, 1, true)
-	
+
+	cnt := 0
 	nup := servers
 	for iters := 0; iters < 1000; iters++ {
 		if iters == 200 {
@@ -944,11 +945,18 @@ func TestFigure8Unreliable2C(t *testing.T) {
 		}
 		leader := -1
 		for i := 0; i < servers; i++ {
-			_, _, ok := cfg.rafts[i].Start(rand.Int() % 10000)
-			if ok && cfg.connected[i] {
+			//_, _, ok := cfg.rafts[i].Start(rand.Int() % 10000)
+			_, _, ok := cfg.rafts[i].Start(cnt)
+			cnt++
+			if ok && cfg.connected[i] {  //找到当前leader，断开连接
 				leader = i
 			}
 		}
+
+		/*for i := 0; i < servers; i++ {
+			fmt.Println("rf:", i, "term:", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+				"logs:", cfg.rafts[i].GetLogs(0))
+		}*/
 
 		if (rand.Int() % 1000) < 100 { //10%的概率
 			ms := rand.Int63() % (int64(RaftElectionTimeout/time.Millisecond) / 2)
@@ -960,6 +968,7 @@ func TestFigure8Unreliable2C(t *testing.T) {
 
 		if leader != -1 && (rand.Int()%1000) < int(RaftElectionTimeout/time.Millisecond)/2 { //50%概率
 			cfg.disconnect(leader)
+			//fmt.Println("disconnect", leader)
 			nup -= 1
 		}
 
@@ -967,6 +976,7 @@ func TestFigure8Unreliable2C(t *testing.T) {
 			s := rand.Int() % servers
 			if cfg.connected[s] == false {
 				cfg.connect(s)
+				//fmt.Println("connect", s)
 				nup += 1
 			}
 		}

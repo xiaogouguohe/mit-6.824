@@ -2,7 +2,7 @@
 rm out
 while [ 1 ]
 do
-  go test -run 2C >> out
+  go test -run TestFigure8Unreliable2C >> out
   sleep 1s
   echo "sleep for a while\n" >> out
 done
