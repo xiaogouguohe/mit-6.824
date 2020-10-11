@@ -544,6 +544,7 @@ func (rf *Raft) LeaderElection() {
 		//fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "commitIndex:",
 			//rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "win election")
 		rf.SetCertainState(LEADER)
+		rf.TurnToLeader()
 		rf.heartbeat2()
 	}
 }
@@ -709,8 +710,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.me = me
 
 	// Your initialization code here (2A, 2B, 2C).
-	rf.SetVoteState(0, -1)
-	//rf.readPersist(persister.ReadRaftState())
+	//rf.SetVoteState(0, -1)
+	rf.readPersist(persister.ReadRaftState())
 	rf.SetCertainState(FOLLOWER)
 
 	rf.SetCommitIndex(-1)
@@ -724,9 +725,9 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.matchIndex = make([]int32, len(rf.peers))
 	rf.matchIndexMu.Unlock()
 
-	rf.logsMu.Lock()
+	/*rf.logsMu.Lock()
 	rf.logs = make([]LogEntry, 0)
-	rf.logsMu.Unlock()
+	rf.logsMu.Unlock()*/
 
 	rf.applyCh = applyCh
 
@@ -777,8 +778,7 @@ func (rf *Raft) SetVoteState(term int, votedFor int) {
 		rf.votedFor = votedFor
 	}
 
-	 //rf.PersistTermAndVotedFor()
-	//rf.persist()
+	rf.persist()
 }
 
 func (rf* Raft) GetCurrentTerm() int {
@@ -799,7 +799,7 @@ func (rf *Raft) SetVotedFor(votedFor int) {
 	defer rf.voteMu.Unlock()
 	rf.votedFor = votedFor
 
-	//rf.persist()
+	rf.persist()
 }
 
 func (rf *Raft) TurnToCandidate() (int, int) {
@@ -807,8 +807,22 @@ func (rf *Raft) TurnToCandidate() (int, int) {
 	defer rf.voteMu.Unlock()
 	rf.currentTerm++;
 	rf.votedFor = rf.me
-	//rf.persist()
+	rf.persist()
 	return rf.currentTerm, rf.votedFor
+}
+
+func (rf *Raft) TurnToLeader() () {
+	rf.nextIndexMu.Lock()
+	for server := 0; server < len(rf.peers); server++ {
+		rf.nextIndex[server] = 0
+	}
+	rf.nextIndexMu.Unlock()
+
+	rf.matchIndexMu.Lock()
+	for server := 0; server < len(rf.peers); server++ {
+		rf.matchIndex[server] = 0
+	}
+	rf.matchIndexMu.Unlock()
 }
 
 func (rf *Raft) GetCertainState() uint32 {
@@ -832,7 +846,7 @@ func (rf* Raft) UpdateTerm(term int) {
 		rf.votedFor = -1;
 		atomic.StoreUint32(&rf.state, FOLLOWER)
 	}
-	//rf.persist()
+	rf.persist()
 }
 
 func (rf *Raft) UpdateLastRecvTime() {
@@ -900,8 +914,8 @@ func (rf *Raft) GetNextIndex(server int) int32 {
 }
 
 func (rf* Raft) SetNextIndex(server int, index int32) {
-	rf.nextIndexMu.RLock()
-	defer rf.nextIndexMu.RUnlock()
+	rf.nextIndexMu.Lock()
+	defer rf.nextIndexMu.Unlock()
 
 	if (index >= 0) {
 		rf.nextIndex[server] = index
@@ -935,7 +949,7 @@ func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 
 	//fmt.Println("in func AppendLogs: rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "entries:", entries)
 	rf.logs = append(rf.logs[:index], entries...)
-	//rf.persist()
+	rf.persist()
 
 }
 
@@ -944,7 +958,7 @@ func (rf* Raft) PushBackLogs(entries []LogEntry) int32 {
 	defer rf.logsMu.Unlock()
 
 	rf.logs = append(rf.logs, entries...)
-	//rf.persist()
+	rf.persist()
 	return int32(len(rf.logs))
 }
 
