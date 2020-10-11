@@ -1,143 +1,65 @@
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:23:06 apply error: commit index=2 server=0 305 != server=4 3
-exit status 1
-FAIL	6.824_new/src/raft	31.647s
+Test (2B): basic agreement ...
+  ... Passed --   1.2  3   16    4118    3
+Test (2B): RPC byte count ...
+  ... Passed --   2.8  3   48  113026   11
+Test (2B): agreement despite follower disconnection ...
+  ... Passed --   5.8  3   87   22764    7
+Test (2B): no agreement if too many followers disconnect ...
+  ... Passed --   5.4  5  144   31148    3
+Test (2B): concurrent Start()s ...
+  ... Passed --   1.8  3   26    6858    6
+Test (2B): rejoin of partitioned leader ...
+  ... Passed --   6.9  3   84   21115    4
+Test (2B): leader backs up quickly over incorrect follower logs ...
+  ... Passed --  19.3  5  840  329487   53
+Test (2B): RPC counts aren't too high ...
+  ... Passed --   3.7  3   66   17722   12
+PASS
+ok  	6.824_new/src/raft	46.840s
 sleep for a while
 
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:23:14 apply error: commit index=1 server=2 272 != server=1 10000
-exit status 1
-FAIL	6.824_new/src/raft	6.906s
+Test (2B): basic agreement ...
+  ... Passed --   1.2  3   16    4118    3
+Test (2B): RPC byte count ...
+  ... Passed --   2.7  3   46  112492   11
+Test (2B): agreement despite follower disconnection ...
+  ... Passed --   5.8  3   86   22642    7
+Test (2B): no agreement if too many followers disconnect ...
+  ... Passed --   5.5  5  140   29665    3
+Test (2B): concurrent Start()s ...
+  ... Passed --   1.8  3   26    6858    6
+Test (2B): rejoin of partitioned leader ...
+  ... Passed --   7.2  3   99   24866    4
+Test (2B): leader backs up quickly over incorrect follower logs ...
+  ... Passed --  18.9  5  826  332460   54
+Test (2B): RPC counts aren't too high ...
+  ... Passed --   3.6  3   62   16658   12
+PASS
+ok  	6.824_new/src/raft	46.701s
 sleep for a while
 
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:23:21 apply error: commit index=1 server=1 406 != server=2 10000
-exit status 1
-FAIL	6.824_new/src/raft	5.229s
+Test (2B): basic agreement ...
+  ... Passed --   1.3  3   16    4086    3
+Test (2B): RPC byte count ...
+  ... Passed --   2.8  3   48  113026   11
+Test (2B): agreement despite follower disconnection ...
+  ... Passed --   5.8  3   92   23796    7
+Test (2B): no agreement if too many followers disconnect ...
+  ... Passed --   5.1  5  130   28611    3
+Test (2B): concurrent Start()s ...
+  ... Passed --   1.6  3   24    6326    6
+Test (2B): rejoin of partitioned leader ...
+  ... Passed --   8.0  3   86   21597    5
+Test (2B): leader backs up quickly over incorrect follower logs ...
+  ... Passed --  20.9  5  967  388168   55
+Test (2B): RPC counts aren't too high ...
+  ... Passed --   3.8  3   66   17590   12
+PASS
+ok  	6.824_new/src/raft	49.165s
 sleep for a while
 
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (39.20s)
-    config.go:515: one(2494) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	39.204s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (42.67s)
-    config.go:515: one(970) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	42.675s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:24:50 apply error: commit index=1 server=0 88 != server=2 10000
-exit status 1
-FAIL	6.824_new/src/raft	3.299s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:24:56 apply error: commit index=1 server=1 359 != server=0 10000
-exit status 1
-FAIL	6.824_new/src/raft	4.910s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (45.77s)
-    config.go:515: one(8278) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	45.776s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:25:52 apply error: commit index=1 server=2 57 != server=1 10000
-exit status 1
-FAIL	6.824_new/src/raft	7.481s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:25:55 apply error: commit index=1 server=1 81 != server=4 10000
-exit status 1
-FAIL	6.824_new/src/raft	1.197s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:25:58 apply error: commit index=1 server=3 158 != server=0 10000
-exit status 1
-FAIL	6.824_new/src/raft	2.007s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:26:01 apply error: commit index=1 server=0 235 != server=2 10000
-exit status 1
-FAIL	6.824_new/src/raft	1.872s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:26:09 apply error: commit index=3 server=3 73 != server=4 6
-exit status 1
-FAIL	6.824_new/src/raft	6.911s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:26:17 apply error: commit index=1 server=4 189 != server=0 10000
-exit status 1
-FAIL	6.824_new/src/raft	5.853s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (42.09s)
-    config.go:515: one(5792) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	42.097s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:27:15 apply error: commit index=2 server=4 256 != server=3 300
-exit status 1
-FAIL	6.824_new/src/raft	13.255s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (45.64s)
-    config.go:515: one(8006) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	45.642s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:28:04 apply error: commit index=1 server=2 92 != server=0 10000
-exit status 1
-FAIL	6.824_new/src/raft	1.411s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (43.61s)
-    config.go:515: one(3377) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	43.612s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
---- FAIL: TestFigure8Unreliable2C (37.55s)
-    config.go:515: one(9836) failed to reach agreement
-FAIL
-exit status 1
-FAIL	6.824_new/src/raft	37.556s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
-2020/10/12 00:29:32 apply error: commit index=1 server=1 386 != server=2 10000
-exit status 1
-FAIL	6.824_new/src/raft	2.684s
-sleep for a while
-
-Test (2C): Figure 8 (unreliable) ...
+Test (2B): basic agreement ...
+  ... Passed --   1.1  3   16    4118    3
+Test (2B): RPC byte count ...
 signal: interrupt
-FAIL	6.824_new/src/raft	1.202s
+FAIL	6.824_new/src/raft	1.334s
