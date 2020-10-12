@@ -100,6 +100,8 @@ type Raft struct {
 
 	lastRecvTime int64
 
+	cmdCh chan int32
+
 }
 
 type LogEntry struct {
@@ -430,6 +432,7 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 
 	//rf.AppendLogs(int32(index), logEntries)  //同时拿到同一个index，相互覆盖
 	index := rf.PushBackLogs(logEntries) - 1
+	rf.cmdCh <- index
 
 	//fmt.Println("in func Start, rf:", rf.me, "term:", rf.currentTerm, "index:", index, "cmd", command)
 	return int(index) + 1, term, true
@@ -552,70 +555,87 @@ func (rf *Raft) LeaderElection() {
 
 
 func (rf *Raft) heartbeat2() {
-	//fmt.Println("in func heartbeat2, begin")
-	state := rf.GetCertainState()
-	if rf.killed() || state != LEADER {
-		return
+	replyCh := make(chan int32, 1024)
+	peersChs := make([]chan int32, len(rf.peers), 1024)
+	for i := 0; i < len(rf.peers); i++ {
+		peersChs[i] = make(chan int32, 1024)
 	}
 
-	//currentTerm, _ := rf.GetVoteState()
 
-	//fmt.Println("in func heartbeat2: rf", rf.me, "send heartbeat in term", rf.currentTerm)
 
-	itself := rf.GetItself()
+	for i := 0; i < len(rf.peers); i++ {
+		if i == rf.me {
+			continue
+		}
+		go func(server int) {
+			for {
+				select {
+				case <- time.After(HEARTBEAT_INTERVAL):
 
-	for {
-		replyCnt := 1
-		replyCh := make(chan int32, len(rf.peers))
-		lastLogsIndex := rf.GetLastLogIndex()
+				case index := <-peersChs[server]:
+					logsLength := rf.GetLogsLength()
+					args := AppendEntriesArgs{
+						Term:         rf.GetCurrentTerm(),
+						LeaderId:     rf.GetItself(),
+						PrevLogIndex: rf.GetPrevLogIndex(server),
+						PrevLogTerm:  rf.GetPrevLogTerm(server),
+						Entries:      rf.GetLogsBehindNextIndex(server),
+						LeaderCommit: rf.GetCommitIndex(),
+					}
+					reply := AppendEntriesReply{}
 
-		go func() {
-			<-time.
-		}()
-
-		term := rf.GetCurrentTerm()
-		imme := false
-		for i := 0; i < len(rf.peers); i++ {
-			if i == rf.me {
-				continue
-			}
-
-			go func(server int) {
-				args := AppendEntriesArgs{
-					Term:         term,
-					LeaderId:     itself,
-					PrevLogIndex: rf.GetPrevLogIndex(server),
-					PrevLogTerm:  rf.GetPrevLogTerm(server),
-					Entries:      rf.GetLogsBehindNextIndex(server),
-					LeaderCommit: rf.GetCommitIndex(),
-				}
-
-				var reply AppendEntriesReply
-				ok := false
-				okCnt := 0
-				for ok && okCnt < 10 {
-					ok = rf.sendAppendEntries(server, &args, &reply)
-					okCnt++
-				}
-				if ok && reply.Succ {
-					replyCnt++
-					rf.SetNextIndex(server, int32(rf.GetLogsLength()))
-				} else if ok && !reply.Succ {
+					ok := true
+					okCnt := 0
+					for !ok && okCnt < 10 {
+						ok = rf.sendAppendEntries(server, &args, &reply)
+					}
 					rf.UpdateTerm(reply.Term)
-					if (rf.GetCertainState() == LEADER) {
-						imme = true
+					if rf.killed() || rf.GetCertainState() != LEADER {
+						break
+					}
+					if ok && reply.Succ {
+						rf.SetNextIndex(server, int32(logsLength))
+						replyCh <- index
+						//break
+					} else if ok && !reply.Succ {
+						rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
 					}
 				}
-			}(i)
-		}
-
-		go func() {
-			replyCnt++
-		}()
-
-
+			}
+		}(i)
 	}
 
+
+	go func() {
+		for {
+			if rf.killed() || rf.GetCertainState() != LEADER {
+				break
+			}
+			index := <-rf.cmdCh
+			for i := 0; i < len(rf.peers); i++ {
+				if i == rf.me {
+					continue
+				}
+				peersChs[i] <- index
+			}
+
+			majority := len(rf.peers) / 2 + 1
+			replyCnt := 1
+			for {
+				v := <- replyCh
+				if v < rf.GetCommitIndex() {
+					continue
+				}
+				replyCnt++
+				if replyCnt >= majority {
+					break
+				}
+			}
+			if replyCnt >= majority {
+				rf.SetCommitIndex(index)
+			}
+		}
+	}()
 }
 
 func (rf *Raft) commitLogs() {
@@ -689,6 +709,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	rf.heartbeatInterval = HEARTBEAT_INTERVAL  //错开选举超时的时间，否则大家都会同时超时，同时发起选举，只会投自己，永远宣不出leader
 	rf.electionInterval = time.Duration(time.Duration(rand.Intn(200)+500) * time.Millisecond)
+
+	rf.cmdCh = make(chan int32, 1024)
 
 	go func() {
 		for {
