@@ -564,111 +564,57 @@ func (rf *Raft) heartbeat2() {
 
 	itself := rf.GetItself()
 
-	replyCh := make(chan int32, len(rf.peers))
+	for {
+		replyCnt := 1
+		replyCh := make(chan int32, len(rf.peers))
+		lastLogsIndex := rf.GetLastLogIndex()
 
-	for i := range(rf.peers) {
-		if i == itself {
-			continue
+		go func() {
+			<-time.
+		}()
+
+		term := rf.GetCurrentTerm()
+		imme := false
+		for i := 0; i < len(rf.peers); i++ {
+			if i == rf.me {
+				continue
+			}
+
+			go func(server int) {
+				args := AppendEntriesArgs{
+					Term:         term,
+					LeaderId:     itself,
+					PrevLogIndex: rf.GetPrevLogIndex(server),
+					PrevLogTerm:  rf.GetPrevLogTerm(server),
+					Entries:      rf.GetLogsBehindNextIndex(server),
+					LeaderCommit: rf.GetCommitIndex(),
+				}
+
+				var reply AppendEntriesReply
+				ok := false
+				okCnt := 0
+				for ok && okCnt < 10 {
+					ok = rf.sendAppendEntries(server, &args, &reply)
+					okCnt++
+				}
+				if ok && reply.Succ {
+					replyCnt++
+					rf.SetNextIndex(server, int32(rf.GetLogsLength()))
+				} else if ok && !reply.Succ {
+					rf.UpdateTerm(reply.Term)
+					if (rf.GetCertainState() == LEADER) {
+						imme = true
+					}
+				}
+			}(i)
 		}
 
 		go func() {
-			for {
-				if rf.killed() || rf.GetCertainState() != LEADER {
-					break
-				}
-				select{
-				case <-time.After(HEARTBEAT_INTERVAL / 2):
-					replyCh <- -2
-					//fmt.Println("in func heartbeat2's goroutine: -2 into replyCh")
-				}
-			}
+			replyCnt++
 		}()
 
-		go func(server int) {
-			for {
-				//select{
-				//case <- time.After(HEARTBEAT_INTERVAL):
-					if rf.killed() || rf.GetCertainState() != LEADER {
-						break
-					}
 
-					//fmt.Println("in func heartbeat2's go routine, sender:", rf.me, "server:", server,
-						//"nextIndex:", rf.GetNextIndex(server), "commitIndex:", rf.GetCommitIndex())
-					args := AppendEntriesArgs{
-						Term:         rf.GetCurrentTerm(), //会不会因为在f协程之间，任期发生变化，从而导致不一致？
-						LeaderId:     rf.GetItself(),
-						PrevLogIndex: rf.GetPrevLogIndex(server),
-						PrevLogTerm:  rf.GetLastLogTerm(),
-						Entries:      rf.GetLogsBehindNextIndex(server),
-						LeaderCommit: rf.GetCommitIndex(),
-					}
-
-					var reply AppendEntriesReply
-					//commitIndex := rf.GetCommitIndex()
-					//lastLogIndex := rf.GetLastLogIndex()
-
-					ok := rf.sendAppendEntries(server, &args, &reply)
-
-					okCnt := 0
-					if !ok && okCnt < 100 {
-						time.Sleep(10 * time.Millisecond)
-						ok = rf.sendAppendEntries(server, &args, &reply)
-						okCnt++
-					}
-					//fmt.Println("in func heartbeat2's go routine, sender:", rf.me, "server:", server, "okCnt:", okCnt, "ok:", ok)
-
-					//fmt.Println("in func heartbeat2's goroutine, ok:", ok)
-					rf.UpdateTerm(reply.Term)
-					if reply.Succ {
-						//fmt.Println("in func heartbeat2's goroutine, server:", server, "into replyCh")
-						replyCh <- reply.CommitIndex
-						rf.SetNextIndex(server, int32(rf.GetLogsLength()))
-						time.Sleep(HEARTBEAT_INTERVAL)
-					} else {
-						rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
-						time.Sleep(10 * time.Millisecond)
-					}
-				//}
-			}
-		}(i)
 	}
-
-	go func() {
-		for {
-			if rf.killed() || rf.GetCertainState() != LEADER {
-				break
-			}
-			//commitIndex := rf.GetCommitIndex()
-			//lastLogIndex := rf.GetLastLogIndex()  //不太准确，寄希望于这个能在森的AppendEntries之前执行
-			replyCnt := 1
-			majority := len(rf.peers) / 2 + 1  //设置多数值  //可嫩还要给len枷锁
-			for {
-				v := <- replyCh
-				//fmt.Println("in func heartbeat2, rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "v:", v)
-				if v == -2 {
-					break
-				} else if v < rf.GetCommitIndex(){
-					continue
-				} else {
-					replyCnt++
-				}
-				if replyCnt >= majority {
-					break
-				}
-			}
-
-			if replyCnt >= majority && majority > 1{
-				commitIndex := rf.GetCommitIndex()
-				lastLogIndex := rf.GetLastLogIndex()  //不太准确，寄希望于这个能在森的AppendEntries之前执行
-				//fmt.Println("in func heartbeat2's go routine, rf:", rf.me, "rf.Term", rf.GetCurrentTerm(),
-					//"commitIndex:", commitIndex, " lastLogIndex:", lastLogIndex)
-				if commitIndex < lastLogIndex {
-					rf.SetCommitIndex(commitIndex + 1)
-					go rf.commitLogs()
-				}
-			}
-		}
-	}()
 
 }
 
