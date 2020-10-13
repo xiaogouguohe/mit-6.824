@@ -312,7 +312,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	//fmt.Println("in func AppendEntries, begin")
-	fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "leader:", args.LeaderId, "leader.Term", args.Term)
+	//fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "leader:", args.LeaderId, "leader.Term", args.Term)
 	rf.UpdateTerm(args.Term)
 	currentTerm, _ := rf.GetVoteState()
 	reply.Term = currentTerm
@@ -324,7 +324,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	}
 	rf.UpdateLastRecvTime()
 	atomic.StoreUint32(&rf.state, FOLLOWER)
-	fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState())
+	//fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState())
 	reply.Succ = true
 
 	logLen := int32(rf.GetLogsLength())
@@ -332,7 +332,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	commitIndex := rf.GetCommitIndex()
 
 	termOfPrevLogIndexInRf := rf.GetSingleEntry(args.PrevLogIndex).Term
-	fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "termOfPrevLogIndexInRf:", termOfPrevLogIndexInRf)
+	//fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "termOfPrevLogIndexInRf:", termOfPrevLogIndexInRf)
 
 	if args.PrevLogIndex > logLen - 1 /*|| args.LeaderCommit > logLen - 1*/ {
 		//fmt.Println("in func AppendEntries, args.PervLogIndex > logLen, args.PrevLogIndex:", args.PrevLogIndex, "logLen:", logLen)
@@ -401,9 +401,9 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) sendAppendEntries(server int, args* AppendEntriesArgs, reply *AppendEntriesReply) bool {
-	fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "begin")
+	//fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "begin")
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
-	fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "end")
+	//fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "end")
 	return ok
 }
 
@@ -588,19 +588,19 @@ func (rf *Raft) heartbeat2() {
 			continue
 		}
 		go func(server int) {
-			fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-				"receiver:", server, "begin go func")
+			//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+			//	"receiver:", server, "begin go func")
 			term := rf.GetCurrentTerm()
 			for {
 				if rf.killed() || rf.GetCertainState() != LEADER {
 					break
 				}
-				fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-					"receiver:", server, "begin one loop")
+				//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+				//	"receiver:", server, "begin one loop")
 				select {
 				case <- time.After(HEARTBEAT_INTERVAL / 2):
-					fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-						"receiver:", server, ", before args, after heartbeat")
+					//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+					//	"receiver:", server, ", before args, after heartbeat")
 					args := AppendEntriesArgs{
 						Term:         term,
 						LeaderId:     rf.GetItself(),
@@ -609,8 +609,8 @@ func (rf *Raft) heartbeat2() {
 						Entries:      nil,
 						LeaderCommit: rf.GetCommitIndex(),
 					}
-					fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-						"receiver:", server, "after args, after heartbeat")
+					//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+					//	"receiver:", server, "after args, after heartbeat")
 					reply := AppendEntriesReply{}
 					ok := false
 					okCnt := 0
@@ -620,19 +620,19 @@ func (rf *Raft) heartbeat2() {
 						//time.Sleep(10 * time.Millisecond)
 					//}
 					if (ok) {
-						fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							"receiver:", server, "sendAppendEntries heartbeat succ", "okCnt:", okCnt)
+						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+							//"receiver:", server, "sendAppendEntries heartbeat succ", "okCnt:", okCnt)
 					} else {
-						fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							"receiver:", server, "sendAppendEntries heartbeat fail", "okCnt:", okCnt)
+						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+							//"receiver:", server, "sendAppendEntries heartbeat fail", "okCnt:", okCnt)
 					}
 					rf.UpdateTerm(reply.Term)
 
 
 				case index := <-peersChs[server]:
 					for {
-						fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							"receiver:", server, ", before args, index come")
+						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+							//"receiver:", server, ", before args, index come")
 						args := AppendEntriesArgs{
 							Term:         term,
 							LeaderId:     rf.GetItself(),
@@ -641,8 +641,8 @@ func (rf *Raft) heartbeat2() {
 							Entries:      rf.GetLogsBehindNextIndex(server),
 							LeaderCommit: rf.GetCommitIndex(),
 						}
-						fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							"receiver:", server, ", after args, index come")
+						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+							//"receiver:", server, ", after args, index come")
 						reply := AppendEntriesReply{}
 
 						ok := false
@@ -650,16 +650,16 @@ func (rf *Raft) heartbeat2() {
 						for !ok /*&& okCnt < 10*/  && rf.GetCertainState() == LEADER && rf.GetCurrentTerm() == term {
 							ok = rf.sendAppendEntries(server, &args, &reply)
 							okCnt++
-							fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-								"receiver:", server, "ok:", ok, "okCnt:", okCnt)
+							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+								//"receiver:", server, "ok:", ok, "okCnt:", okCnt)
 							time.Sleep(10 * time.Millisecond)
 						}
 						if (ok) {
-							fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-								"receiver:", server, "sendAppendEntries appendlog succ", "okCnt:", okCnt)
+							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+								//"receiver:", server, "sendAppendEntries appendlog succ", "okCnt:", okCnt)
 						} else {
-							fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-								"receiver:", server, "sendAppendEntries appendlog fail", "okCnt:", okCnt)
+							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+								//"receiver:", server, "sendAppendEntries appendlog fail", "okCnt:", okCnt)
 						}
 						rf.UpdateTerm(reply.Term)
 						if rf.killed() || rf.GetCertainState() != LEADER || rf.GetCurrentTerm() != term {
