@@ -401,8 +401,9 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) sendAppendEntries(server int, args* AppendEntriesArgs, reply *AppendEntriesReply) bool {
-	fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server)
+	fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "begin")
 	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+	fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "end")
 	return ok
 }
 
