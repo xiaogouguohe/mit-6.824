@@ -360,9 +360,9 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 		rf.AppendLogs(args.PrevLogIndex + 1, args.Entries)
 		rf.SetCommitIndex(args.LeaderCommit)
-		if rf.GetLastApplied() < rf.GetCommitIndex() {
+		//if rf.GetLastApplied() < rf.GetCommitIndex() {
 			go rf.commitLogs()  //会不会提交到一半被覆盖？
-		}
+		//}
 	}
 }
 //
@@ -518,7 +518,7 @@ func (rf *Raft) LeaderElection() {
 				for !ok && okCnt < 10 {
 					ok = rf.sendRequestVote(voter, &args, &reply)
 					okCnt++
-					fmt.Println("in func leaderElection's goroutine, rf:", rf.me, "term", rf.GetCurrentTerm(), "ok:", ok, "okCnt:", okCnt)
+					//fmt.Println("in func leaderElection's goroutine, rf:", rf.me, "term", rf.GetCurrentTerm(), "ok:", ok, "okCnt:", okCnt)
 					time.Sleep(10 * time.Millisecond)
 				}
 
@@ -532,8 +532,8 @@ func (rf *Raft) LeaderElection() {
 					replyCount <- voter
 				}
 
-				fmt.Println("in func LeaderElection's goroutine: candidate:", rf.me, "state:", rf.GetCertainState(),
-					"voter:", voter, "term:", reply.Term, "vote or not:", reply.VoteGranted)
+				//fmt.Println("in func LeaderElection's goroutine: candidate:", rf.me, "state:", rf.GetCertainState(),
+				//	"voter:", voter, "term:", reply.Term, "vote or not:", reply.VoteGranted)
 
 			}(i)
 		}
@@ -672,8 +672,8 @@ func (rf *Raft) heartbeat2() {
 							//break
 						} else if ok && !reply.Succ {
 							//nextIndex1 := rf.GetNextIndex(server)
-							//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
-							rf.SetNextIndex(server, reply.ConflictIndex)
+							rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
+							//rf.SetNextIndex(server, reply.ConflictIndex)
 							//nextIndex2 := rf.GetNextIndex(server)
 							//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
 							//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
@@ -712,9 +712,9 @@ func (rf *Raft) heartbeat2() {
 			}
 			if replyCnt >= majority {
 				rf.SetCommitIndex(index)
-				if rf.GetLastApplied() < rf.GetCommitIndex() {
+				//if rf.GetLastApplied() < rf.GetCommitIndex() {
 					go rf.commitLogs()
-				}
+				//}
 			}
 		}
 	}()
