@@ -489,7 +489,7 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 				}
 				time.Sleep(20 * time.Millisecond)
 
-				/*for i := 0; i < 3; i++ {
+				/*for i := 0; i < expectedServers; i++ {
 					tmp := cfg.rafts[i]
 					//fmt.Println("raft:", i, "length of log:", len(tmp.logs))
 					if len(tmp.logs) > 0 {

@@ -988,7 +988,14 @@ func TestFigure8Unreliable2C(t *testing.T) {
 		}
 	}
 
-	cfg.one(rand.Int()%10000, servers, true)
+	fmt.Println("sleep for 2s")
+	time.Sleep(2 *time.Second)
+	for i := 0; i < servers; i++ {
+		fmt.Println("rf:", i, "term:", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
+			"commitIndex:", cfg.rafts[i].GetCommitIndex(), "logs:", cfg.rafts[i].GetLogs(0))
+	}
+	//cfg.one(rand.Int()%10000, servers, true)
+	cfg.one(20000, servers, true)
 
 	cfg.end()
 }
