@@ -318,7 +318,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	reply.Term = currentTerm
 
 	if (currentTerm > args.Term) {  //该结点收到leader的heartbeat，但是自己的任期更大，拒绝
-		//fmt.Println("in func AppendEntries: rf.Term > args.Term")
+		fmt.Println("in func AppendEntries: rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "rf.Term > args.Term")
 		reply.Succ = false
 		return
 	}
@@ -328,20 +328,22 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	reply.Succ = true
 
 	logLen := int32(rf.GetLogsLength())
-	//lastLogTerm := rf.GetLastLogTerm()
+	lastLogTerm := rf.GetLastLogTerm()
 	commitIndex := rf.GetCommitIndex()
 
 	termOfPrevLogIndexInRf := rf.GetSingleEntry(args.PrevLogIndex).Term
 	//fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "termOfPrevLogIndexInRf:", termOfPrevLogIndexInRf)
 
 	if args.PrevLogIndex > logLen - 1 /*|| args.LeaderCommit > logLen - 1*/ {
-		//fmt.Println("in func AppendEntries, args.PervLogIndex > logLen, args.PrevLogIndex:", args.PrevLogIndex, "logLen:", logLen)
+		fmt.Println("in func AppendEntries,  rf:", rf.me, "rf.term:", rf.GetCurrentTerm(),
+			"args.PervLogIndex > logLen, args.PrevLogIndex:", args.PrevLogIndex, "logLen:", logLen)
 		reply.Succ = false
 		reply.CommitIndex = commitIndex
 		reply.Term = args.Term
 	} else if args.PrevLogIndex >= 0 && args.PrevLogTerm != int32(termOfPrevLogIndexInRf)/*lastLogTerm*/ {
-		//fmt.Println("in func AppendEntries, args.PrevLogIndex >= 0 && args.PrevLogTerm != lastLogTerm, args.PrevLogTerm:",
-			//args.PrevLogTerm, "lastLogTerm:", lastLogTerm)
+		fmt.Println("in func AppendEntries, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(),
+			"args.PrevLogIndex >= 0 && args.PrevLogTerm != lastLogTerm, args.PrevLogTerm:",
+			args.PrevLogTerm, "lastLogTerm:", lastLogTerm)
 		reply.Succ = false
 		reply.CommitIndex = commitIndex
 		reply.Term = args.Term
@@ -352,8 +354,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		}
 		reply.ConflictIndex = i
 	} else {
-		//fmt.Println("in func AppendEntries, match, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state", rf.GetCertainState(),
-		//	"args.PrevLogIndex:", args.PrevLogIndex, "args.Entries:", args.Entries)
+		fmt.Println("in func AppendEntries, match, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state", rf.GetCertainState(),
+			"args.PrevLogIndex:", args.PrevLogIndex, "args.Entries:", args.Entries)
 		reply.Succ = true
 		reply.CommitIndex = args.LeaderCommit
 		reply.Term = args.Term
@@ -555,8 +557,8 @@ func (rf *Raft) LeaderElection() {
 		if votedCnt >= majority/* && votedCnt > 1 */{
 			break
 		}
-		fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
-			rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
+		fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+			"commitIndex:", rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
 		rand.Seed(time.Now().UnixNano())
 		timeout = time.Duration(time.Duration(
 			rand.Intn(500)+500) * time.Millisecond)
