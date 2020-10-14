@@ -1,1756 +1,364 @@
 Test (2C): basic persistence ...
-in func Make's goroutine, rf: 1 term: 0 launch Election
-in func LeaderElection, rf: 1 rf.Term: 0 commitIndex: -1 length of logs: 0 begin election
-in func leaderElection, rf: 1 term: 1 commitIndex: -1 length of logs: 0 win election
-in func one, nd: 0 cmd1: <nil> cmd: 11 index: 1
-in func AppendEntries, match, rf: 2 term: 1 state 3 args.PrevLogIndex: -1 args.Entries: [{1 11}]
-in func AppendEntries, match, rf: 0 term: 1 state 3 args.PrevLogIndex: -1 args.Entries: [{1 11}]
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func AppendEntries, match, rf: 0 term: 1 state 3 args.PrevLogIndex: 0 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 1 state 3 args.PrevLogIndex: 0 args.Entries: []
-in func one, nd: 3 cmd1: 11 cmd: 11 index: 1
-in func Make's goroutine, rf: 0 term: 1 launch Election
-in func LeaderElection, rf: 0 rf.Term: 1 commitIndex: -1 length of logs: 1 begin election
-in func leaderElection, rf: 0 term: 2 commitIndex: -1 length of logs: 1 win election
-in func one, nd: 0 cmd1: <nil> cmd: 12 index: 2
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 0 args.Entries: [{2 12}]
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 0 args.Entries: [{2 12}]
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func one, nd: 3 cmd1: 12 cmd: 12 index: 2
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-leader1: 0
-in func Make's goroutine, rf: 0 term: 2 launch Election
-in func LeaderElection, rf: 0 rf.Term: 2 commitIndex: -1 length of logs: 2 begin election
-in func leaderElection, rf: 0 term: 3 commitIndex: -1 length of logs: 2 win election
-in func one, nd: 0 cmd1: <nil> cmd: 13 index: 3
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 1 args.Entries: [{3 13}]
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 1 args.Entries: [{3 13}]
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func one, nd: 3 cmd1: 13 cmd: 13 index: 3
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-leader2: 0
-in func Make's goroutine, rf: 1 term: 3 launch Election
-in func LeaderElection, rf: 1 rf.Term: 3 commitIndex: 2 length of logs: 3 begin election
-in func leaderElection, rf: 1 term: 4 commitIndex: 2 length of logs: 3 win election
-in func one, nd: 0 cmd1: <nil> cmd: 14 index: 4
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 2 args.Entries: [{4 14}]
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func one, nd: 2 cmd1: 14 cmd: 14 index: 4
-after connect leader2
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func Make's goroutine, rf: 0 term: 3 launch Election
-in func LeaderElection, rf: 0 rf.Term: 3 commitIndex: -1 length of logs: 3 begin election
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func LeaderElection, rf: 0 rf.Term: 4 state: 2 commitIndex: -1 length of logs: 3 not become leader, sleep for a while
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 2 args.Entries: [{4 14}]
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func one, nd: 0 cmd1: <nil> cmd: 15 index: 5
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: [{4 15}]
-in func one, nd: 1 cmd1: 15 cmd: 15 index: 5
-in func one, nd: 1 cmd1: 15 cmd: 15 index: 5
-in func one, nd: 1 cmd1: 15 cmd: 15 index: 5
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 4 args.Entries: []
-in func one, nd: 2 cmd1: 15 cmd: 15 index: 5
-in func one, nd: 0 cmd1: <nil> cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 4 args.Entries: [{4 16}]
-in func one, nd: 1 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 1 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 1 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 0 term: 4 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func Make's goroutine, rf: 2 term: 4 launch Election
-in func LeaderElection, rf: 2 rf.Term: 4 commitIndex: -1 length of logs: 4 begin election
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries: rf: 0 rf.term: 5 rf.Term > args.Term
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func LeaderElection, rf: 2 rf.Term: 5 state: 2 commitIndex: -1 length of logs: 4 not become leader, sleep for a while
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func Make's goroutine, rf: 0 term: 5 launch Election
-in func LeaderElection, rf: 0 rf.Term: 5 commitIndex: 5 length of logs: 6 begin election
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func leaderElection, rf: 0 term: 6 commitIndex: 5 length of logs: 6 win election
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 5 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 5 logLen: 4
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 6
-in func one, nd: 0 cmd1: <nil> cmd: 16 index: 7
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 5 args.Entries: [{6 16}]
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 5 logLen: 4
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 4 logLen: 4
-in func one, nd: 1 cmd1: 16 cmd: 16 index: 7
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: [{4 15} {4 16} {6 16}]
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 7
-in func one, nd: 2 cmd1: 16 cmd: 16 index: 7
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 6 args.Entries: []
-in func one, nd: 3 cmd1: 16 cmd: 16 index: 7
-  ... Passed --   9.8  3  192   54825    7
+  ... Passed --  11.0  3  178   50493    6
+Test (2C): more persistence ...
+  ... Passed --  35.3  5 1223  281331   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   6.4  3  102   28922    6
+Test (2C): Figure 8 ...
+  ... Passed --  33.5  5  865  172463   22
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1228  361350  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  39.7  5  702  206786   10
+Test (2C): churn ...
+  ... Passed --  16.2  5  712  211270  242
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5 1139  372796  258
 PASS
-ok  	6.824_new/src/raft	9.754s
+ok  	6.824_new/src/raft	167.265s
 sleep for a while
 
 Test (2C): basic persistence ...
-in func Make's goroutine, rf: 2 term: 0 launch Election
-in func LeaderElection, rf: 2 rf.Term: 0 commitIndex: -1 length of logs: 0 begin election
-in func leaderElection, rf: 2 term: 1 commitIndex: -1 length of logs: 0 win election
-in func one, nd: 0 cmd1: <nil> cmd: 11 index: 1
-in func AppendEntries, match, rf: 0 term: 1 state 3 args.PrevLogIndex: -1 args.Entries: [{1 11}]
-in func AppendEntries, match, rf: 1 term: 1 state 3 args.PrevLogIndex: -1 args.Entries: [{1 11}]
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func AppendEntries, match, rf: 1 term: 1 state 3 args.PrevLogIndex: 0 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 1 state 3 args.PrevLogIndex: 0 args.Entries: []
-in func one, nd: 3 cmd1: 11 cmd: 11 index: 1
-in func Make's goroutine, rf: 1 term: 1 launch Election
-in func LeaderElection, rf: 1 rf.Term: 1 commitIndex: -1 length of logs: 1 begin election
-in func leaderElection, rf: 1 term: 2 commitIndex: -1 length of logs: 1 win election
-in func one, nd: 0 cmd1: <nil> cmd: 12 index: 2
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 0 args.Entries: [{2 12}]
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 0 args.Entries: [{2 12}]
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func one, nd: 3 cmd1: 12 cmd: 12 index: 2
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-leader1: 1
-in func Make's goroutine, rf: 1 term: 2 launch Election
-in func LeaderElection, rf: 1 rf.Term: 2 commitIndex: -1 length of logs: 2 begin election
-in func leaderElection, rf: 1 term: 3 commitIndex: -1 length of logs: 2 win election
-in func one, nd: 0 cmd1: <nil> cmd: 13 index: 3
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 1 args.Entries: [{3 13}]
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 1 args.Entries: [{3 13}]
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func one, nd: 3 cmd1: 13 cmd: 13 index: 3
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-leader2: 1
-in func Make's goroutine, rf: 0 term: 3 launch Election
-in func LeaderElection, rf: 0 rf.Term: 3 commitIndex: 2 length of logs: 3 begin election
-in func leaderElection, rf: 0 term: 4 commitIndex: 2 length of logs: 3 win election
-in func one, nd: 0 cmd1: <nil> cmd: 14 index: 4
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 2 args.Entries: [{4 14}]
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func one, nd: 2 cmd1: 14 cmd: 14 index: 4
-after connect leader2
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func Make's goroutine, rf: 1 term: 3 launch Election
-in func LeaderElection, rf: 1 rf.Term: 3 commitIndex: -1 length of logs: 3 begin election
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func LeaderElection, rf: 1 rf.Term: 4 state: 2 commitIndex: -1 length of logs: 3 not become leader, sleep for a while
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func LeaderElection, rf: 1 rf.Term: 4 commitIndex: -1 length of logs: 3 begin election
-in func AppendEntries: rf: 2 rf.term: 5 rf.Term > args.Term
-in func LeaderElection, rf: 1 rf.Term: 5 state: 2 commitIndex: -1 length of logs: 3 not become leader, sleep for a while
-in func Make's goroutine, rf: 0 term: 5 launch Election
-in func LeaderElection, rf: 0 rf.Term: 5 commitIndex: 3 length of logs: 4 begin election
-in func leaderElection, rf: 0 term: 6 commitIndex: 3 length of logs: 4 win election
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 2 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 1 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
---- FAIL: TestPersist12C (34.48s)
-    config.go:422: only 2 decided for index 4; wanted 3
+  ... Passed --  10.2  3  202   61587    8
+Test (2C): more persistence ...
+  ... Passed --  33.9  5 1306  333975   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   6.8  3  109   30052    5
+Test (2C): Figure 8 ...
+  ... Passed --  34.7  5  845  165485   24
+Test (2C): unreliable agreement ...
+  ... Passed --   9.1  5 1212  360692  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  43.2  5  656  278204  427
+Test (2C): churn ...
+  ... Passed --  19.0  5 2744 1930845  782
+Test (2C): unreliable churn ...
+  ... Passed --  16.4  5  663  155747   89
+PASS
+ok  	6.824_new/src/raft	173.239s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  10.2  3  205   59036    6
+Test (2C): more persistence ...
+  ... Passed --  34.7  5 1263  306410   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   7.4  3  121   33785    6
+Test (2C): Figure 8 ...
+  ... Passed --  40.4  5  824  140993   15
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1207  359035  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (41.52s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  19.0  5 2413 2661452  766
+Test (2C): unreliable churn ...
+  ... Passed --  16.3  5  760  211898  133
 FAIL
 exit status 1
-FAIL	6.824_new/src/raft	34.480s
+FAIL	6.824_new/src/raft	178.512s
 sleep for a while
 
 Test (2C): basic persistence ...
-in func Make's goroutine, rf: 2 term: 0 launch Election
-in func LeaderElection, rf: 2 rf.Term: 0 commitIndex: -1 length of logs: 0 begin election
-in func leaderElection, rf: 2 term: 1 commitIndex: -1 length of logs: 0 win election
-in func one, nd: 0 cmd1: <nil> cmd: 11 index: 1
-in func AppendEntries, match, rf: 0 term: 1 state 3 args.PrevLogIndex: -1 args.Entries: [{1 11}]
-in func AppendEntries, match, rf: 1 term: 1 state 3 args.PrevLogIndex: -1 args.Entries: [{1 11}]
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func one, nd: 1 cmd1: 11 cmd: 11 index: 1
-in func AppendEntries, match, rf: 0 term: 1 state 3 args.PrevLogIndex: 0 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 1 state 3 args.PrevLogIndex: 0 args.Entries: []
-in func one, nd: 3 cmd1: 11 cmd: 11 index: 1
-in func Make's goroutine, rf: 2 term: 1 launch Election
-in func LeaderElection, rf: 2 rf.Term: 1 commitIndex: -1 length of logs: 1 begin election
-in func leaderElection, rf: 2 term: 2 commitIndex: -1 length of logs: 1 win election
-in func one, nd: 0 cmd1: <nil> cmd: 12 index: 2
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 0 args.Entries: [{2 12}]
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 0 args.Entries: [{2 12}]
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func one, nd: 1 cmd1: 12 cmd: 12 index: 2
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func one, nd: 3 cmd1: 12 cmd: 12 index: 2
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 2 state 3 args.PrevLogIndex: 1 args.Entries: []
-leader1: 2
-in func Make's goroutine, rf: 2 term: 2 launch Election
-in func LeaderElection, rf: 2 rf.Term: 2 commitIndex: -1 length of logs: 2 begin election
-in func leaderElection, rf: 2 term: 3 commitIndex: -1 length of logs: 2 win election
-in func one, nd: 0 cmd1: <nil> cmd: 13 index: 3
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 1 args.Entries: [{3 13}]
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 1 args.Entries: [{3 13}]
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func one, nd: 1 cmd1: 13 cmd: 13 index: 3
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func one, nd: 3 cmd1: 13 cmd: 13 index: 3
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 0 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 3 state 3 args.PrevLogIndex: 2 args.Entries: []
-leader2: 2
-in func Make's goroutine, rf: 0 term: 3 launch Election
-in func LeaderElection, rf: 0 rf.Term: 3 commitIndex: 2 length of logs: 3 begin election
-in func leaderElection, rf: 0 term: 4 commitIndex: 2 length of logs: 3 win election
-in func one, nd: 0 cmd1: <nil> cmd: 14 index: 4
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 2 args.Entries: [{4 14}]
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func one, nd: 1 cmd1: 14 cmd: 14 index: 4
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func one, nd: 2 cmd1: 14 cmd: 14 index: 4
-after connect leader2
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func Make's goroutine, rf: 2 term: 3 launch Election
-in func LeaderElection, rf: 2 rf.Term: 3 commitIndex: -1 length of logs: 3 begin election
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func LeaderElection, rf: 2 rf.Term: 4 state: 2 commitIndex: -1 length of logs: 3 not become leader, sleep for a while
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 4 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func LeaderElection, rf: 2 rf.Term: 4 commitIndex: -1 length of logs: 3 begin election
-in func AppendEntries: rf: 1 rf.term: 5 rf.Term > args.Term
-in func LeaderElection, rf: 2 rf.Term: 5 state: 2 commitIndex: -1 length of logs: 3 not become leader, sleep for a while
-in func Make's goroutine, rf: 0 term: 5 launch Election
-in func LeaderElection, rf: 0 rf.Term: 5 commitIndex: 3 length of logs: 4 begin election
-in func leaderElection, rf: 0 term: 6 commitIndex: 3 length of logs: 4 win election
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
-in func AppendEntries,  rf: 2 rf.term: 6 args.PervLogIndex > logLen, args.PrevLogIndex: 3 logLen: 3
-in func AppendEntries, match, rf: 1 term: 6 state 3 args.PrevLogIndex: 3 args.Entries: []
+  ... Passed --  11.0  3  203   58058    6
+Test (2C): more persistence ...
+  ... Passed --  35.6  5 1351  352922   20
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   2.9  3   54   14944    4
+Test (2C): Figure 8 ...
+  ... Passed --  34.0  5  700  125697   24
+Test (2C): unreliable agreement ...
+  ... Passed --   8.7  5 1205  358959  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  39.1  5  636  184557  196
+Test (2C): churn ...
+  ... Passed --  16.4  5 2372  887308  724
+Test (2C): unreliable churn ...
+  ... Passed --  16.7  5  569  164796  136
+PASS
+ok  	6.824_new/src/raft	164.449s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  14.6  3  336  103435    9
+Test (2C): more persistence ...
+  ... Passed --  36.1  5 1235  312458   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.3  3   83   23672    5
+Test (2C): Figure 8 ...
+  ... Passed --  30.3  5  635  119898   20
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1207  356524  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (41.56s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  18.2  5 1804 1819722  582
+Test (2C): unreliable churn ...
+  ... Passed --  16.1  5  598  164487   86
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	170.011s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  15.9  3  272   82157    8
+Test (2C): more persistence ...
+--- FAIL: TestPersist22C (17.34s)
+    config.go:515: one(16) failed to reach agreement
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.0  3   80   22526    5
+Test (2C): Figure 8 ...
+  ... Passed --  29.0  5  526   94711   18
+Test (2C): unreliable agreement ...
+  ... Passed --   8.7  5 1203  359325  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (43.65s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  17.9  5 1441  441611  416
+Test (2C): unreliable churn ...
+  ... Passed --  16.3  5 1519  573531  377
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	153.756s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --   6.9  3  144   40704    6
+Test (2C): more persistence ...
+  ... Passed --  37.2  5 1342  324561   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.7  3   73   20314    4
+Test (2C): Figure 8 ...
+  ... Passed --  31.1  5  756  144593   29
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1216  361707  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (39.36s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.6  5 1506  478279  403
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5  443   90462   48
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	161.211s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  16.4  3  371  116161    9
+Test (2C): more persistence ...
+  ... Passed --  41.0  5 1556  407335   22
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   7.4  3  158   49161    6
+Test (2C): Figure 8 ...
+  ... Passed --  32.1  5  593  107278   12
+Test (2C): unreliable agreement ...
+  ... Passed --   8.9  5 1219  360125  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  34.0  5  494  112766   12
+Test (2C): churn ...
+  ... Passed --  16.6  5 1029  383082  375
+Test (2C): unreliable churn ...
+  ... Passed --  16.9  5  993  312065  292
+PASS
+ok  	6.824_new/src/raft	173.351s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  13.2  3  271   81899    8
+Test (2C): more persistence ...
+  ... Passed --  42.4  5 1535  385859   20
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   3.2  3   52   14728    4
+Test (2C): Figure 8 ...
+  ... Passed --  33.3  5  750  142666   26
+Test (2C): unreliable agreement ...
+  ... Passed --   8.5  5 1187  355496  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  39.6  5  721  171467  142
+Test (2C): churn ...
+  ... Passed --  18.4  5 2752 1904889  766
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5 1127  339304  257
+PASS
+ok  	6.824_new/src/raft	174.786s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --   9.0  3  192   54693    6
+Test (2C): more persistence ...
+  ... Passed --  36.8  5 1192  264062   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   3.0  3   51   14439    4
+Test (2C): Figure 8 ...
+  ... Passed --  37.0  5  969  198429   32
+Test (2C): unreliable agreement ...
+  ... Passed --   9.1  5 1221  362728  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (45.74s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  17.0  5 1366  472735  446
+Test (2C): unreliable churn ...
+  ... Passed --  16.3  5 1243  756750  304
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	174.078s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  10.8  3  225   68644    8
+Test (2C): more persistence ...
+  ... Passed --  31.9  5 1264  335972   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.1  3   78   22272    4
+Test (2C): Figure 8 ...
+  ... Passed --  30.1  5  635  124117   25
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1214  361627  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (44.61s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.3  5 1512  507114  507
+Test (2C): unreliable churn ...
+  ... Passed --  18.3  5 1189 1082163  285
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	164.919s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  13.8  3  234   67313    7
+Test (2C): more persistence ...
+  ... Passed --  33.9  5 1357  333378   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   6.2  3   96   26814    5
+Test (2C): Figure 8 ...
+  ... Passed --  31.4  5  773  146239   23
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1205  359060  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (44.39s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.2  5 1623  731602  455
+Test (2C): unreliable churn ...
+  ... Passed --  18.2  5 1232 1293418  281
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	172.883s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --   7.7  3  128   35976    6
+Test (2C): more persistence ...
+  ... Passed --  43.3  5 1460  377282   22
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.5  3   95   26976    5
+Test (2C): Figure 8 ...
+  ... Passed --  31.1  5  718  128615   15
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1222  361951  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (39.88s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  16.3  5 1855  664368  642
+Test (2C): unreliable churn ...
+  ... Passed --  16.8  5 1545  509538  331
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	169.366s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  11.7  3  218   62721    7
+Test (2C): more persistence ...
+  ... Passed --  37.1  5 1361  311950   21
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.8  3   95   26637    5
+Test (2C): Figure 8 ...
+  ... Passed --  35.0  5  978  189647   28
+Test (2C): unreliable agreement ...
+  ... Passed --   8.8  5 1211  358352  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (42.41s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  20.8  5 1850  601932  579
+Test (2C): unreliable churn ...
+  ... Passed --  17.2  5  717  220837  184
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	178.766s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  16.4  3  310   94603    9
+Test (2C): more persistence ...
+  ... Passed --  28.8  5  881  206557   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   4.8  3   83   23516    5
+Test (2C): Figure 8 ...
+  ... Passed --  28.9  5  592  113833   21
+Test (2C): unreliable agreement ...
+  ... Passed --   8.9  5 1236  364706  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  37.7  5  511  134761   70
+Test (2C): churn ...
+  ... Passed --  16.5  5 1285  434861  581
+Test (2C): unreliable churn ...
+  ... Passed --  17.0  5 1050  322849  280
+PASS
+ok  	6.824_new/src/raft	158.960s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  13.3  3  290   90251    8
+Test (2C): more persistence ...
+  ... Passed --  30.9  5 1260  327565   18
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   5.8  3   99   27748    5
+Test (2C): Figure 8 ...
+  ... Passed --  32.6  5  774  159635   27
+Test (2C): unreliable agreement ...
+  ... Passed --   9.2  5 1234  365766  246
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (44.55s)
+    config.go:515: one(20000) failed to reach agreement
+Test (2C): churn ...
+  ... Passed --  18.9  5 1746  598996  615
+Test (2C): unreliable churn ...
+  ... Passed --  17.6  5  529  139163   93
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	172.767s
+sleep for a while
+
+Test (2C): basic persistence ...
+  ... Passed --  15.4  3  327   97003    7
+Test (2C): more persistence ...
+  ... Passed --  44.8  5 1440  321238   19
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   8.6  3  167   51094    6
+Test (2C): Figure 8 ...
+  ... Passed --  32.6  5  801  152703   27
+Test (2C): unreliable agreement ...
+  ... Passed --   9.0  5 1228  363758  246
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  41.9  5  703  214804  150
+Test (2C): churn ...
+  ... Passed --  16.2  5 1088  374603  214
+Test (2C): unreliable churn ...
+  ... Passed --  16.8  5 1316  409546  261
+PASS
+ok  	6.824_new/src/raft	185.281s
+sleep for a while
+
+Test (2C): basic persistence ...
 signal: interrupt
-FAIL	6.824_new/src/raft	9.369s
+FAIL	6.824_new/src/raft	4.901s

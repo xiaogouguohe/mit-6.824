@@ -312,13 +312,14 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	//fmt.Println("in func AppendEntries, begin")
-	//fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "leader:", args.LeaderId, "leader.Term", args.Term)
+	//fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+	//	"leader:", args.LeaderId, "leader.Term", args.Term)
 	rf.UpdateTerm(args.Term)
 	currentTerm, _ := rf.GetVoteState()
 	reply.Term = currentTerm
 
 	if (currentTerm > args.Term) {  //该结点收到leader的heartbeat，但是自己的任期更大，拒绝
-		fmt.Println("in func AppendEntries: rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "rf.Term > args.Term")
+		//fmt.Println("in func AppendEntries: rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "rf.Term > args.Term")
 		reply.Succ = false
 		return
 	}
@@ -328,22 +329,24 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	reply.Succ = true
 
 	logLen := int32(rf.GetLogsLength())
-	lastLogTerm := rf.GetLastLogTerm()
+	//lastLogTerm := rf.GetLastLogTerm()
 	commitIndex := rf.GetCommitIndex()
 
 	termOfPrevLogIndexInRf := rf.GetSingleEntry(args.PrevLogIndex).Term
 	//fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "termOfPrevLogIndexInRf:", termOfPrevLogIndexInRf)
 
-	if args.PrevLogIndex > logLen - 1 /*|| args.LeaderCommit > logLen - 1*/ {
-		fmt.Println("in func AppendEntries,  rf:", rf.me, "rf.term:", rf.GetCurrentTerm(),
-			"args.PervLogIndex > logLen, args.PrevLogIndex:", args.PrevLogIndex, "logLen:", logLen)
+	if args.PrevLogIndex > logLen /*|| args.LeaderCommit > logLen - 1*/ {
+		/*fmt.Println("in func AppendEntries,  rf:", rf.me, "rf.term:", rf.GetCurrentTerm(),
+			"args.PervLogIndex > logLen, args.PrevLogIndex:", args.PrevLogIndex, "logLen:", logLen)*/
 		reply.Succ = false
 		reply.CommitIndex = commitIndex
 		reply.Term = args.Term
 	} else if args.PrevLogIndex >= 0 && args.PrevLogTerm != int32(termOfPrevLogIndexInRf)/*lastLogTerm*/ {
-		fmt.Println("in func AppendEntries, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(),
-			"args.PrevLogIndex >= 0 && args.PrevLogTerm != lastLogTerm, args.PrevLogTerm:",
-			args.PrevLogTerm, "lastLogTerm:", lastLogTerm)
+		/*fmt.Println("in func AppendEntries, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(),
+			"args.PrevLogIndex >= 0 && args.PrevLogTerm != termOfPrevLogIndexInRf, " +
+			"args.PrevLogIndex:", args.PrevLogIndex,
+			"PrevLogTerm:", args.PrevLogTerm, "termOfPrevLogIndexInRf:", termOfPrevLogIndexInRf,
+			"rf.logs", rf.GetLogs(0), "args.logs", args.Entries)*/
 		reply.Succ = false
 		reply.CommitIndex = commitIndex
 		reply.Term = args.Term
@@ -354,17 +357,20 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		}
 		reply.ConflictIndex = i
 	} else {
-		fmt.Println("in func AppendEntries, match, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state", rf.GetCertainState(),
-			"args.PrevLogIndex:", args.PrevLogIndex, "args.Entries:", args.Entries)
+		/*fmt.Println("in func AppendEntries, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "state", rf.GetCertainState(),
+			"match",
+			"args.PrevLogIndex:", args.PrevLogIndex,
+			"PrevLogTerm:", args.PrevLogTerm, "termOfPrevLogIndexInRf:", termOfPrevLogIndexInRf,
+			"rf.logs", rf.GetLogs(0), "args.logs", args.Entries)*/
 		reply.Succ = true
 		reply.CommitIndex = args.LeaderCommit
 		reply.Term = args.Term
 
 		rf.AppendLogs(args.PrevLogIndex + 1, args.Entries)
 		rf.SetCommitIndex(args.LeaderCommit)
-		//if rf.GetLastApplied() < rf.GetCommitIndex() {
+		if rf.GetLastApplied() < rf.GetCommitIndex() {
 			go rf.commitLogs()  //会不会提交到一半被覆盖？
-		//}
+		}
 	}
 }
 //
@@ -483,13 +489,13 @@ func (rf *Raft) LeaderElection() {
 	for {
 		state := rf.GetCertainState()
 		if (rf.killed() || state != CANDIDATE) {
-			//fmt.Println("ini func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
-				//rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not candidate anymore")
+			/*fmt.Println("ini func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
+				rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not candidate anymore")*/
 			return
 		}
 
-		fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
-			rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "begin election")
+		//fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
+		//	rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "begin election")
 		currentTerm, _ = rf.TurnToCandidate()
 		itself := rf.GetItself()
 
@@ -557,8 +563,8 @@ func (rf *Raft) LeaderElection() {
 		if votedCnt >= majority/* && votedCnt > 1 */{
 			break
 		}
-		fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-			"commitIndex:", rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
+		//fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+		//	"commitIndex:", rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
 		rand.Seed(time.Now().UnixNano())
 		timeout = time.Duration(time.Duration(
 			rand.Intn(500)+500) * time.Millisecond)
@@ -566,8 +572,8 @@ func (rf *Raft) LeaderElection() {
 	}
 	//
 	if currentTerm == rf.GetCurrentTerm() && rf.GetCertainState() == CANDIDATE {
-		fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "commitIndex:",
-			rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "win election")
+		//fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "commitIndex:",
+		//	rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "win election")
 		for len(rf.cmdCh) > 0 {
 			<- rf.cmdCh
 		}
@@ -608,7 +614,7 @@ func (rf *Raft) heartbeat2() {
 						LeaderId:     rf.GetItself(),
 						PrevLogIndex: rf.GetPrevLogIndex(server),
 						PrevLogTerm:  rf.GetPrevLogTerm(server),
-						Entries:      nil,
+						Entries:      rf.GetLogsBehindNextIndex(server),
 						LeaderCommit: rf.GetCommitIndex(),
 					}
 					//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
@@ -629,6 +635,18 @@ func (rf *Raft) heartbeat2() {
 							//"receiver:", server, "sendAppendEntries heartbeat fail", "okCnt:", okCnt)
 					}
 					rf.UpdateTerm(reply.Term)
+					if rf.killed() || rf.GetCertainState() != LEADER || rf.GetCurrentTerm() != term {
+						break
+					}
+					if ok && !reply.Succ {
+						//nextIndex1 := rf.GetNextIndex(server)
+						//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
+						rf.SetNextIndex(server, reply.ConflictIndex)
+						//rf.SetNextIndex(server, reply.ConflictIndex)
+						//nextIndex2 := rf.GetNextIndex(server)
+						//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
+						//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
+					}
 
 
 				case index := <-peersChs[server]:
@@ -674,8 +692,10 @@ func (rf *Raft) heartbeat2() {
 							//break
 						} else if ok && !reply.Succ {
 							//nextIndex1 := rf.GetNextIndex(server)
-							rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
-							//rf.SetNextIndex(server, reply.ConflictIndex)
+							//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
+							rf.SetNextIndex(server, reply.ConflictIndex)
+							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+							//	"receiver:", server, "sendAppendEntries change nextIndex")
 							//nextIndex2 := rf.GetNextIndex(server)
 							//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
 							//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
@@ -714,9 +734,9 @@ func (rf *Raft) heartbeat2() {
 			}
 			if replyCnt >= majority {
 				rf.SetCommitIndex(index)
-				//if rf.GetLastApplied() < rf.GetCommitIndex() {
+				if rf.GetLastApplied() < rf.GetCommitIndex() {
 					go rf.commitLogs()
-				//}
+				}
 			}
 		}
 	}()
@@ -813,7 +833,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 			now := time.Now().UnixNano()
 			prev := atomic.LoadInt64(&rf.lastRecvTime)
 			if time.Duration(now - prev) * time.Nanosecond >= rf.electionInterval {
-				fmt.Println("in func Make's goroutine, rf:", rf.me, "term:", rf.GetCurrentTerm(), "launch Election")
+				//fmt.Println("in func Make's goroutine, rf:", rf.me, "term:", rf.GetCurrentTerm(), "launch Election")
 				rf.LeaderElection()
 			}
 		}

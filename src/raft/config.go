@@ -477,7 +477,7 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 			t1 := time.Now()
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
-				fmt.Println("in func one, nd:", nd, "cmd1:", cmd1, "cmd:", cmd, "index:", index)
+				//fmt.Println("in func one, nd:", nd, "cmd1:", cmd1, "cmd:", cmd, "index:", index)
 
 				//fmt.Println("nd:", nd, "cmd:", cmd, "cmd1:", cmd1)
 				if nd > 0 && nd >= expectedServers {

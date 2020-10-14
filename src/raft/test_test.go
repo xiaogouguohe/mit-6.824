@@ -731,7 +731,7 @@ func TestPersist12C(t *testing.T) {
 	cfg.one(12, servers, true)
 
 	leader1 := cfg.checkOneLeader()
-	fmt.Println("leader1:", leader1)
+	//fmt.Println("leader1:", leader1)
 	cfg.disconnect(leader1)
 	cfg.start1(leader1)
 	cfg.connect(leader1)
@@ -739,12 +739,12 @@ func TestPersist12C(t *testing.T) {
 	cfg.one(13, servers, true)
 
 	leader2 := cfg.checkOneLeader()
-	fmt.Println("leader2:", leader2)
+	//fmt.Println("leader2:", leader2)
 	cfg.disconnect(leader2)
 	cfg.one(14, servers-1, true)
 	cfg.start1(leader2)
 	cfg.connect(leader2)
-	fmt.Println("after connect leader2")
+	//fmt.Println("after connect leader2")
 
 	cfg.wait(4, servers, -1) // wait for leader2 to join before killing i3
 
