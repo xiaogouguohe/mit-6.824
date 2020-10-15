@@ -313,7 +313,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	//fmt.Println("in func AppendEntries, begin")
 	//fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-	//	"leader:", args.LeaderId, "leader.Term", args.Term)
+	///	"leader:", args.LeaderId, "leader.Term", args.Term)
 	rf.UpdateTerm(args.Term)
 	currentTerm, _ := rf.GetVoteState()
 	reply.Term = currentTerm
@@ -409,10 +409,22 @@ func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *Reques
 }
 
 func (rf *Raft) sendAppendEntries(server int, args* AppendEntriesArgs, reply *AppendEntriesReply) bool {
+	//defer fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "end")
 	//fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "begin")
-	ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
-	//fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "end")
-	return ok
+	okCh := make(chan bool, 1)
+	go func() {
+		ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+		okCh <- ok
+	}()
+	ok := false
+	select{
+	case ok = <- okCh:
+		return ok
+	case <- time.After(50 * time.Millisecond):
+		return false
+	}
+	//ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+	//return ok
 }
 
 
@@ -489,8 +501,8 @@ func (rf *Raft) LeaderElection() {
 	for {
 		state := rf.GetCertainState()
 		if (rf.killed() || state != CANDIDATE) {
-			/*fmt.Println("ini func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
-				rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not candidate anymore")*/
+			//fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
+			//	rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not candidate anymore")
 			return
 		}
 
@@ -622,11 +634,13 @@ func (rf *Raft) heartbeat2() {
 					reply := AppendEntriesReply{}
 					ok := false
 					okCnt := 0
-					//for !ok && okCnt < 10 && rf.GetCertainState() == LEADER {
+					for !ok /*&& okCnt < 10*/ && rf.GetCertainState() == LEADER {
 						ok = rf.sendAppendEntries(server, &args, &reply)
 						okCnt++
-						//time.Sleep(10 * time.Millisecond)
-					//}
+						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+						//	"receiver:", server, "ok:", ok, "okCnt:", okCnt, "heartbeat")
+						time.Sleep(10 * time.Millisecond)
+					}
 					if (ok) {
 						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 							//"receiver:", server, "sendAppendEntries heartbeat succ", "okCnt:", okCnt)
@@ -671,7 +685,7 @@ func (rf *Raft) heartbeat2() {
 							ok = rf.sendAppendEntries(server, &args, &reply)
 							okCnt++
 							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-								//"receiver:", server, "ok:", ok, "okCnt:", okCnt)
+							//	"receiver:", server, "ok:", ok, "okCnt:", okCnt, "real append")
 							time.Sleep(10 * time.Millisecond)
 						}
 						if (ok) {
@@ -758,7 +772,7 @@ func (rf *Raft) commitLogs() {
 	}
 
 	for i := lastApplied + 1; i <= commitIndex; i++ {
-		//fmt.Println("in func commitLogs, rf:", rf.me, "commandIndex:", i, "command", rf.logs[i].Command)
+		//fmt.Println("in func commitLogs, rf:", rf.me, "commitIndex:", commitIndex, "commandIndex:", i, "command", rf.logs[i].Command)
 		rf.applyCh <- ApplyMsg{
 			CommandIndex: int(i + 1),
 			Command: rf.logs[i].Command,

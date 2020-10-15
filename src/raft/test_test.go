@@ -993,8 +993,8 @@ func TestFigure8Unreliable2C(t *testing.T) {
 
 	//fmt.Println("after connect all")
 	//fmt.Println("sleep for 2s")
-	//time.Sleep(2 *time.Second)
-	/*for i := 0; i < servers; i++ {
+	/*time.Sleep(2 *time.Second)
+	for i := 0; i < servers; i++ {
 		fmt.Println("rf:", i, "term:", cfg.rafts[i].GetCurrentTerm(), "state:", cfg.rafts[i].GetCertainState(),
 			"commitIndex:", cfg.rafts[i].GetCommitIndex(), "logs:", cfg.rafts[i].GetLogs(0))
 	}*/
