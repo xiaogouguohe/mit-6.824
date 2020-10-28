@@ -1,7 +1,7 @@
 package kvraft
 
-import "../porcupine"
-import "../models"
+import "6.824_new/src/porcupine"
+import "6.824_new/src/models"
 import "testing"
 import "strconv"
 import "time"
@@ -10,7 +10,6 @@ import "log"
 import "strings"
 import "sync"
 import "sync/atomic"
-import "fmt"
 import "io/ioutil"
 
 // The tester generously allows solutions to complete elections in one second
@@ -183,6 +182,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 	cfg.begin(title)
 
 	ck := cfg.makeClient(cfg.All())
+	//fmt.Println("in func test, nclients:", nclients)
 
 	done_partitioner := int32(0)
 	done_clients := int32(0)
@@ -204,13 +204,16 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			key := strconv.Itoa(cli)
 			Put(cfg, myck, key, last)
 			for atomic.LoadInt32(&done_clients) == 0 {
+				//fmt.Println("in func test, done_client == 0")
 				if (rand.Int() % 1000) < 500 {
+					//fmt.Println("in func test, append")
 					nv := "x " + strconv.Itoa(cli) + " " + strconv.Itoa(j) + " y"
 					// log.Printf("%d: client new append %v\n", cli, nv)
 					Append(cfg, myck, key, nv)
 					last = NextValue(last, nv)
 					j++
 				} else {
+					//fmt.Println("in func test, get")
 					// log.Printf("%d: client new get %v\n", cli, key)
 					v := Get(cfg, myck, key)
 					if v != last {
@@ -229,6 +232,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 
 		atomic.StoreInt32(&done_clients, 1)     // tell clients to quit
 		atomic.StoreInt32(&done_partitioner, 1) // tell partitioner to quit
+		//fmt.Println("in func test, done_client == 1")
 
 		if partitions {
 			// log.Printf("wait for partitioner\n")
@@ -265,9 +269,11 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			// if j < 10 {
 			// 	log.Printf("Warning: client %d managed to perform only %d put operations in 1 sec?\n", i, j)
 			// }
+			//.Println("in func test, j:", j)
 			key := strconv.Itoa(i)
 			// log.Printf("Check %v for client %d\n", j, i)
 			v := Get(cfg, ck, key)
+			//fmt.Println("in func test, v:", v)
 			checkClntAppends(t, i, v, j)
 		}
 
@@ -429,19 +435,19 @@ func GenericTestLinearizability(t *testing.T, part string, nclients int, nserver
 	if res == porcupine.Illegal {
 		file, err := ioutil.TempFile("", "*.html")
 		if err != nil {
-			fmt.Printf("info: failed to create temp file for visualization")
+			//fmt.Printf("info: failed to create temp file for visualization")
 		} else {
 			err = porcupine.Visualize(models.KvModel, info, file)
 			if err != nil {
-				fmt.Printf("info: failed to write history visualization to %s\n", file.Name())
+				//fmt.Printf("info: failed to write history visualization to %s\n", file.Name())
 			} else {
-				fmt.Printf("info: wrote history visualization to %s\n", file.Name())
+				//fmt.Printf("info: wrote history visualization to %s\n", file.Name())
 			}
 		}
 		t.Fatal("history is not linearizable")
 		t.Fatal("history is not linearizable")
 	} else if res == porcupine.Unknown {
-		fmt.Println("info: linearizability check timed out, assuming history is ok")
+		//fmt.Println("info: linearizability check timed out, assuming history is ok")
 	}
 }
 

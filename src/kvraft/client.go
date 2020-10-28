@@ -1,6 +1,8 @@
 package kvraft
 
-import "../labrpc"
+import (
+	"6.824_new/src/labrpc"
+)
 import "crypto/rand"
 import "math/big"
 
@@ -39,7 +41,18 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 func (ck *Clerk) Get(key string) string {
 
 	// You will have to modify this function.
-	return ""
+	//return ""
+
+
+	for i := 0; ; i = (i + 1) % len(ck.servers) {
+		args := GetArgs{Key:key}
+		var reply GetReply
+		ok := ck.servers[i].Call("KVServer.Get", &args, &reply)
+		if ok && reply.Err == "" {
+			return reply.Value
+		}
+	}
+	//return reply.Value
 }
 
 //
@@ -54,6 +67,22 @@ func (ck *Clerk) Get(key string) string {
 //
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
+
+	//fmt.Println("in func client's PutAppend, len(ck.servers):", len(ck.servers))
+	for i := 0; ; i = (i + 1) % len(ck.servers) {
+		args := PutAppendArgs{
+			Key:   key,
+			Value: value,
+			Op:    op,
+		}
+		var reply PutAppendReply
+		ok := ck.servers[i].Call("KVServer.PutAppend", &args, &reply)
+		//fmt.Print("in func client's PutAppend, reply.Err:", reply.Err)
+		if ok && reply.Err == "" {
+			//fmt.Println("in func client's PutAppend, i:", i, "ok and reply.Err is nil")
+			break
+		}
+	}
 }
 
 func (ck *Clerk) Put(key string, value string) {
