@@ -312,8 +312,11 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	//fmt.Println("in func AppendEntries, begin")
+	if (args == nil) {
+		//fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(), "args is nil")
+	}
 	//fmt.Println("in func AppendEntries, begin, rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-	///	"leader:", args.LeaderId, "leader.Term", args.Term)
+	//	"leader:", args.LeaderId, "leader.Term", args.Term)
 	rf.UpdateTerm(args.Term)
 	currentTerm, _ := rf.GetVoteState()
 	reply.Term = currentTerm
@@ -641,7 +644,7 @@ func (rf *Raft) heartbeat2() {
 						//	"receiver:", server, "ok:", ok, "okCnt:", okCnt, "heartbeat")
 						time.Sleep(10 * time.Millisecond)
 					}
-					if (ok) {
+					if ok {
 						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 							//"receiver:", server, "sendAppendEntries heartbeat succ", "okCnt:", okCnt)
 					} else {
@@ -666,7 +669,7 @@ func (rf *Raft) heartbeat2() {
 				case index := <-peersChs[server]:
 					for {
 						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							//"receiver:", server, ", before args, index come")
+						//	"receiver:", server, "index:", index)
 						args := AppendEntriesArgs{
 							Term:         term,
 							LeaderId:     rf.GetItself(),
@@ -678,6 +681,10 @@ func (rf *Raft) heartbeat2() {
 						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 							//"receiver:", server, ", after args, index come")
 						reply := AppendEntriesReply{}
+
+						if &args == nil {
+							//fmt.Println("in func heartbeat2, args is nil")
+						}
 
 						ok := false
 						okCnt := 0

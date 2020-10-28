@@ -1,0 +1,66 @@
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:04:46 get wrong value, key 1, wanted:
+x 1 0 yx 1 1 y
+, got
+x 1 0 yx 1 1 yx 1 1 yx 1 1 y
+exit status 1
+FAIL	6.824_new/src/kvraft	2.627s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:04:49 get wrong value, key 4, wanted:
+x 4 0 yx 4 1 yx 4 2 y
+, got
+x 4 0 yx 4 0 yx 4 0 yx 4 1 yx 4 2 y
+exit status 1
+FAIL	6.824_new/src/kvraft	1.512s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:04:54 get wrong value, key 2, wanted:
+x 2 0 yx 2 1 yx 2 2 yx 2 3 yx 2 4 yx 2 5 yx 2 6 y
+, got
+x 2 0 yx 2 1 yx 2 2 yx 2 3 yx 2 4 yx 2 4 yx 2 5 yx 2 6 y
+exit status 1
+FAIL	6.824_new/src/kvraft	3.845s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:04:57 get wrong value, key 2, wanted:
+x 2 0 yx 2 1 y
+, got
+x 2 0 yx 2 0 yx 2 1 y
+exit status 1
+FAIL	6.824_new/src/kvraft	1.510s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:05:00 get wrong value, key 1, wanted:
+x 1 0 yx 1 1 yx 1 2 y
+, got
+x 1 0 yx 1 1 yx 1 1 yx 1 2 y
+exit status 1
+FAIL	6.824_new/src/kvraft	1.703s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:05:04 get wrong value, key 1, wanted:
+x 1 0 yx 1 1 yx 1 2 yx 1 3 y
+, got
+x 1 0 yx 1 1 yx 1 2 yx 1 3 yx 1 3 y
+exit status 1
+FAIL	6.824_new/src/kvraft	2.166s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+2020/10/28 15:05:06 get wrong value, key 2, wanted:
+x 2 0 yx 2 1 y
+, got
+x 2 0 yx 2 0 yx 2 1 y
+exit status 1
+FAIL	6.824_new/src/kvraft	1.276s
+sleep for a while
+
+Test: unreliable net, many clients (3A) ...
+signal: interrupt
+FAIL	6.824_new/src/kvraft	0.207s

@@ -113,7 +113,9 @@ func (e *ClientEnd) Call(svcMeth string, args interface{}, reply interface{}) bo
 	//
 	// wait for the reply.
 	//
+	//fmt.Println("wait for reply")
 	rep := <-req.replyCh
+	//fmt.Println("get reply")
 
 	if rep.ok {
 		rb := bytes.NewBuffer(rep.reply)
