@@ -4,8 +4,9 @@ import (
 	"6.824_new/src/labgob"
 	"6.824_new/src/labrpc"
 	"6.824_new/src/raft"
-
 	//"fmt"
+
+	"time"
 
 	//"../labgob"
 	//"../labrpc"
@@ -33,6 +34,7 @@ type Op struct {
 	Key string
 	Value string
 	Ope string
+	OpUni OpUnique
 
 }
 
@@ -47,8 +49,12 @@ type KVServer struct {
 
 	// Your definitions here.
 	data map[string]string
-	putAppendCh chan raft.ApplyMsg
 	dataMu sync.RWMutex
+
+	putAppendChs map[OpUnique]chan raft.ApplyMsg
+	putAppendOps map[OpUnique]bool
+	putAppendChsMu sync.RWMutex
+	putAppendOpsMu sync.RWMutex
 }
 
 
@@ -60,17 +66,30 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 		Key: args.Key,
 		//Value: args.Value,
 		Ope: "Get",
+		OpUni: args.OpUni,
 	})
+
 	if succ {
-		/*applyMsg := */<- kv.putAppendCh
+		kv.putAppendChsMu.Lock()
+		if _, ok := kv.putAppendChs[args.OpUni]; ok {
+			kv.putAppendChsMu.Unlock()
+		} else {
+			kv.putAppendChs[args.OpUni] = make(chan raft.ApplyMsg)
+			//kv.putAppendOps[args.OpUni] = true
+			kv.putAppendChsMu.Unlock()
+		}
+		/*applyMsg := */<- kv.putAppendChs[args.OpUni]
 		//fmt.Println("in func server's Get, get from putAppendCh, applyMsg:", applyMsg)
+		//fmt.Println("in func server's Get, OpUni:", args.OpUni)
+
 		kv.dataMu.Lock()
+		//fmt.Println("in func server's Get, kv:", kv.me, "key:", args.Key, "Value:", kv.data[args.Key])
 		reply.Value = kv.data[args.Key]
 		//fmt.Println("in func server's Get, reply.Value:", reply.Value)
 		kv.dataMu.Unlock()
-		reply.Err = ""
+		reply.Err = OK
 	} else {
-		reply.Err = "false"
+		reply.Err = ErrWrongLeader
 	}
 
 }
@@ -84,10 +103,28 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 		Key: args.Key,
 		Value: args.Value,
 		Ope: args.Op,
+		OpUni: args.OpUni,
 
 	})
 	if succ {
-		<- kv.putAppendCh
+		kv.putAppendChsMu.Lock()
+		if _, ok := kv.putAppendChs[args.OpUni]; ok {
+			kv.putAppendChsMu.Unlock()
+		} else {
+			kv.putAppendChs[args.OpUni] = make(chan raft.ApplyMsg)
+			//kv.putAppendOps[args.OpUni] = true
+			kv.putAppendChsMu.Unlock()
+		}
+
+		select{
+		case <- kv.putAppendChs[args.OpUni]:
+			//fmt.Println("in func server's putAppend, kv:", kv.me, "OpUni:", args.OpUni, "get from channel")
+			reply.Err = OK
+
+		case <- time.After(time.Duration(500 * time.Millisecond)):
+			//fmt.Println("in func server's PutAppend, time out, args:", args)
+			reply.Err = "time out"
+		}
 		//fmt.Println("in func server's PutAppend, get from putAppendCh, applyMsg:", applyMsg)
 		/*if args.Op == "Put" {
 			kv.dataMu.Lock()
@@ -100,10 +137,9 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 			//fmt.Println("in func test, is Append, Key:", args.Key, "kv.data[args.Key]:", kv.data[args.Key], "args.Value", args.Value, "after add")
 			kv.dataMu.Unlock()
 		}*/
-		reply.Err = ""
 	} else {
 		//fmt.Println("in func server's PutAppend, false")
-		reply.Err = "false"
+		reply.Err = ErrWrongLeader
 	}
 
 }
@@ -150,6 +186,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 	kv := new(KVServer)
 	kv.me = me
+	//fmt.Println("in func StartKVServer, me:", me)
 	kv.maxraftstate = maxraftstate
 
 	// You may need initialization code here.
@@ -159,28 +196,60 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 	// You may need initialization code here.
 	kv.data = make(map[string]string)
-	kv.putAppendCh = make(chan raft.ApplyMsg, 1024)
+	kv.putAppendChs = make(map[OpUnique]chan raft.ApplyMsg)
+	kv.putAppendOps = make(map[OpUnique]bool)
 
 	go func() {
 		for {
 			applyMsg := <- kv.applyCh
 			op, _ := applyMsg.Command.(Op)
-			if op.Ope == "Put" {
-				kv.dataMu.Lock()
-				kv.data[op.Key] = op.Value
-				kv.dataMu.Unlock()
+			//在这里做判断，不要重复添加
+			kv.putAppendChsMu.Lock()
+			/*fmt.Println("in func StartKVServer, op:", op)
+			for k, v := range(kv.putAppendOps) {
+				fmt.Println("in func StartKVServer, kv:", kv.me, "key:", k, "value", v)
+			}*/
+			if _, ok := kv.putAppendChs[op.OpUni]; ok {
+				//fmt.Println("in func StartKVServer, kv:", kv.me, "op.Opuni:", op.OpUni, "already exist")
+				//continue
+				kv.putAppendChsMu.Unlock()
 			} else {
-				//fmt.Println("in func test, is Append, Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "before add")
-				kv.dataMu.Lock()
-				kv.data[op.Key] += op.Value
-				//fmt.Println("in func test, is Append, Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "after add")
-				kv.dataMu.Unlock()
+
+				 //fmt.Println("in func StartKVServer, kv:", kv.me, "op.Opuni:", op.OpUni, "set")
+
+				kv.putAppendChs[op.OpUni] = make(chan raft.ApplyMsg)
+				//kv.putAppendOps[op.OpUni] = true
+				kv.putAppendChsMu.Unlock()
+
+			}
+
+			kv.putAppendOpsMu.Lock()
+			if _, ok := kv.putAppendOps[op.OpUni]; ok {
+				kv.putAppendOpsMu.Unlock()
+			} else {
+				kv.putAppendOps[op.OpUni] = true
+				kv.putAppendOpsMu.Unlock()
+
+				if op.Ope == "Put" {
+					kv.dataMu.Lock()
+					kv.data[op.Key] = op.Value
+					kv.dataMu.Unlock()
+				} else {
+					//fmt.Println("in func StartKVServer, is Append, kv:", kv.me, "Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "before add")
+					kv.dataMu.Lock()
+					kv.data[op.Key] += op.Value
+					//fmt.Println("in func StartKVServer, is Append, kv:", kv.me, "Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "after add")
+					kv.dataMu.Unlock()
+				}
+
 			}
 
 			if kv.rf.GetCertainState() == raft.LEADER {
 				//fmt.Println("in func start a server, put applyMsg into putAppendCh, applyMsg:", applyMsg)
-				kv.putAppendCh <- applyMsg
+				//fmt.Println("in func StartKVServer, kv:", kv.me, "OpUni:", op.OpUni, "applyMsg:", applyMsg, "put to channel")
+				kv.putAppendChs[op.OpUni] <- applyMsg
 			}
+
 		}
 	}()
 
