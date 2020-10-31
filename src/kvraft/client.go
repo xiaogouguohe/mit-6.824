@@ -2,7 +2,9 @@ package kvraft
 
 import (
 	"6.824_new/src/labrpc"
+	"fmt"
 	"sync"
+	"time"
 )
 import "crypto/rand"
 import "math/big"
@@ -67,8 +69,26 @@ func (ck *Clerk) Get(key string) string {
 			Key: key,
 			OpUni: opUni,
 		}
-		var reply GetReply
-		ok := ck.servers[i].Call("KVServer.Get", &args, &reply)
+		reply := GetReply{
+			Err:   "initial",
+			Value: "",
+		}
+		ok := false
+		okCh := make(chan bool, 1)
+		go func() {
+			ok := ck.servers[i].Call("KVServer.Get", &args, &reply)
+			okCh <- ok
+		}()
+
+		select{
+		case ok = <- okCh:
+
+		case <- time.After(500 * time.Millisecond):
+
+		}
+
+		fmt.Println("in func client's Get, ok:", ok, "server:", i, "Key:", key, "Value:", reply.Value, "opUni:", opUni,
+			"reply.Err:", reply.Err)
 		if ok && reply.Err == OK {
 			return reply.Value
 		}
@@ -105,10 +125,24 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 
 		}
 		//fmt.Println("in func client's PutAppend, seq:", ck.seq)
-		var reply PutAppendReply
-		ok := ck.servers[i].Call("KVServer.PutAppend", &args, &reply)
-		//fmt.Println("in func client's PutAppend, ok:", ok, "server:", i, "Key:", key, "Value:", value, "Op:", op, "opUni:", opUni,
-			//"reply.Err:", reply.Err)
+		reply := PutAppendReply{
+			Err: "initial",
+		}
+		ok := false
+		okCh := make(chan bool, 1)
+		go func() {
+			ok := ck.servers[i].Call("KVServer.PutAppend", &args, &reply)
+			okCh <- ok
+		}()
+
+		select{
+		case ok = <- okCh:
+
+		case <- time.After(500 * time.Millisecond):
+
+		}
+		fmt.Println("in func client's PutAppend, ok:", ok, "server:", i, "Key:", key, "Value:", value, "Op:", op, "opUni:", opUni,
+			"reply.Err:", reply.Err)
 		if ok && reply.Err == OK {
 			//fmt.Println("in func client's PutAppend, i:", i, "ok and reply.Err is nil")
 			break
