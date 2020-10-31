@@ -1,6 +1,9 @@
 package kvraft
 
-import "6.824_new/src/porcupine"
+import (
+	"6.824_new/src/porcupine"
+	"fmt"
+)
 import "6.824_new/src/models"
 import "testing"
 import "strconv"
@@ -139,6 +142,7 @@ func partitioner(t *testing.T, cfg *config, ch chan bool, done *int32) {
 		cfg.partition(pa[0], pa[1])
 		time.Sleep(electionTimeout + time.Duration(rand.Int63()%200)*time.Millisecond)
 	}
+	//fmt.Println("in func test, partitioner end")
 }
 
 // Basic test is as follows: one or more clients submitting Append/Get
@@ -198,6 +202,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 		go spawn_clients_and_wait(t, cfg, nclients, func(cli int, myck *Clerk, t *testing.T) {
 			j := 0
 			defer func() {
+				//fmt.Println("in func test, cli:", cli, "j:", j)
 				clnts[cli] <- j
 			}()
 			last := ""
@@ -209,18 +214,23 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 					//fmt.Println("in func test, append")
 					nv := "x " + strconv.Itoa(cli) + " " + strconv.Itoa(j) + " y"
 					// log.Printf("%d: client new append %v\n", cli, nv)
+					fmt.Println("in func test, is Append, nv:", nv, "j:", j, "i:", i)
 					Append(cfg, myck, key, nv)
+					fmt.Println("in func test, is Append, finish")
 					last = NextValue(last, nv)
 					j++
 				} else {
 					//fmt.Println("in func test, get")
 					// log.Printf("%d: client new get %v\n", cli, key)
+					fmt.Println("in func test, is Get, j:", j, "i:", i)
 					v := Get(cfg, myck, key)
+					fmt.Println("in func test, is Get, finish")
 					if v != last {
 						log.Fatalf("get wrong value, key %v, wanted:\n%v\n, got\n%v\n", key, last, v)
 					}
 				}
 			}
+			fmt.Println("in func test, loop end, j:", j, "i:", i)
 		})
 
 		if partitions {
@@ -232,11 +242,16 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 
 		atomic.StoreInt32(&done_clients, 1)     // tell clients to quit
 		atomic.StoreInt32(&done_partitioner, 1) // tell partitioner to quit
-		//fmt.Println("in func test, done_client == 1")
+		//fmt.Println("in func test, done_partitioner == 1")
+
+		time.Sleep(2 * time.Second)
 
 		if partitions {
 			// log.Printf("wait for partitioner\n")
+			//fmt.Println("in func test, before ch_partitioner")
 			<-ch_partitioner
+			//fmt.Println("in func test, after ch_partitioner")
+
 			// reconnect network and submit a request. A client may
 			// have submitted a request in a minority.  That request
 			// won't return until that server discovers a new term
@@ -263,6 +278,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 		}
 
 		// log.Printf("wait for clients\n")
+		//fmt.Println("in func test, nclient:", nclients)
 		for i := 0; i < nclients; i++ {
 			// log.Printf("read from clients %d\n", i)
 			j := <-clnts[i]
@@ -272,7 +288,9 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			//.Println("in func test, j:", j)
 			key := strconv.Itoa(i)
 			// log.Printf("Check %v for client %d\n", j, i)
+			fmt.Println("in func test, before Get")
 			v := Get(cfg, ck, key)
+			fmt.Println("in func test, after Get")
 			//fmt.Println("in func test, v:", v)
 			checkClntAppends(t, i, v, j)
 		}
@@ -506,19 +524,34 @@ func TestOnePartition3A(t *testing.T) {
 	cfg := make_config(t, nservers, false, -1)
 	defer cfg.cleanup()
 	ck := cfg.makeClient(cfg.All())
+	//fmt.Println("in func test, ck's name:", ck.name)
 
+	//fmt.Println("in func test, before Put 13")
 	Put(cfg, ck, "1", "13")
+	//fmt.Println("in func test, after Put 13")
 
+	//time.Sleep(1 * time.Second)
 	cfg.begin("Test: progress in majority (3A)")
 
 	p1, p2 := cfg.make_partition()
-	cfg.partition(p1, p2)
+	/*fmt.Println("in func test, p1:")
+	for i := range p1 {
+		fmt.Println(i)
+	}
+	fmt.Println("in func test, p2:")
+	for i := range p2 {
+		fmt.Println(i)
+	}*/
+	cfg.partition(p1, p2) // p1是多数节点，但是没有leader，p2是少数节点，包含之前的leader
 
 	ckp1 := cfg.makeClient(p1)  // connect ckp1 to p1
+	//fmt.Println("in func test, ckp1's name:", ckp1.name)
 	ckp2a := cfg.makeClient(p2) // connect ckp2a to p2
 	ckp2b := cfg.makeClient(p2) // connect ckp2b to p2
 
-	Put(cfg, ckp1, "1", "14")
+	//fmt.Println("in func test, before Put 14")
+	Put(cfg, ckp1, "1", "14") //
+	//fmt.Println("in func test, after Put 14")
 	check(cfg, t, ckp1, "1", "14")
 
 	cfg.end()

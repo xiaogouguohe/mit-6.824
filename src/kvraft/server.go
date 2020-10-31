@@ -111,17 +111,19 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 		if _, ok := kv.putAppendChs[args.OpUni]; ok {
 			kv.putAppendChsMu.Unlock()
 		} else {
-			kv.putAppendChs[args.OpUni] = make(chan raft.ApplyMsg)
+			kv.putAppendChs[args.OpUni] = make(chan raft.ApplyMsg, 1)
 			//kv.putAppendOps[args.OpUni] = true
 			kv.putAppendChsMu.Unlock()
 		}
+
+		//fmt.Println("in func server's putAppend, kv:", kv.me, "OpUni:", args.OpUni, "try to get from channel")
 
 		select{
 		case <- kv.putAppendChs[args.OpUni]:
 			//fmt.Println("in func server's putAppend, kv:", kv.me, "OpUni:", args.OpUni, "get from channel")
 			reply.Err = OK
 
-		case <- time.After(time.Duration(500 * time.Millisecond)):
+		case <- time.After(time.Duration(150 * time.Millisecond)):
 			//fmt.Println("in func server's PutAppend, time out, args:", args)
 			reply.Err = "time out"
 		}
@@ -217,7 +219,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 				 //fmt.Println("in func StartKVServer, kv:", kv.me, "op.Opuni:", op.OpUni, "set")
 
-				kv.putAppendChs[op.OpUni] = make(chan raft.ApplyMsg)
+				kv.putAppendChs[op.OpUni] = make(chan raft.ApplyMsg, 1)
 				//kv.putAppendOps[op.OpUni] = true
 				kv.putAppendChsMu.Unlock()
 
@@ -248,6 +250,12 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 				//fmt.Println("in func start a server, put applyMsg into putAppendCh, applyMsg:", applyMsg)
 				//fmt.Println("in func StartKVServer, kv:", kv.me, "OpUni:", op.OpUni, "applyMsg:", applyMsg, "put to channel")
 				kv.putAppendChs[op.OpUni] <- applyMsg
+
+				/*go func() {
+					time.Sleep(500 * time.Millisecond)
+					<- kv.putAppendChs[op.OpUni]
+				}()*/
+
 			}
 
 		}
