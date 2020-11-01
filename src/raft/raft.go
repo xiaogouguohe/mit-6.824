@@ -510,8 +510,8 @@ func (rf *Raft) LeaderElection() {
 		}
 
 		currentTerm, _ = rf.TurnToCandidate()
-		fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
-			rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "begin election")
+		//fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "commitIndex:",
+		//	rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "begin election")
 		itself := rf.GetItself()
 
 		replyCount := make(chan int, len(rf.peers))
@@ -581,8 +581,8 @@ func (rf *Raft) LeaderElection() {
 		if votedCnt >= majority/* && votedCnt > 1 */{
 			break
 		}
-		fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-			"commitIndex:", rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
+		//fmt.Println("in func LeaderElection, rf:", rf.me, "rf.Term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+		//	"commitIndex:", rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "not become leader, sleep for a while")
 		rand.Seed(time.Now().UnixNano())
 		timeout = time.Duration(time.Duration(
 			rand.Intn(500)+500) * time.Millisecond)
@@ -590,8 +590,8 @@ func (rf *Raft) LeaderElection() {
 	}
 	//
 	if currentTerm == rf.GetCurrentTerm() && rf.GetCertainState() == CANDIDATE {
-		fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "commitIndex:",
-			rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "win election")
+		//fmt.Println("in func leaderElection, rf:", rf.me, "term:", rf.GetCurrentTerm(), "commitIndex:",
+		//	rf.GetCommitIndex(), "length of logs:", rf.GetLogsLength(), "win election")
 		for len(rf.cmdCh) > 0 {
 			<- rf.cmdCh
 		}

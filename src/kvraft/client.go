@@ -2,7 +2,6 @@ package kvraft
 
 import (
 	"6.824_new/src/labrpc"
-	"fmt"
 	"sync"
 	"time"
 )
@@ -87,8 +86,8 @@ func (ck *Clerk) Get(key string) string {
 
 		}
 
-		fmt.Println("in func client's Get, ok:", ok, "server:", i, "Key:", key, "Value:", reply.Value, "opUni:", opUni,
-			"reply.Err:", reply.Err)
+		//fmt.Println("in func client's Get, ok:", ok, "server:", i, "Key:", key, "Value:", reply.Value, "opUni:", opUni,
+		//	"reply.Err:", reply.Err)
 		if ok && reply.Err == OK {
 			return reply.Value
 		}
@@ -141,8 +140,8 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		case <- time.After(500 * time.Millisecond):
 
 		}
-		fmt.Println("in func client's PutAppend, ok:", ok, "server:", i, "Key:", key, "Value:", value, "Op:", op, "opUni:", opUni,
-			"reply.Err:", reply.Err)
+		//fmt.Println("in func client's PutAppend, ok:", ok, "server:", i, "Key:", key, "Value:", value, "Op:", op, "opUni:", opUni,
+		//	"reply.Err:", reply.Err)
 		if ok && reply.Err == OK {
 			//fmt.Println("in func client's PutAppend, i:", i, "ok and reply.Err is nil")
 			break

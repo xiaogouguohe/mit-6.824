@@ -2,7 +2,6 @@ package kvraft
 
 import (
 	"6.824_new/src/porcupine"
-	"fmt"
 )
 import "6.824_new/src/models"
 import "testing"
@@ -214,23 +213,23 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 					//fmt.Println("in func test, append")
 					nv := "x " + strconv.Itoa(cli) + " " + strconv.Itoa(j) + " y"
 					// log.Printf("%d: client new append %v\n", cli, nv)
-					fmt.Println("in func test, is Append, nv:", nv, "j:", j, "i:", i)
+					//fmt.Println("in func test, is Append, nv:", nv, "j:", j, "i:", i)
 					Append(cfg, myck, key, nv)
-					fmt.Println("in func test, is Append, finish")
+					//fmt.Println("in func test, is Append, finish")
 					last = NextValue(last, nv)
 					j++
 				} else {
 					//fmt.Println("in func test, get")
 					// log.Printf("%d: client new get %v\n", cli, key)
-					fmt.Println("in func test, is Get, j:", j, "i:", i)
+					//fmt.Println("in func test, is Get, j:", j, "i:", i)
 					v := Get(cfg, myck, key)
-					fmt.Println("in func test, is Get, finish")
+					//fmt.Println("in func test, is Get, finish")
 					if v != last {
 						log.Fatalf("get wrong value, key %v, wanted:\n%v\n, got\n%v\n", key, last, v)
 					}
 				}
 			}
-			fmt.Println("in func test, loop end, j:", j, "i:", i)
+			//fmt.Println("in func test, loop end, j:", j, "i:", i)
 		})
 
 		if partitions {
@@ -259,6 +258,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			cfg.ConnectAll()
 			// wait for a while so that we have a new term
 			time.Sleep(electionTimeout)
+			//fmt.Println("in func test, after ConnectAll")
 		}
 
 		if crash {
@@ -288,9 +288,9 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			//.Println("in func test, j:", j)
 			key := strconv.Itoa(i)
 			// log.Printf("Check %v for client %d\n", j, i)
-			fmt.Println("in func test, before Get")
+			//fmt.Println("in func test, before Get")
 			v := Get(cfg, ck, key)
-			fmt.Println("in func test, after Get")
+			//fmt.Println("in func test, after Get")
 			//fmt.Println("in func test, v:", v)
 			checkClntAppends(t, i, v, j)
 		}
