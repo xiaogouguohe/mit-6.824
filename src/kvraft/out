@@ -1,284 +1,212 @@
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 10948  689
-PASS
-ok  	6.824_new/src/kvraft	21.102s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.4  5 15866  813
-PASS
-ok  	6.824_new/src/kvraft	21.377s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  22.0  5  4338  396
-PASS
-ok  	6.824_new/src/kvraft	21.975s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.3  3   345   52
-PASS
-ok  	6.824_new/src/kvraft	2.332s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   0.9  5   133    2
+  ... Passed --   1.0  5   152    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.1  5   213    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    89    3
-PASS
-ok  	6.824_new/src/kvraft	3.617s
-Test: partitions, one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  27.7  5 33682  643
-PASS
-ok  	6.824_new/src/kvraft	27.684s
-Test: partitions, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  28.4  5 45762  626
-PASS
-ok  	6.824_new/src/kvraft	28.465s
+--- FAIL: TestOnePartition3A (1.93s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.935s
 sleep for a while
 
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 10013  688
-PASS
-ok  	6.824_new/src/kvraft	21.139s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.3  5 13652  817
-PASS
-ok  	6.824_new/src/kvraft	21.371s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  22.7  5  4392  392
-PASS
-ok  	6.824_new/src/kvraft	22.686s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.6  3   378   52
-PASS
-ok  	6.824_new/src/kvraft	2.571s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   1.0  5   129    2
+  ... Passed --   1.1  5   153    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.2  5   230    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    91    3
-PASS
-ok  	6.824_new/src/kvraft	3.749s
-Test: partitions, one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  28.5  5 26746  594
-PASS
-ok  	6.824_new/src/kvraft	28.478s
-Test: partitions, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  27.7  5 113102  665
-PASS
-ok  	6.824_new/src/kvraft	27.756s
+--- FAIL: TestOnePartition3A (1.69s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.696s
 sleep for a while
 
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 11742  680
-PASS
-ok  	6.824_new/src/kvraft	21.095s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.4  5 16755  809
-PASS
-ok  	6.824_new/src/kvraft	21.387s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  23.1  5  4388  400
-PASS
-ok  	6.824_new/src/kvraft	23.132s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.7  3   333   52
-PASS
-ok  	6.824_new/src/kvraft	2.696s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   0.7  5   109    2
+  ... Passed --   1.1  5   150    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.0  5   205    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    94    3
-PASS
-ok  	6.824_new/src/kvraft	3.337s
-Test: partitions, one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  29.4  5 76526  488
-PASS
-ok  	6.824_new/src/kvraft	29.424s
-Test: partitions, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  28.4  5 39538  599
-PASS
-ok  	6.824_new/src/kvraft	28.380s
+--- FAIL: TestOnePartition3A (1.71s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.710s
 sleep for a while
 
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 11205  683
-PASS
-ok  	6.824_new/src/kvraft	21.081s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.4  5 16528  825
-PASS
-ok  	6.824_new/src/kvraft	21.361s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  22.2  5  4196  397
-PASS
-ok  	6.824_new/src/kvraft	22.266s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.6  3   326   52
-PASS
-ok  	6.824_new/src/kvraft	2.565s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   0.9  5   131    2
+  ... Passed --   1.2  5   179    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.0  5   200    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    90    3
-PASS
-ok  	6.824_new/src/kvraft	3.746s
-Test: partitions, one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  27.9  5 34161  503
-PASS
-ok  	6.824_new/src/kvraft	27.896s
-Test: partitions, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  29.4  5 120988  566
-PASS
-ok  	6.824_new/src/kvraft	29.460s
+--- FAIL: TestOnePartition3A (1.82s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.825s
 sleep for a while
 
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 11129  673
-PASS
-ok  	6.824_new/src/kvraft	21.089s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.4  5 19316  803
-PASS
-ok  	6.824_new/src/kvraft	21.437s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  22.6  5  4422  377
-PASS
-ok  	6.824_new/src/kvraft	22.626s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.7  3   352   52
-PASS
-ok  	6.824_new/src/kvraft	2.658s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   0.9  5   122    2
+  ... Passed --   1.1  5   149    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.0  5   198    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    91    3
-PASS
-ok  	6.824_new/src/kvraft	3.492s
-Test: partitions, one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  28.3  5 100894  376
-PASS
-ok  	6.824_new/src/kvraft	28.279s
-Test: partitions, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  28.6  5 85419  592
-PASS
-ok  	6.824_new/src/kvraft	28.616s
+--- FAIL: TestOnePartition3A (1.79s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.789s
 sleep for a while
 
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 11113  685
-PASS
-ok  	6.824_new/src/kvraft	21.107s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.4  5 17075  811
-PASS
-ok  	6.824_new/src/kvraft	21.377s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  22.4  5  4535  408
-PASS
-ok  	6.824_new/src/kvraft	22.371s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.6  3   356   52
-PASS
-ok  	6.824_new/src/kvraft	2.599s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   0.9  5   123    2
+  ... Passed --   0.7  5   113    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.0  5   195    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    89    3
-PASS
-ok  	6.824_new/src/kvraft	3.522s
-Test: partitions, one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  27.8  5 44302  551
-PASS
-ok  	6.824_new/src/kvraft	27.824s
-Test: partitions, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  27.5  5 111757  457
-PASS
-ok  	6.824_new/src/kvraft	27.467s
+--- FAIL: TestOnePartition3A (1.44s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.440s
 sleep for a while
 
-Test: one client (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.1  5 11225  677
-PASS
-ok  	6.824_new/src/kvraft	21.079s
-Test: many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  21.4  5 16981  806
-PASS
-ok  	6.824_new/src/kvraft	21.375s
-Test: unreliable net, many clients (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  22.7  5  4443  393
-PASS
-ok  	6.824_new/src/kvraft	22.738s
-Test: concurrent append to same key, unreliable (3A) ...
-labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --   2.6  3   321   52
-PASS
-ok  	6.824_new/src/kvraft	2.630s
 labgob warning: Decoding into a non-default variable/field Err may not work
 Test: progress in majority (3A) ...
-  ... Passed --   0.8  5   110    2
+  ... Passed --   0.8  5   112    2
 Test: no progress in minority (3A) ...
-  ... Passed --   1.2  5   236    3
-Test: completion after heal (3A) ...
-  ... Passed --   1.0  5    94    3
-PASS
-ok  	6.824_new/src/kvraft	3.670s
-Test: partitions, one client (3A) ...
+--- FAIL: TestOnePartition3A (1.43s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.435s
+sleep for a while
+
 labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  27.5  5 33760  602
-PASS
-ok  	6.824_new/src/kvraft	27.502s
-Test: partitions, many clients (3A) ...
+Test: progress in majority (3A) ...
+  ... Passed --   0.8  5   125    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.55s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.552s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.9  5   148    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.64s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.645s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.7  5    95    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.44s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.441s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.7  5   113    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.34s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.347s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.9  5   114    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.60s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.600s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   1.1  5   162    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.76s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.766s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   1.0  5   151    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.79s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.798s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   1.3  5   172    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (2.10s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	2.102s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.8  5   136    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.47s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.477s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.9  5   150    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.46s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.464s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   1.0  5   140    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.71s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.716s
+sleep for a while
+
+labgob warning: Decoding into a non-default variable/field Err may not work
+Test: progress in majority (3A) ...
+  ... Passed --   0.7  5   116    2
+Test: no progress in minority (3A) ...
+--- FAIL: TestOnePartition3A (1.26s)
+    test_test.go:576: Get in minority completed
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	1.273s
+sleep for a while
+
 labgob warning: Decoding into a non-default variable/field Err may not work
 signal: interrupt
-FAIL	6.824_new/src/kvraft	3.432s
+FAIL	6.824_new/src/kvraft	0.334s

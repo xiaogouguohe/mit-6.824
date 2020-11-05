@@ -62,42 +62,12 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
 	//fmt.Println("in func kv.Get, Key:", args.Key)
 
-	_, _, succ := kv.rf.Start(Op{
-		Key: args.Key,
-		//Value: args.Value,
-		Ope: "Get",
-		OpUni: args.OpUni,
-	})
+	if kv.rf.GetCertainState() == raft.LEADER {
+		kv.dataMu.RLock()
+		reply.Value = kv.data[args.Key]
+		kv.dataMu.RUnlock()
 
-	if succ {
-		kv.putAppendChsMu.Lock()
-		if _, ok := kv.putAppendChs[args.OpUni]; ok {
-			kv.putAppendChsMu.Unlock()
-		} else {
-			kv.putAppendChs[args.OpUni] = make(chan raft.ApplyMsg, 1024)
-			//kv.putAppendOps[args.OpUni] = true
-			kv.putAppendChsMu.Unlock()
-		}
-
-		//fmt.Println("in func server's Get, kv:", kv.me, "OpUni:", args.OpUni, "try to get from channel")
-
-		select{
-		case <- kv.putAppendChs[args.OpUni]:
-			//fmt.Println("in func server's Get, kv:", kv.me, "OpUni:", args.OpUni, "get from channel")
-			reply.Err = OK
-			kv.dataMu.Lock()
-			//fmt.Println("in func server's Get, kv:", kv.me, "key:", args.Key, "Value:", kv.data[args.Key])
-			reply.Value = kv.data[args.Key]
-			//fmt.Println("in func server's Get, reply.Value:", reply.Value)
-			kv.dataMu.Unlock()
-
-		case <- time.After(time.Duration(400 * time.Millisecond)):
-			//fmt.Println("in func server's Get, time out, args:", args)
-			reply.Err = "time out"
-		}
-		/*applyMsg := *///<- kv.putAppendChs[args.OpUni]
-		//fmt.Println("in func server's Get, get from putAppendCh, applyMsg:", applyMsg)
-		//fmt.Println("in func server's Get, OpUni:", args.OpUni)
+		reply.Err = OK
 
 	} else {
 		reply.Err = ErrWrongLeader
