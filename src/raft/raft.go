@@ -19,8 +19,6 @@ package raft
 
 import (
 	"6.824_new/src/labgob"
-	"fmt"
-
 	//"src/labgob"
 	"6.824_new/src/labrpc"
 	"bytes"
@@ -461,10 +459,12 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	}
 
 	//cmd, _ := Encode(command)
+	rf.voteMu.RLock()
 	logEntry := LogEntry{
 		Term:    rf.currentTerm,
 		Command: command,
 	}
+	rf.voteMu.RUnlock()
 	logEntries := []LogEntry{logEntry}
 	//fmt.Println("term:", rf.currentTerm, "cmd:", cmd)
 
@@ -789,11 +789,13 @@ func (rf *Raft) commitLogs() {
 
 	for i := lastApplied + 1; i <= commitIndex; i++ {
 		//fmt.Println("in func commitLogs, rf:", rf.me, "commitIndex:", commitIndex, "commandIndex:", i, "command", rf.logs[i].Command)
+		rf.voteMu.RLock()
 		rf.applyCh <- ApplyMsg{
 			CommandIndex: int(i + 1),
 			Command: rf.logs[i].Command,
 			CommandValid: true,
 		}
+		rf.voteMu.RUnlock()
 	}
 
 	rf.SetLastApplied(commitIndex)
@@ -1042,12 +1044,12 @@ func (rf* Raft) SetNextIndex(server int, index int32) {
 	defer rf.nextIndexMu.Unlock()
 
 	if (index >= 0) {
-		oriIndex := rf.nextIndex[server]
+		//oriIndex := rf.nextIndex[server]
 		rf.nextIndex[server] = index
-		if index > int32(len(rf.logs)) {
+		/*if index > int32(len(rf.logs)) {
 			fmt.Println("in func SetNextIndex, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 				"index:", index, "lenOfLogs:", len(rf.logs), "oriIndex:", oriIndex, "logs:", rf.logs)
-		}
+		}*/
 	} else {
 		rf.nextIndex[server] = 0
 	}

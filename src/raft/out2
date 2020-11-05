@@ -1,0 +1,293 @@
+Test (2A): initial election ...
+  ... Passed --   3.5  3   90   26812    0
+Test (2A): election after network failure ...
+  ... Passed --   6.0  3  206   44005    0
+Test (2B): basic agreement ...
+  ... Passed --   0.8  3   14    3978    3
+Test (2B): RPC byte count ...
+  ... Passed --   1.8  3   46  114034   11
+Test (2B): agreement despite follower disconnection ...
+  ... Passed --   5.8  3  170   52493    8
+Test (2B): no agreement if too many followers disconnect ...
+  ... Passed --   4.9  5  305   65293    4
+Test (2B): concurrent Start()s ...
+  ... Passed --   1.2  3   30    8904    6
+Test (2B): rejoin of partitioned leader ...
+  ... Passed --   6.1  3  220   46476    4
+Test (2B): leader backs up quickly over incorrect follower logs ...
+  ... Passed --  12.0  5 1282  421152   53
+Test (2B): RPC counts aren't too high ...
+  ... Passed --   2.8  3   78   23422   12
+Test (2C): basic persistence ...
+  ... Passed --   5.5  3  281   59887    6
+Test (2C): more persistence ...
+  ... Passed --  26.1  5 2065  424817   16
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   2.1  3   48   12161    4
+Test (2C): Figure 8 ...
+==================
+WARNING: DATA RACE
+Read at 0x00c000598c00 by goroutine 411:
+  reflect.typedmemmove()
+      /usr/local/go/src/runtime/mbarrier.go:177 +0x0
+  reflect.packEface()
+      /usr/local/go/src/reflect/value.go:119 +0x103
+  reflect.valueInterface()
+      /usr/local/go/src/reflect/value.go:1033 +0x16f
+  6.824_new/src/labgob.checkDefault1()
+      /usr/local/go/src/reflect/value.go:1003 +0x31c
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:145 +0x110
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:152 +0x5a1
+  6.824_new/src/labgob.checkDefault()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:126 +0xa2
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:54 +0x5e
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Previous write at 0x00c000598c00 by goroutine 846:
+  [failed to restore the stack]
+
+Goroutine 411 (running) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+
+Goroutine 846 (finished) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+==================
+labgob warning: Decoding into a non-default variable/field Term may not work
+==================
+WARNING: DATA RACE
+Read at 0x00c0004bd640 by goroutine 1928:
+  reflect.typedmemmove()
+      /usr/local/go/src/runtime/mbarrier.go:177 +0x0
+  reflect.packEface()
+      /usr/local/go/src/reflect/value.go:119 +0x103
+  reflect.valueInterface()
+      /usr/local/go/src/reflect/value.go:1033 +0x16f
+  6.824_new/src/labgob.checkDefault1()
+      /usr/local/go/src/reflect/value.go:1003 +0x31c
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:145 +0x110
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:152 +0x5a1
+  6.824_new/src/labgob.checkDefault()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:126 +0xa2
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:54 +0x5e
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Previous write at 0x00c0004bd640 by goroutine 2424:
+  reflect.Value.SetInt()
+      /usr/local/go/src/reflect/value.go:1611 +0x105
+  encoding/gob.decInt64()
+      /usr/local/go/src/encoding/gob/decode.go:302 +0x64
+  encoding/gob.(*Decoder).decodeStruct()
+      /usr/local/go/src/encoding/gob/decode.go:471 +0x207
+  encoding/gob.(*Decoder).decodeValue()
+      /usr/local/go/src/encoding/gob/decode.go:1205 +0x34a
+  encoding/gob.(*Decoder).DecodeValue()
+      /usr/local/go/src/encoding/gob/decoder.go:213 +0x228
+  encoding/gob.(*Decoder).Decode()
+      /usr/local/go/src/encoding/gob/decoder.go:188 +0x213
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:55 +0x93
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Goroutine 1928 (running) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+
+Goroutine 2424 (finished) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c0004bd648 by goroutine 1928:
+  reflect.typedmemmove()
+      /usr/local/go/src/runtime/mbarrier.go:177 +0x0
+  reflect.packEface()
+      /usr/local/go/src/reflect/value.go:119 +0x103
+  reflect.valueInterface()
+      /usr/local/go/src/reflect/value.go:1033 +0x16f
+  6.824_new/src/labgob.checkDefault1()
+      /usr/local/go/src/reflect/value.go:1003 +0x31c
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:145 +0x110
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:152 +0x5a1
+  6.824_new/src/labgob.checkDefault()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:126 +0xa2
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:54 +0x5e
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Previous write at 0x00c0004bd648 by goroutine 2424:
+  reflect.Value.SetBool()
+      /usr/local/go/src/reflect/value.go:1550 +0x69
+  encoding/gob.decBool()
+      /usr/local/go/src/encoding/gob/decode.go:242 +0x65
+  encoding/gob.(*Decoder).decodeStruct()
+      /usr/local/go/src/encoding/gob/decode.go:471 +0x207
+  encoding/gob.(*Decoder).decodeValue()
+      /usr/local/go/src/encoding/gob/decode.go:1205 +0x34a
+  encoding/gob.(*Decoder).DecodeValue()
+      /usr/local/go/src/encoding/gob/decoder.go:213 +0x228
+  encoding/gob.(*Decoder).Decode()
+      /usr/local/go/src/encoding/gob/decoder.go:188 +0x213
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:55 +0x93
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Goroutine 1928 (running) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+
+Goroutine 2424 (finished) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c0004bd64c by goroutine 1928:
+  reflect.typedmemmove()
+      /usr/local/go/src/runtime/mbarrier.go:177 +0x0
+  reflect.packEface()
+      /usr/local/go/src/reflect/value.go:119 +0x103
+  reflect.valueInterface()
+      /usr/local/go/src/reflect/value.go:1033 +0x16f
+  6.824_new/src/labgob.checkDefault1()
+      /usr/local/go/src/reflect/value.go:1003 +0x31c
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:145 +0x110
+  6.824_new/src/labgob.checkDefault1()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:152 +0x5a1
+  6.824_new/src/labgob.checkDefault()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:126 +0xa2
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:54 +0x5e
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Previous write at 0x00c0004bd64c by goroutine 2424:
+  reflect.Value.SetInt()
+      /usr/local/go/src/reflect/value.go:1617 +0x15f
+  encoding/gob.decInt32()
+      /usr/local/go/src/encoding/gob/decode.go:287 +0x78
+  encoding/gob.(*Decoder).decodeStruct()
+      /usr/local/go/src/encoding/gob/decode.go:471 +0x207
+  encoding/gob.(*Decoder).decodeValue()
+      /usr/local/go/src/encoding/gob/decode.go:1205 +0x34a
+  encoding/gob.(*Decoder).DecodeValue()
+      /usr/local/go/src/encoding/gob/decoder.go:213 +0x228
+  encoding/gob.(*Decoder).Decode()
+      /usr/local/go/src/encoding/gob/decoder.go:188 +0x213
+  6.824_new/src/labgob.(*LabDecoder).Decode()
+      /home/xiaogouguohe/go/src/6.824_new/src/labgob/labgob.go:55 +0x93
+  6.824_new/src/labrpc.(*ClientEnd).Call()
+      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:123 +0x4b2
+  6.824_new/src/raft.(*Raft).sendAppendEntries.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:417 +0xc7
+
+Goroutine 1928 (running) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+
+Goroutine 2424 (finished) created at:
+  6.824_new/src/raft.(*Raft).sendAppendEntries()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:416 +0xb3
+  6.824_new/src/raft.(*Raft).heartbeat2.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:701 +0x7a
+==================
+--- FAIL: TestFigure82C (32.38s)
+    testing.go:853: race detected during execution of test
+Test (2C): unreliable agreement ...
+==================
+WARNING: DATA RACE
+Write at 0x00c0002f4b51 by goroutine 1592:
+  testing.(*common).FailNow()
+      /usr/local/go/src/testing/testing.go:652 +0x4c
+  testing.(*common).Fatalf()
+      /usr/local/go/src/testing/testing.go:716 +0x9d
+  6.824_new/src/raft.(*config).one()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:515 +0x5b9
+  6.824_new/src/raft.TestUnreliableAgree2C.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/test_test.go:918 +0xb3
+
+Previous write at 0x00c0002f4b51 by goroutine 1913:
+  ??()
+      -:0 +0xffffffffffffffff
+  sync.(*Mutex).Unlock()
+      /usr/local/go/src/sync/mutex.go:186 +0x51
+  6.824_new/src/raft.(*config).nCommitted()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:382 +0x1e0
+  6.824_new/src/raft.(*config).one()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/config.go:479 +0x2a5
+  6.824_new/src/raft.TestUnreliableAgree2C.func1()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/test_test.go:918 +0xb3
+
+Goroutine 1592 (running) created at:
+  6.824_new/src/raft.TestUnreliableAgree2C()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/test_test.go:916 +0x164
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:909 +0x199
+
+Goroutine 1913 (finished) created at:
+  6.824_new/src/raft.TestUnreliableAgree2C()
+      /home/xiaogouguohe/go/src/6.824_new/src/raft/test_test.go:916 +0x164
+  testing.tRunner()
+      /usr/local/go/src/testing/testing.go:909 +0x199
+==================
+--- FAIL: TestUnreliableAgree2C (11.89s)
+    config.go:515: one(102) failed to reach agreement
+    config.go:515: one(103) failed to reach agreement
+    config.go:515: one(100) failed to reach agreement
+    config.go:515: one(101) failed to reach agreement
+    config.go:515: one(1) failed to reach agreement
+    testing.go:853: race detected during execution of test
+Test (2C): Figure 8 (unreliable) ...
+--- FAIL: TestFigure8Unreliable2C (11.87s)
+    config.go:515: one(10000) failed to reach agreement
+Test (2C): churn ...
+--- FAIL: TestReliableChurn2C (28.06s)
+    config.go:515: one(1963160382107166874) failed to reach agreement
+Test (2C): unreliable churn ...
+--- FAIL: TestUnreliableChurn2C (29.43s)
+    config.go:515: one(3309429649246163676) failed to reach agreement
+FAIL
+exit status 1
+FAIL	6.824_new/src/raft	192.398s
