@@ -2,6 +2,7 @@ package kvraft
 
 import (
 	"6.824_new/src/porcupine"
+	"fmt"
 )
 import "6.824_new/src/models"
 import "testing"
@@ -453,19 +454,21 @@ func GenericTestLinearizability(t *testing.T, part string, nclients int, nserver
 	if res == porcupine.Illegal {
 		file, err := ioutil.TempFile("", "*.html")
 		if err != nil {
-			//fmt.Printf("info: failed to create temp file for visualization")
+			fmt.Printf("info: failed to create temp file for visualization")
 		} else {
 			err = porcupine.Visualize(models.KvModel, info, file)
 			if err != nil {
-				//fmt.Printf("info: failed to write history visualization to %s\n", file.Name())
+				fmt.Printf("info: failed to write history visualization to %s\n", file.Name())
 			} else {
-				//fmt.Printf("info: wrote history visualization to %s\n", file.Name())
+				fmt.Printf("info: wrote history visualization to %s\n", file.Name())
 			}
 		}
 		t.Fatal("history is not linearizable")
 		t.Fatal("history is not linearizable")
 	} else if res == porcupine.Unknown {
-		//fmt.Println("info: linearizability check timed out, assuming history is ok")
+		fmt.Println("info: linearizability check timed out, assuming history is ok")
+	} else {
+		fmt.Println("all is well")
 	}
 }
 
