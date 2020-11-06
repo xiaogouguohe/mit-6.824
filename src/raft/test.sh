@@ -12,6 +12,9 @@ do
   #go test -run TestFailNoAgree2B >> out
   #go test -run TestBackup2B >> out
   #go test -run TestConcurrentStarts2B >> out
+  #go test -run TestPersist22C >> out
+  #go test -run TestReliableChurn2C >> out
+  #go test -run TestUnreliableChurn2C >> out
   sleep 1s
   echo "sleep for a while\n" >> out
 done

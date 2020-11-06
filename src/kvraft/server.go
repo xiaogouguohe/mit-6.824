@@ -214,6 +214,23 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.putAppendChs = make(map[OpUnique]chan raft.ApplyMsg)
 	kv.putAppendOps = make(map[OpUnique]bool)
 
+	logs := kv.rf.GetLogsBeforeCommitIndex(me)
+	kv.dataMu.Lock()
+	for i := 0; i < len(logs); i++ {
+		log := logs[i]
+		op, _ := log.Command.(Op)
+		if op.Ope == "Put" {
+			kv.dataMu.Lock()
+			kv.data[op.Key] = op.Value
+			kv.dataMu.Unlock()
+		} else if op.Ope == "Append" {
+			kv.dataMu.Lock()
+			kv.data[op.Key] += op.Value
+			kv.dataMu.Unlock()
+		}
+	}
+	kv.dataMu.Unlock()
+
 	go func() {
 		for {
 			applyMsg := <- kv.applyCh
