@@ -1082,6 +1082,14 @@ func (rf *Raft) GetCommitIndex() int32 {
 	return atomic.LoadInt32(&rf.commitIndex)
 }
 
+func (rf *Raft) GetLogsBeforeCommitIndex(server int) []LogEntry {
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
+
+	commitIndex := rf.GetCommitIndex()
+	return rf.logs[0: commitIndex + 1]
+}
+
 func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
