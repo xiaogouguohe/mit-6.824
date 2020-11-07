@@ -102,6 +102,8 @@ type Raft struct {
 
 	cmdCh chan int32
 
+	afterSnapshotIndex int32
+
 }
 
 type LogEntry struct {
@@ -161,6 +163,18 @@ func (rf *Raft) persist() {
 	e.Encode(rf.currentTerm)
 	e.Encode(rf.votedFor)
 	e.Encode(rf.logs)
+
+	data := w.Bytes()
+	rf.persister.SaveRaftState(data)
+}
+
+func (rf *Raft) PersistFromTo(beginIndex int32, endIndex int32) {
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+
+	e.Encode(rf.currentTerm)
+	e.Encode(rf.votedFor)
+	e.Encode(rf.logs[beginIndex: endIndex])
 
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
@@ -853,6 +867,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	//rf.electionInterval = time.Duration(time.Duration(1000) * time.Millisecond)
 	rf.cmdCh = make(chan int32, 1024)
 
+	rf.afterSnapshotIndex = 0
+
 	go func() {
 		for {
 			if (rf.killed()) {
@@ -897,6 +913,7 @@ func (rf *Raft) SetVoteState(term int, votedFor int) {
 		rf.votedFor = votedFor
 	}
 
+	//fmt.Println("in func SetVoteState")
 	rf.persist()
 }
 
@@ -918,6 +935,7 @@ func (rf *Raft) SetVotedFor(votedFor int) {
 	defer rf.voteMu.Unlock()
 	rf.votedFor = votedFor
 
+	//fmt.Println("in func SetVotedFor")
 	rf.persist()
 }
 
@@ -926,6 +944,8 @@ func (rf *Raft) TurnToCandidate() (int, int) {
 	defer rf.voteMu.Unlock()
 	rf.currentTerm++;
 	rf.votedFor = rf.me
+
+	//fmt.Println("in func TurnToCandidate")
 	rf.persist()
 	return rf.currentTerm, rf.votedFor
 }
@@ -964,7 +984,11 @@ func (rf* Raft) UpdateTerm(term int) {
 		rf.currentTerm = term
 		rf.votedFor = -1;
 		atomic.StoreUint32(&rf.state, FOLLOWER)
+		//fmt.Println("in func UpdateTerm")
+		//rf.persist()
 	}
+
+	//fmt.Println("in func UpdateTerm")
 	rf.persist()
 }
 
@@ -1070,6 +1094,13 @@ func (rf* Raft) GetLogs(beginIndex int32) []LogEntry {
 	return rf.logs[beginIndex:]
 }
 
+func (rf* Raft) GetLogsFromTo(beginIndex int32, endIndex int32) []LogEntry {
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
+
+	return rf.logs[beginIndex: endIndex]
+}
+
 /*func (rf *Raft) SetLogs() []LogEntry {
 
 }*/
@@ -1102,6 +1133,11 @@ func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 		fmt.Println("in func AppendLogs: rf:", rf.me, "rf.Term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 			"index:", index, "logs:", rf.logs, "entries:", entries)
 	}*/
+	if !(int(index) >= len(rf.logs) && len(entries) == 0) {
+		//fmt.Println("in func AppendLogs")
+		//rf.persist()
+	}
+	//fmt.Println("in func AppendLogs")
 	rf.persist()
 
 }
@@ -1111,6 +1147,7 @@ func (rf* Raft) PushBackLogs(entries []LogEntry) int32 {
 	defer rf.voteMu.Unlock()
 
 	rf.logs = append(rf.logs, entries...)
+	//fmt.Println("in func PushBackLogs")
 	rf.persist()
 	return int32(len(rf.logs))
 }
@@ -1126,6 +1163,14 @@ func (rf* Raft) GetSingleEntry (index int32) LogEntry{
 		Term:    -2,
 		Command: nil,
 	}
+}
+
+func (rf* Raft) SetAfterSnapshotIndex(index int32) {
+	rf.afterSnapshotIndex = index
+}
+
+func (rf* Raft) GetAfterSnapshotIndex() int32 {
+	return rf.afterSnapshotIndex
 }
 
 /*func (rf* Raft) GetSingleEntryTerm (index int32) LogEntry{

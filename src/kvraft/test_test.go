@@ -2,6 +2,7 @@ package kvraft
 
 import (
 	"6.824_new/src/porcupine"
+	"fmt"
 )
 import "6.824_new/src/models"
 import "testing"
@@ -724,6 +725,7 @@ func TestSnapshotSize3B(t *testing.T) {
 	cfg.begin("Test: snapshot size is reasonable (3B)")
 
 	for i := 0; i < 200; i++ {
+		fmt.Println("in func test, i:", i)
 		Put(cfg, ck, "x", "0")
 		check(cfg, t, ck, "x", "0")
 		Put(cfg, ck, "x", "1")
@@ -731,6 +733,8 @@ func TestSnapshotSize3B(t *testing.T) {
 	}
 
 	// check that servers have thrown away most of their log entries
+	fmt.Println("sleep for 1s")
+	time.Sleep(1 * time.Second)
 	sz := cfg.LogSize()
 	if sz > 8*maxraftstate {
 		t.Fatalf("logs were not trimmed (%v > 8*%v)", sz, maxraftstate)

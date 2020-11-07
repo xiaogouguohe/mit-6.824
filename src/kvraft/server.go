@@ -4,6 +4,9 @@ import (
 	"6.824_new/src/labgob"
 	"6.824_new/src/labrpc"
 	"6.824_new/src/raft"
+	"bytes"
+	"fmt"
+
 	//"fmt"
 
 	"time"
@@ -55,6 +58,8 @@ type KVServer struct {
 	putAppendOps map[OpUnique]bool
 	putAppendChsMu sync.RWMutex
 	putAppendOpsMu sync.RWMutex
+
+	applyIndex int32
 }
 
 
@@ -215,7 +220,30 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.putAppendOps = make(map[OpUnique]bool)
 
 	logs := kv.rf.GetLogsBeforeCommitIndex(me)
+	kv.applyIndex = -1
+
 	kv.dataMu.Lock()
+
+	if maxraftstate > -1 {
+		dbdata := persister.ReadSnapshot()
+
+
+		if dbdata == nil || len(dbdata) < 1 { // bootstrap without any state?
+			//return
+		} else {
+			r := bytes.NewBuffer(dbdata)
+			d := labgob.NewDecoder(r)
+
+			if d.Decode(&kv.data) != nil {
+				//fmt.Println("in func readPersist, decode error")
+				//return
+			} else {
+
+				//fmt.Println("in func readPersist, after decode, term:", rf.GetCurrentTerm(), "votedFor:", rf.GetVotedFor(), "logs:", rf.GetLogs(0))
+			}
+		}
+	}
+
 	for i := 0; i < len(logs); i++ {
 		log := logs[i]
 		op, _ := log.Command.(Op)
@@ -233,8 +261,14 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 	go func() {
 		for {
+			if kv.killed() {
+				break
+			}
 			applyMsg := <- kv.applyCh
 			op, _ := applyMsg.Command.(Op)
+			kv.dataMu.Lock()
+			atomic.StoreInt32(&kv.applyIndex, int32(applyMsg.CommandIndex) - 1)
+			kv.dataMu.Unlock()
 			//在这里做判断，不要重复添加
 			kv.putAppendChsMu.Lock()
 			/*fmt.Println("in func StartKVServer, op:", op)
@@ -290,6 +324,44 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 		}
 	}()
+	if maxraftstate > -1 {
+		go func() {
+			for {
+				if kv.killed() {
+					break
+				}
+				fmt.Println("in func snapshot, server:", kv.me, "snapshot's size:", persister.RaftStateSize())
+				if maxraftstate <= persister.RaftStateSize() {
+					kv.dataMu.RLock()
+					w := new(bytes.Buffer)
+					e := labgob.NewEncoder(w)
+
+					e.Encode(kv.data)
+
+					applyIndex := kv.applyIndex
+					kv.dataMu.RUnlock()
+
+					dbdata := w.Bytes()
+					//kv.rf.PersistFromTo(kv.rf.GetAfterSnapshotIndex(), kv.rf.GetLastLogIndex() + 1)
+
+					w2 := new(bytes.Buffer)
+					e2 := labgob.NewEncoder(w2)
+					afterSnapshotIndex := kv.rf.GetAfterSnapshotIndex()
+					kv.rf.SetAfterSnapshotIndex(applyIndex + 1)
+					logs := kv.rf.GetLogsFromTo(afterSnapshotIndex, applyIndex + 1)
+					e2.Encode(kv.rf.GetCurrentTerm())
+					e2.Encode(kv.rf.GetVotedFor())
+					e2.Encode(logs)
+					rfdata := w2.Bytes()
+					persister.SaveStateAndSnapshot(dbdata, rfdata)
+
+
+				}
+				time.Sleep(10 * time.Millisecond)
+			}
+
+		}()
+	}
 
 	return kv
 }

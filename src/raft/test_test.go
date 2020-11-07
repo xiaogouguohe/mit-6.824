@@ -759,7 +759,7 @@ func TestPersist12C(t *testing.T) {
 	cfg.end()
 }
 
-func TestPersist22C(t *testing.T) {
+func c (t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, false)
 	defer cfg.cleanup()

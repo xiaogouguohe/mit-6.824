@@ -2,7 +2,7 @@
 rm out
 while [ 1 ]
 do
-  go test -run 3A >> out
+  #go test -run 3A >> out
   #go test -run TestBasic3A >> out
   #go test -run TestConcurrent3A >> out
   #go test -run TestUnreliable3A >> out
@@ -15,6 +15,8 @@ do
   #go test -run TestPersistConcurrentUnreliable3A >> out
   #go test -run TestPersistPartition3A >> out
   #go test -run TestPersistPartitionUnreliableLinearizable3A >> out
+  #go test -run TestSnapshotRPC3B >> out
+  go test -run TestSnapshotSize3B >> out
   sleep 1s
   echo "sleep for a while\n" >> out
 done
