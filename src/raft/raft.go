@@ -405,8 +405,18 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 //
 func (rf *Raft) sendRequestVote(server int, args *RequestVoteArgs, reply *RequestVoteReply) bool {    //发送请求给server，让server来选自己
 	//fmt.Println("in func sendRequestVote: sender:", rf.me, "voter:", server)
-	ok := rf.peers[server].Call("Raft.RequestVote", args, reply)    //远程调用，假设这个方法不在这台主机上
-	return ok
+	okCh := make(chan bool, 1)
+	go func() {
+		ok := rf.peers[server].Call("Raft.RequestVote", args, reply)
+		okCh <- ok
+	}()
+	ok := false
+	select{
+	case ok = <- okCh:
+		return ok
+	case <- time.After(50 * time.Millisecond):
+		return false
+	}
 }
 
 func (rf *Raft) sendAppendEntries(server int, args* AppendEntriesArgs, reply *AppendEntriesReply) bool {
@@ -541,7 +551,7 @@ func (rf *Raft) LeaderElection() {
 				}
 				ok := false  //向voter节点发送请求
 				okCnt := 0
-				for !ok && okCnt < 10 {
+				for !ok {
 					ok = rf.sendRequestVote(voter, &args, &reply)
 					okCnt++
 					//fmt.Println("in func leaderElection's goroutine, rf:", rf.me, "term", rf.GetCurrentTerm(), "ok:", ok, "okCnt:", okCnt)
