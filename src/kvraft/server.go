@@ -5,8 +5,6 @@ import (
 	"6.824_new/src/labrpc"
 	"6.824_new/src/raft"
 	"bytes"
-	"fmt"
-
 	//"fmt"
 
 	"time"
@@ -330,7 +328,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 				if kv.killed() {
 					break
 				}
-				fmt.Println("in func snapshot, server:", kv.me, "snapshot's size:", persister.RaftStateSize())
+				//fmt.Println("in func snapshot, server:", kv.me, "snapshot's size:", persister.RaftStateSize())
 				if maxraftstate <= persister.RaftStateSize() {
 					kv.dataMu.RLock()
 					w := new(bytes.Buffer)
