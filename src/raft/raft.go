@@ -19,11 +19,12 @@ package raft
 
 import (
 	"6.824_new/src/labgob"
+	"fmt"
+
 	//"src/labgob"
 	"6.824_new/src/labrpc"
 	"bytes"
 	"encoding/gob"
-	//"fmt"
 	"math/rand"
 
 	"sync/atomic"
@@ -388,6 +389,75 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		}
 	}
 }
+
+type InstallSnapshotArgs struct {
+	Term int
+	LeaderId int
+	LastIncludeIndex int32
+	LastIncludeTerm int32
+	Offset int
+	Data []byte
+	Done bool
+}
+
+type InstallSnapshotReply struct {
+	Term int
+}
+
+
+func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
+	rf.UpdateTerm(args.Term)
+
+	currentTerm, _ := rf.GetVoteState()
+	reply.Term = currentTerm
+
+	if (currentTerm > args.Term) {  //该结点收到leader的heartbeat，但是自己的任期更大，拒绝
+		//fmt.Println("in func AppendEntries: rf:", rf.me, "rf.term:", rf.GetCurrentTerm(), "rf.Term > args.Term")
+		return
+	}
+
+	//rf.UpdateLastRecvTime()
+	//atomic.StoreUint32(&rf.state, FOLLOWER)
+	//fmt.Println("in func AppendEntries, rf:", rf.me, "term:", rf.GetCurrentTerm(), "state:", rf.GetCertainState())
+
+	rf.voteMu.RLock()
+	if args.LastIncludeIndex > rf.GetLastLogIndex() || int(args.LastIncludeTerm) > rf.logs[args.LastIncludeIndex].Term { // 快照全部替换
+		rf.persister.SaveStateAndSnapshot(args.Data, []byte{})
+		rf.voteMu.RUnlock()
+	} else {
+		logsAfterSnapshot := rf.logs[rf.afterSnapshotIndex:]
+		rf.voteMu.RUnlock()
+
+		rf.afterSnapshotIndex = args.LastIncludeIndex + 1
+
+		w := new(bytes.Buffer)
+		e := labgob.NewEncoder(w)
+		e.Encode(logsAfterSnapshot)
+
+		logData := w.Bytes()
+
+		rf.persister.SaveStateAndSnapshot(args.Data, logData)
+	}
+}
+
+func (rf *Raft) sendInstallSnapshot(server int, args* InstallSnapshotArgs, reply *InstallSnapshotReply) bool {
+	//defer fmt.Println("in func sendAppendEntries: sender:", rf.me, "server:", server, "end")
+	fmt.Println("in func sendInstallSnapshot: sender:", rf.me, "server:", server, "begin")
+	okCh := make(chan bool, 1)
+	go func() {
+		ok := rf.peers[server].Call("Raft.InstallSnapshot", args, reply)
+		okCh <- ok
+	}()
+	ok := false
+	select{
+	case ok = <- okCh:
+		return ok
+	case <- time.After(50 * time.Millisecond):
+		return false
+	}
+	//ok := rf.peers[server].Call("Raft.AppendEntries", args, reply)
+	//return ok
+}
 //
 // example code to send a RequestVote RPC to a server.
 // server is the index of the target server in rf.peers[].
@@ -655,108 +725,122 @@ func (rf *Raft) heartbeat2() {
 					ok := false
 					okCnt := 0
 					for !ok /*&& okCnt < 10*/ && rf.GetCertainState() == LEADER {
-						args := AppendEntriesArgs{
-							Term:         term,
-							LeaderId:     rf.GetItself(),
-							PrevLogIndex: rf.GetPrevLogIndex(server),
-							PrevLogTerm:  rf.GetPrevLogTerm(server),
-							Entries:      rf.GetLogsBehindNextIndex(server),
-							LeaderCommit: rf.GetCommitIndex(),
-						}
-						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-						//	"receiver:", server, "after args, after heartbeat")
-						reply := AppendEntriesReply{
-							Term:          0,
-							Succ:          false,
-							CommitIndex:   0,
-							ConflictIndex: 0,
-							ConflictTerm:  0,
-						}
-						ok = rf.sendAppendEntries(server, &args, &reply)
-						okCnt++
-						if !(!ok /*&& okCnt < 10*/ && rf.GetCertainState() == LEADER) {
-							rf.UpdateTerm(reply.Term)
-							if rf.killed() || rf.GetCertainState() != LEADER || rf.GetCurrentTerm() != term {
+						if rf.GetNextIndex(server) < rf.afterSnapshotIndex {
+							/*args := InstallSnapshotArgs{
+								Term:             term,
+								LeaderId:         rf.GetItself(),
+								LastIncludeIndex: rf.afterSnapshotIndex - 1,
+								LastIncludeTerm:  int32(rf.logs[rf.afterSnapshotIndex - 1].Term),
+								Offset:           0,
+								Data:             rf.persister.ReadSnapshot(),
+								Done:             false,
+							}
+
+							var reply InstallSnapshotReply
+
+							rf.sendInstallSnapshot(server, &args, &reply)*/
+						} else {
+							args := AppendEntriesArgs{
+								Term:         term,
+								LeaderId:     rf.GetItself(),
+								PrevLogIndex: rf.GetPrevLogIndex(server),
+								PrevLogTerm:  rf.GetPrevLogTerm(server),
+								Entries:      rf.GetLogsBehindNextIndex(server),
+								LeaderCommit: rf.GetCommitIndex(),
+							}
+							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+							//	"receiver:", server, "after args, after heartbeat")
+							reply := AppendEntriesReply{
+								Term:          0,
+								Succ:          false,
+								CommitIndex:   0,
+								ConflictIndex: 0,
+								ConflictTerm:  0,
+							}
+							ok = rf.sendAppendEntries(server, &args, &reply)
+							okCnt++
+							if !(!ok /*&& okCnt < 10*/ && rf.GetCertainState() == LEADER) {
+								rf.UpdateTerm(reply.Term)
+								if rf.killed() || rf.GetCertainState() != LEADER || rf.GetCurrentTerm() != term {
+									break
+								}
+								if ok && !reply.Succ {
+									//nextIndex1 := rf.GetNextIndex(server)
+									//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
+									rf.SetNextIndex(server, reply.ConflictIndex)
+									//rf.SetNextIndex(server, reply.ConflictIndex)
+									//nextIndex2 := rf.GetNextIndex(server)
+									//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
+									//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
+								}
 								break
 							}
-							if ok && !reply.Succ {
-								//nextIndex1 := rf.GetNextIndex(server)
-								//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
-								rf.SetNextIndex(server, reply.ConflictIndex)
-								//rf.SetNextIndex(server, reply.ConflictIndex)
-								//nextIndex2 := rf.GetNextIndex(server)
-								//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
-								//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
-							}
-							break
 						}
+
 						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 						//	"receiver:", server, "ok:", ok, "okCnt:", okCnt, "heartbeat")
 						time.Sleep(10 * time.Millisecond)
 					}
-					/*if ok {
-						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							//"receiver:", server, "sendAppendEntries heartbeat succ", "okCnt:", okCnt)
-					} else {
-						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							//"receiver:", server, "sendAppendEntries heartbeat fail", "okCnt:", okCnt)
-					}*/
-
 
 				case index := <-peersChs[server]:
 					for {
 						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
 						//	"receiver:", server, "index:", index)
-						args := AppendEntriesArgs{
-							Term:         term,
-							LeaderId:     rf.GetItself(),
-							PrevLogIndex: rf.GetPrevLogIndex(server),
-							PrevLogTerm:  rf.GetPrevLogTerm(server),
-							Entries:      rf.GetLogsBehindNextIndex(server),
-							LeaderCommit: rf.GetCommitIndex(),
-						}
-						//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							//"receiver:", server, ", after args, index come")
-						reply := AppendEntriesReply{}
+						if rf.GetNextIndex(server) < rf.afterSnapshotIndex {
+							/*args := InstallSnapshotArgs{
+								Term:             term,
+								LeaderId:         rf.GetItself(),
+								LastIncludeIndex: rf.afterSnapshotIndex - 1,
+								LastIncludeTerm:  int32(rf.logs[rf.afterSnapshotIndex - 1].Term),
+								Offset:           0,
+								Data:             rf.persister.ReadSnapshot(),
+								Done:             false,
+							}
 
-						if &args == nil {
-							//fmt.Println("in func heartbeat2, args is nil")
-						}
+							var reply InstallSnapshotReply
 
-						ok := false
-						okCnt := 0
-						for !ok /*&& okCnt < 10*/  && rf.GetCertainState() == LEADER && rf.GetCurrentTerm() == term {
-							ok = rf.sendAppendEntries(server, &args, &reply)
-							okCnt++
-							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							//	"receiver:", server, "ok:", ok, "okCnt:", okCnt, "real append")
-							time.Sleep(10 * time.Millisecond)
-						}
-						if (ok) {
-							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-								//"receiver:", server, "sendAppendEntries appendlog succ", "okCnt:", okCnt)
+							rf.sendInstallSnapshot(server, &args, &reply)*/
 						} else {
+							args := AppendEntriesArgs{
+								Term:         term,
+								LeaderId:     rf.GetItself(),
+								PrevLogIndex: rf.GetPrevLogIndex(server),
+								PrevLogTerm:  rf.GetPrevLogTerm(server),
+								Entries:      rf.GetLogsBehindNextIndex(server),
+								LeaderCommit: rf.GetCommitIndex(),
+							}
 							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-								//"receiver:", server, "sendAppendEntries appendlog fail", "okCnt:", okCnt)
-						}
-						rf.UpdateTerm(reply.Term)
-						if rf.killed() || rf.GetCertainState() != LEADER || rf.GetCurrentTerm() != term {
-							break
-						}
-						if ok && reply.Succ {
-							rf.SetNextIndex(server, rf.GetNextIndex(server) + int32(len(args.Entries)))
-							replyCh <- index
-							break
-							//break
-						} else if ok && !reply.Succ {
-							//nextIndex1 := rf.GetNextIndex(server)
-							//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
-							rf.SetNextIndex(server, reply.ConflictIndex)
-							//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
-							//	"receiver:", server, "sendAppendEntries change nextIndex")
-							//nextIndex2 := rf.GetNextIndex(server)
-							//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
-							//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
+							//"receiver:", server, ", after args, index come")
+							reply := AppendEntriesReply{}
+
+							ok := false
+							okCnt := 0
+							for !ok /*&& okCnt < 10*/  && rf.GetCertainState() == LEADER && rf.GetCurrentTerm() == term {
+								ok = rf.sendAppendEntries(server, &args, &reply)
+								okCnt++
+								//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+								//	"receiver:", server, "ok:", ok, "okCnt:", okCnt, "real append")
+								time.Sleep(10 * time.Millisecond)
+							}
+							rf.UpdateTerm(reply.Term)
+							if rf.killed() || rf.GetCertainState() != LEADER || rf.GetCurrentTerm() != term {
+								break
+							}
+							if ok && reply.Succ {
+								rf.SetNextIndex(server, rf.GetNextIndex(server) + int32(len(args.Entries)))
+								replyCh <- index
+								break
+								//break
+							} else if ok && !reply.Succ {
+								//nextIndex1 := rf.GetNextIndex(server)
+								//rf.SetNextIndex(server, rf.GetNextIndex(server) - 1)
+								rf.SetNextIndex(server, reply.ConflictIndex)
+								//fmt.Println("in func heartbeat2's goroutine, sender:", rf.me, "term", rf.GetCurrentTerm(), "state:", rf.GetCertainState(),
+								//	"receiver:", server, "sendAppendEntries change nextIndex")
+								//nextIndex2 := rf.GetNextIndex(server)
+								//fmt.Println("in func heartbeat2's goroutine, rf:", rf.me, "term:", term, "server", server,
+								//	"nextIndex1:", nextIndex1, "nextIndex2:", nextIndex2)
+							}
 						}
 					}
 				}
@@ -921,10 +1005,11 @@ func (rf *Raft) SetVoteState(term int, votedFor int) {
 	if rf.currentTerm < term {
 		rf.currentTerm = term
 		rf.votedFor = votedFor
+		rf.persist()
 	}
 
 	//fmt.Println("in func SetVoteState")
-	rf.persist()
+	//rf.persist()
 }
 
 func (rf* Raft) GetCurrentTerm() int {
@@ -943,10 +1028,14 @@ func (rf* Raft) GetVotedFor() int {
 func (rf *Raft) SetVotedFor(votedFor int) {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
+	if rf.votedFor != votedFor {
+		rf.votedFor = votedFor
+		rf.persist()
+	}
 	rf.votedFor = votedFor
 
 	//fmt.Println("in func SetVotedFor")
-	rf.persist()
+	//rf.persist()
 }
 
 func (rf *Raft) TurnToCandidate() (int, int) {
@@ -995,11 +1084,11 @@ func (rf* Raft) UpdateTerm(term int) {
 		rf.votedFor = -1;
 		atomic.StoreUint32(&rf.state, FOLLOWER)
 		//fmt.Println("in func UpdateTerm")
-		//rf.persist()
+		rf.persist()
 	}
 
 	//fmt.Println("in func UpdateTerm")
-	rf.persist()
+	//rf.persist()
 }
 
 func (rf *Raft) UpdateLastRecvTime() {
@@ -1145,10 +1234,10 @@ func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 	}*/
 	if !(int(index) >= len(rf.logs) && len(entries) == 0) {
 		//fmt.Println("in func AppendLogs")
-		//rf.persist()
+		rf.persist()
 	}
 	//fmt.Println("in func AppendLogs")
-	rf.persist()
+	//rf.persist()
 
 }
 
@@ -1156,9 +1245,13 @@ func (rf* Raft) PushBackLogs(entries []LogEntry) int32 {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
 
-	rf.logs = append(rf.logs, entries...)
+	if len(entries) > 0 {
+		rf.logs = append(rf.logs, entries...)
+		rf.persist()
+	}
+	//rf.logs = append(rf.logs, entries...)
 	//fmt.Println("in func PushBackLogs")
-	rf.persist()
+	//rf.persist()
 	return int32(len(rf.logs))
 }
 

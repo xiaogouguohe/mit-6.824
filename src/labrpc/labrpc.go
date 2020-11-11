@@ -462,6 +462,7 @@ func MakeService(rcvr interface{}) *Service {
 		method := svc.typ.Method(m)
 		mtype := method.Type
 		mname := method.Name
+		//fmt.Println("in func MakeService, mname:", mname)
 
 		//fmt.Printf("%v pp %v ni %v 1k %v 2k %v no %v\n",
 		//	mname, method.PkgPath, mtype.NumIn(), mtype.In(1).Kind(), mtype.In(2).Kind(), mtype.NumOut())
