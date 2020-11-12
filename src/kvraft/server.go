@@ -110,12 +110,12 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
-	//fmt.Println("in func server's PutAppend, Key:", args.Key, "Value:", args.Value, "OP:", args.Op)
+	//fmt.Println("in func server's PutAppend, me:", kv.rf.GetItself(), "args.Key:", args.Key, "Value:", args.Value, "OP:", args.Op)
 	//time.Sleep(1 * time.Second)
 
 	//fmt.Println("in func kv.PutAppend, Key:", args.Key, "Value:", args.Value)
 
-	_, _, succ := kv.rf.Start(Op{
+	_, _, succ := kv.rf.Start(Op{ // 有可能没调用到
 		Key: args.Key,
 		Value: args.Value,
 		Ope: args.Op,
@@ -123,6 +123,7 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 
 	})
 	if succ {
+		//fmt.Println("in func server's PutAppend, me:", kv.rf.GetItself(), "start succ")
 		kv.putAppendChsMu.Lock()
 		if _, ok := kv.putAppendChs[args.OpUni]; ok {
 			kv.putAppendChsMu.Unlock()
@@ -156,7 +157,7 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 			kv.dataMu.Unlock()
 		}*/
 	} else {
-		//fmt.Println("in func server's PutAppend, false")
+		//fmt.Println("in func server's PutAppend, me:", kv.rf.GetItself(), "start false")
 		reply.Err = ErrWrongLeader
 	}
 
@@ -310,7 +311,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 			if kv.rf.GetCertainState() == raft.LEADER {
 				//fmt.Println("in func start a server, put applyMsg into putAppendCh, applyMsg:", applyMsg)
-				//fmt.Println("in func StartKVServer, kv:", kv.me, "OpUni:", op.OpUni, "applyMsg:", applyMsg, "put to channel")
+				//fmt.Println("in func StartKVServer, me:", kv.rf.GetItself(), "OpUni:", op.OpUni, "applyMsg:", applyMsg, "put to channel")
 				kv.putAppendChs[op.OpUni] <- applyMsg
 
 				/*go func() {

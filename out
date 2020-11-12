@@ -1,0 +1,21 @@
+diff --git a/src/kvraft/server.go b/src/kvraft/server.go
+index 9603ce6..e2b0a29 100644
+--- a/src/kvraft/server.go
++++ b/src/kvraft/server.go
+@@ -5,6 +5,8 @@ import (
+ 	"6.824_new/src/labrpc"
+ 	"6.824_new/src/raft"
+ 	"bytes"
++	"fmt"
++
+ 	//"fmt"
+ 
+ 	"time"
+@@ -223,6 +225,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
+ 	kv.dataMu.Lock()
+ 
+ 	if maxraftstate > -1 {
++		fmt.Println("in func StartKVServer, maxraftstate:", maxraftstate)
+ 		dbdata := persister.ReadSnapshot()
+ 
+ 
