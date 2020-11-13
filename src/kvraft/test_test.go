@@ -213,8 +213,12 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 					//fmt.Println("in func test, append")
 					nv := "x " + strconv.Itoa(cli) + " " + strconv.Itoa(j) + " y"
 					// log.Printf("%d: client new append %v\n", cli, nv)
-					//fmt.Println("in func test, is Append, nv:", nv, "j:", j, "i:", i)
+					//fmt.Println("in func test, is Append, j:", j, "i:", i, "nv:", nv)
 					Append(cfg, myck, key, nv)
+					//data := make(map[string]string)
+					//fmt.Println("in func test, save[0]:", cfg.saved[0].ReadSnapshot())
+
+
 					//fmt.Println("in func test, is Append, finish")
 					last = NextValue(last, nv)
 					j++
@@ -264,7 +268,10 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 		if crash {
 			// log.Printf("shutdown servers\n")
 			for i := 0; i < nservers; i++ {
+				//fmt.Println("in func test, before crash i:", i, "saved:", cfg.saved[i].ReadSnapshot())
+				//fmt.Println("in func test, before crash i:", i, "snapshot:", cfg.kvservers[i].rf.GetPersister().ReadSnapshot())
 				cfg.ShutdownServer(i)
+				//fmt.Println("in func test, after crash i:", i, "snapshot:", cfg.saved[i].ReadSnapshot())
 			}
 			// Wait for a while for servers to shutdown, since
 			// shutdown isn't a real crash and isn't instantaneous
@@ -272,6 +279,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			// log.Printf("restart servers\n")
 			// crash and re-start all
 			for i := 0; i < nservers; i++ {
+				//fmt.Println("in func test, start i:", i)
 				cfg.StartServer(i)
 			}
 			cfg.ConnectAll()
@@ -292,6 +300,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			v := Get(cfg, ck, key)
 			//fmt.Println("in func test, after Get")
 			//fmt.Println("in func test, v:", v)
+			//fmt.Println("in func test, i:", i, "j:", j, "key:", key, "v:", v)
 			checkClntAppends(t, i, v, j)
 		}
 
@@ -762,6 +771,10 @@ func TestSnapshotSize3B(t *testing.T) {
 func TestSnapshotRecover3B(t *testing.T) {
 	// Test: restarts, snapshots, one client (3B) ...
 	GenericTest(t, "3B", 1, false, true, false, 1000)
+}
+
+func TestMapDecode3B(t *testing.T) {
+
 }
 
 func TestSnapshotRecoverManyClients3B(t *testing.T) {

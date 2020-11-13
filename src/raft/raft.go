@@ -19,6 +19,8 @@ package raft
 
 import (
 	"6.824_new/src/labgob"
+	"fmt"
+
 	//"src/labgob"
 	"6.824_new/src/labrpc"
 	"bytes"
@@ -166,9 +168,10 @@ func (rf *Raft) persist() {
 
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
+	//rf.persister = rf.persister.Copy()
 }
 
-func (rf *Raft) PersistFromTo(beginIndex int32, endIndex int32) {
+/*func (rf *Raft) PersistFromTo(beginIndex int32, endIndex int32) {
 	w := new(bytes.Buffer)
 	e := labgob.NewEncoder(w)
 
@@ -178,6 +181,7 @@ func (rf *Raft) PersistFromTo(beginIndex int32, endIndex int32) {
 
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
+	rf.persister = rf.persister.Copy()
 }
 
 func (rf *Raft) PersistTermAndVotedFor() {
@@ -192,6 +196,7 @@ func (rf *Raft) PersistTermAndVotedFor() {
 
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
+	rf.persister = rf.persister.Copy()
 }
 
 func (rf *Raft) PersistLogs() {
@@ -206,7 +211,8 @@ func (rf *Raft) PersistLogs() {
 
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
-}
+	rf.persister = rf.persister.Copy()
+}*/
 
 //
 // restore previously persisted state.
@@ -245,6 +251,10 @@ func (rf *Raft) readPersist(data []byte) {
 		//fmt.Println("in func readPersist, after decode, term:", rf.GetCurrentTerm(), "votedFor:", rf.GetVotedFor(), "logs:", rf.GetLogs(0))
 	}
 
+}
+
+func (rf *Raft) GetPersister() *Persister {
+	return rf.persister
 }
 
 //
@@ -407,8 +417,8 @@ type InstallSnapshotReply struct {
 
 
 func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshotReply) {
-	//fmt.Println("in func InstallSnapshot, me:", rf.me, "leader:", args.LeaderId, "args.term:", args.Term, "rf.term", rf.currentTerm,
-	//	"args.index:", args.LastIncludeIndex, "rf.index:", rf.GetLastLogIndex())
+	fmt.Println("in func InstallSnapshot, me:", rf.me, "leader:", args.LeaderId, "args.term:", args.Term, "rf.term", rf.currentTerm,
+		"args.index:", args.LastIncludeIndex, "rf.index:", rf.GetLastLogIndex())
 	rf.UpdateTerm(args.Term)
 
 	currentTerm, _ := rf.GetVoteState()
@@ -429,16 +439,17 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	if args.LastIncludeIndex > rf.GetLastLogIndex() || int(args.LastIncludeTerm) > rf.logs[args.LastIncludeIndex].Term { // 快照全部替换
 		//fmt.Println("in func INstallSnapshot, all should change, begin")
 		rf.persister.SaveStateAndSnapshot(args.Data, []byte{})
-		rf.afterSnapshotIndex = args.LastIncludeIndex + 1
-		rf.logs = make([]LogEntry, rf.afterSnapshotIndex)
+		rf.persister = rf.persister.Copy()
+		rf.SetAfterSnapshotIndex(args.LastIncludeIndex + 1)
+		rf.logs = make([]LogEntry, rf.GetAfterSnapshotIndex())
 		//rf.voteMu.Unlock()
 		//fmt.Println("in func INstallSnapshot, all should change, done")
 	} else { // 替换掉前面的日志
 		//fmt.Println("in func INstallSnapshot, pre should change, begin")
-		logsAfterSnapshot := rf.logs[rf.afterSnapshotIndex:]
+		logsAfterSnapshot := rf.logs[rf.GetAfterSnapshotIndex():]
 		//rf.voteMu.Unlock()
 
-		rf.afterSnapshotIndex = args.LastIncludeIndex + 1
+		rf.SetAfterSnapshotIndex(args.LastIncludeIndex + 1)
 
 		w := new(bytes.Buffer)
 		e := labgob.NewEncoder(w)
@@ -447,6 +458,7 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 		logData := w.Bytes()
 
 		rf.persister.SaveStateAndSnapshot(args.Data, logData)
+		rf.persister = rf.persister.Copy()
 		//fmt.Println("in func INstallSnapshot, pre should change, done")
 	}
 }
@@ -742,17 +754,18 @@ func (rf *Raft) heartbeat2() {
 					for !ok /*&& okCnt < 10*/ && rf.GetCertainState() == LEADER {
 						//fmt.Println("in func heartbeat2's goroutine, case heartbeat, sender:", rf.me, "receiver:", server,
 						//	"nextIndex:", rf.GetNextIndex(server), "afterSnapshotIndex:", rf.afterSnapshotIndex)
-						if rf.GetNextIndex(server) < rf.afterSnapshotIndex {
+						if rf.GetNextIndex(server) < rf.GetAfterSnapshotIndex() {
 							//fmt.Println("in func heartbeat2's goroutine, case heartbeat, installSnapshot, sender:", rf.me, "receiver:", server)
 							args := InstallSnapshotArgs{
 								Term:             term,
 								LeaderId:         rf.GetItself(),
-								LastIncludeIndex: rf.afterSnapshotIndex - 1,
-								LastIncludeTerm:  int32(rf.logs[rf.afterSnapshotIndex - 1].Term),
+								LastIncludeIndex: rf.GetAfterSnapshotIndex() - 1,
+								LastIncludeTerm:  int32(rf.logs[rf.GetAfterSnapshotIndex() - 1].Term),
 								Offset:           0,
 								Data:             rf.persister.ReadSnapshot(),
 								Done:             false,
 							}
+							fmt.Println("in func heartbeat2's goroutine, args.data:", args.Data)
 							var reply InstallSnapshotReply
 							ok := rf.sendInstallSnapshot(server, &args, &reply)
 							okCnt = 0
@@ -770,7 +783,7 @@ func (rf *Raft) heartbeat2() {
 							}
 							if ok && reply.Succ {
 								//fmt.Println("in func heartbeat2's goroutine, case heartbeat, installSnapshot, sender:", rf.me, "receiver:", server, "succ")
-								rf.SetNextIndex(server, rf.afterSnapshotIndex)
+								rf.SetNextIndex(server, rf.GetAfterSnapshotIndex())
 								break
 							}
 
@@ -822,17 +835,18 @@ func (rf *Raft) heartbeat2() {
 						//	"receiver:", server, "index:", index)
 						//fmt.Println("in func heartbeat2's goroutine, case indexCome, sender:", rf.me, "receiver:", server,
 						//	"nextIndex:", rf.GetNextIndex(server), "afterSnapshotIndex:", rf.afterSnapshotIndex)
-						if rf.GetNextIndex(server) < rf.afterSnapshotIndex {
+						if rf.GetNextIndex(server) < rf.GetAfterSnapshotIndex() {
 							//fmt.Println("in func heartbeat2's goroutine, installSnapshot, case indexCome, sender:", rf.me, "receiver:", server)
 							args := InstallSnapshotArgs{
 								Term:             term,
 								LeaderId:         rf.GetItself(),
-								LastIncludeIndex: rf.afterSnapshotIndex - 1,
-								LastIncludeTerm:  int32(rf.logs[rf.afterSnapshotIndex - 1].Term),
+								LastIncludeIndex: rf.GetAfterSnapshotIndex() - 1,
+								LastIncludeTerm:  int32(rf.logs[rf.GetAfterSnapshotIndex() - 1].Term),
 								Offset:           0,
 								Data:             rf.persister.ReadSnapshot(),
 								Done:             false,
 							}
+							fmt.Println("in func heartbeat2's goroutine, args.data:", args.Data)
 							var reply InstallSnapshotReply
 							ok := rf.sendInstallSnapshot(server, &args, &reply)
 							okCnt := 0
@@ -849,7 +863,7 @@ func (rf *Raft) heartbeat2() {
 								break
 							}
 							if ok && reply.Succ {
-								rf.SetNextIndex(server, rf.afterSnapshotIndex)
+								rf.SetNextIndex(server, rf.GetAfterSnapshotIndex())
 								replyCh <- index
 								break
 							}
@@ -1011,7 +1025,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	//rf.electionInterval = time.Duration(time.Duration(1000) * time.Millisecond)
 	rf.cmdCh = make(chan int32, 1024)
 
-	rf.afterSnapshotIndex = 0
+	rf.SetAfterSnapshotIndex(0)
 
 	go func() {
 		for {
@@ -1265,6 +1279,13 @@ func (rf *Raft) GetLogsBeforeCommitIndex(server int) []LogEntry {
 	return rf.logs[0: commitIndex + 1]
 }
 
+func (rf *Raft) GetLogsBehindAfterSnapshotIndex(server int) []LogEntry {
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
+
+	return rf.logs[rf.afterSnapshotIndex:]
+}
+
 func (rf* Raft) AppendLogs(index int32, entries []LogEntry) {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
@@ -1314,10 +1335,16 @@ func (rf* Raft) GetSingleEntry (index int32) LogEntry{
 }
 
 func (rf* Raft) SetAfterSnapshotIndex(index int32) {
+	rf.voteMu.Lock()
+	defer rf.voteMu.Unlock()
+
 	rf.afterSnapshotIndex = index
 }
 
 func (rf* Raft) GetAfterSnapshotIndex() int32 {
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
+
 	return rf.afterSnapshotIndex
 }
 

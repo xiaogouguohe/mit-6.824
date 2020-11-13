@@ -5,6 +5,8 @@ import (
 	"6.824_new/src/labrpc"
 	"6.824_new/src/raft"
 	"bytes"
+	"fmt"
+
 	//"fmt"
 
 	"time"
@@ -218,30 +220,33 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.putAppendChs = make(map[OpUnique]chan raft.ApplyMsg)
 	kv.putAppendOps = make(map[OpUnique]bool)
 
-	logs := kv.rf.GetLogsBeforeCommitIndex(me)
+	//logs := kv.rf.GetLogsBeforeCommitIndex(kv.rf.GetItself())
+	logs := kv.rf.GetLogsBehindAfterSnapshotIndex(kv.rf.GetItself())
 	kv.applyIndex = -1
 
 	kv.dataMu.Lock()
 
 	if maxraftstate > -1 {
 		dbdata := persister.ReadSnapshot()
-
+		//fmt.Println("in func StartKVServer, me:", kv.rf.GetItself(), "dbdata:", dbdata)
 
 		if dbdata == nil || len(dbdata) < 1 { // bootstrap without any state?
 			//return
 		} else {
 			r := bytes.NewBuffer(dbdata)
 			d := labgob.NewDecoder(r)
+			err := d.Decode(&kv.data)
 
-			if d.Decode(&kv.data) != nil {
-				//fmt.Println("in func readPersist, decode error")
+			if err == nil {
+				//fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
 				//return
 			} else {
-
-				//fmt.Println("in func readPersist, after decode, term:", rf.GetCurrentTerm(), "votedFor:", rf.GetVotedFor(), "logs:", rf.GetLogs(0))
+				fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "decode error, error:", err)
 			}
 		}
 	}
+	//fmt.Println("in func StartKVServer, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
+	kv.dataMu.Unlock()
 
 	for i := 0; i < len(logs); i++ {
 		log := logs[i]
@@ -256,7 +261,6 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 			kv.dataMu.Unlock()
 		}
 	}
-	kv.dataMu.Unlock()
 
 	go func() {
 		for {
@@ -331,14 +335,15 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 				}
 				//fmt.Println("in func snapshot, server:", kv.me, "snapshot's size:", persister.RaftStateSize())
 				if maxraftstate <= persister.RaftStateSize() {
-					kv.dataMu.RLock()
+					kv.dataMu.Lock()
 					w := new(bytes.Buffer)
 					e := labgob.NewEncoder(w)
 
 					e.Encode(kv.data)
+					//fmt.Println("in func StartKVServer, kv.data:", kv.data)
 
 					applyIndex := kv.applyIndex
-					kv.dataMu.RUnlock()
+					kv.dataMu.Unlock()
 
 					dbdata := w.Bytes()
 					//kv.rf.PersistFromTo(kv.rf.GetAfterSnapshotIndex(), kv.rf.GetLastLogIndex() + 1)
@@ -352,7 +357,36 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 					e2.Encode(kv.rf.GetVotedFor())
 					e2.Encode(logs)
 					rfdata := w2.Bytes()
-					persister.SaveStateAndSnapshot(dbdata, rfdata)
+					persister.SaveStateAndSnapshot(rfdata, dbdata)
+					//fmt.Println("in func StartKVServer, persister in kv:", persister.ReadSnapshot())
+					//fmt.Println("in func StartKVServer, persister in rf:", kv.rf.GetPersister().ReadSnapshot())
+					//persister = persister.Copy()
+
+					/*fmt.Println("test decode, me:", kv.rf.GetItself(), "begin")
+					r := bytes.NewBuffer(persister.ReadSnapshot())
+					d := labgob.NewDecoder(r)
+
+					fmt.Println("test decode, me:", kv.rf.GetItself(), "dbdata:", dbdata)
+					fmt.Println("test decode, me:", kv.rf.GetItself(), "snapshot:", persister.ReadSnapshot())
+					tmpData := make(map[string]string)
+					err := d.Decode(&tmpData)
+					if err == nil {
+						fmt.Println("test decode, me:", kv.rf.GetItself(), "tmpData:", tmpData)
+					} else {
+						fmt.Println("test decode, me:", kv.rf.GetItself(), "decode dbdata error, error:", err)
+					}*/
+
+					/*r2 := bytes.NewBuffer(rfdata)
+					d2 := labgob.NewDecoder(r2)
+
+					var term int
+					var votedFor int
+					var logss []raft.LogEntry
+					if d2.Decode(&term) != nil || d.Decode(&votedFor) != nil || d.Decode(&logss) != nil {
+						fmt.Println("test decode, me:", kv.rf.GetItself(), "term:", term, "votedFor:", votedFor, "logss:", logss)
+					} else {
+						fmt.Println("test decode, me:", kv.rf.GetItself(), "decode kv.rfstate error")
+					}*/
 
 
 				}

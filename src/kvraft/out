@@ -1,232 +1,64 @@
-Test: InstallSnapshot RPC (3B) ...
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
 labgob warning: Decoding into a non-default variable/field Err may not work
-==================
-WARNING: DATA RACE
-Write at 0x00c000090de0 by goroutine 11:
-  runtime.mapassign()
-      /usr/local/go/src/runtime/map.go:574 +0x0
-  6.824_new/src/kvraft.StartKVServer.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:285 +0x764
-
-Previous read at 0x00c000090de0 by goroutine 30:
-  runtime.mapaccess1()
-      /usr/local/go/src/runtime/map.go:394 +0x0
-  6.824_new/src/kvraft.(*KVServer).PutAppend()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:139 +0x26e
-  runtime.call32()
-      /usr/local/go/src/runtime/asm_amd64.s:539 +0x3a
-  reflect.Value.Call()
-      /usr/local/go/src/reflect/value.go:321 +0xd3
-  6.824_new/src/labrpc.(*Service).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:503 +0x811
-  6.824_new/src/labrpc.(*Server).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:427 +0x607
-  6.824_new/src/labrpc.(*Network).processReq.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:247 +0x93
-
-Goroutine 11 (running) created at:
-  6.824_new/src/kvraft.StartKVServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:261 +0x801
-  6.824_new/src/kvraft.(*config).StartServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:315 +0x8b5
-  6.824_new/src/kvraft.make_config()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:382 +0x538
-  6.824_new/src/kvraft.TestSnapshotRPC3B()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/test_test.go:661 +0x6a
-  testing.tRunner()
-      /usr/local/go/src/testing/testing.go:909 +0x199
-
-Goroutine 30 (running) created at:
-  6.824_new/src/labrpc.(*Network).processReq()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:246 +0x174
-==================
-==================
-WARNING: DATA RACE
-Write at 0x00c0000e0268 by goroutine 13:
-  6.824_new/src/kvraft.StartKVServer.func2()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:1317 +0x2c7
-
-Previous read at 0x00c0000e0268 by goroutine 28:
-  6.824_new/src/raft.(*Raft).heartbeat2.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:825 +0xcd7
-
-Goroutine 13 (running) created at:
-  6.824_new/src/kvraft.StartKVServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:327 +0x865
-  6.824_new/src/kvraft.(*config).StartServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:315 +0x8b5
-  6.824_new/src/kvraft.make_config()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:382 +0x538
-  6.824_new/src/kvraft.TestSnapshotRPC3B()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/test_test.go:661 +0x6a
-  testing.tRunner()
-      /usr/local/go/src/testing/testing.go:909 +0x199
-
-Goroutine 28 (running) created at:
-  6.824_new/src/raft.(*Raft).heartbeat2()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:725 +0x20b
-  6.824_new/src/raft.(*Raft).LeaderElection()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:709 +0x6f1
-  6.824_new/src/raft.Make.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:1033 +0x192
-==================
-==================
-WARNING: DATA RACE
-Write at 0x00c0000912f0 by goroutine 16:
-  runtime.mapassign()
-      /usr/local/go/src/runtime/map.go:574 +0x0
-  6.824_new/src/kvraft.StartKVServer.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:285 +0x764
-
-Previous read at 0x00c0000912f0 by goroutine 36:
-  runtime.mapaccess1()
-      /usr/local/go/src/runtime/map.go:394 +0x0
-  6.824_new/src/kvraft.(*KVServer).Get()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:88 +0x241
-  runtime.call32()
-      /usr/local/go/src/runtime/asm_amd64.s:539 +0x3a
-  reflect.Value.Call()
-      /usr/local/go/src/reflect/value.go:321 +0xd3
-  6.824_new/src/labrpc.(*Service).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:503 +0x811
-  6.824_new/src/labrpc.(*Server).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:427 +0x607
-  6.824_new/src/labrpc.(*Network).processReq.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:247 +0x93
-
-Goroutine 16 (running) created at:
-  6.824_new/src/kvraft.StartKVServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:261 +0x801
-  6.824_new/src/kvraft.(*config).StartServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:315 +0x8b5
-  6.824_new/src/kvraft.make_config()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:382 +0x538
-  6.824_new/src/kvraft.TestSnapshotRPC3B()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/test_test.go:661 +0x6a
-  testing.tRunner()
-      /usr/local/go/src/testing/testing.go:909 +0x199
-
-Goroutine 36 (running) created at:
-  6.824_new/src/labrpc.(*Network).processReq()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:246 +0x174
-==================
---- FAIL: TestSnapshotRPC3B (5.28s)
-    test_test.go:43: Get(c): expected:
-        C
-        received:
-    testing.go:853: race detected during execution of test
+  ... Passed --  26.2  7 17426  227
+--- FAIL: TestPersistPartitionUnreliableLinearizable3A (26.25s)
+    test_test.go:474: history is not linearizable
 FAIL
 exit status 1
-FAIL	6.824_new/src/kvraft	5.347s
+FAIL	6.824_new/src/kvraft	26.257s
 sleep for a while
 
-Test: InstallSnapshot RPC (3B) ...
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
 labgob warning: Decoding into a non-default variable/field Err may not work
-==================
-WARNING: DATA RACE
-Write at 0x00c00009b2f0 by goroutine 16:
-  runtime.mapassign()
-      /usr/local/go/src/runtime/map.go:574 +0x0
-  6.824_new/src/kvraft.StartKVServer.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:285 +0x764
+  ... Passed --  26.6  7 16465  238
+--- FAIL: TestPersistPartitionUnreliableLinearizable3A (26.58s)
+    test_test.go:474: history is not linearizable
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	26.591s
+sleep for a while
 
-Previous read at 0x00c00009b2f0 by goroutine 64:
-  runtime.mapaccess1()
-      /usr/local/go/src/runtime/map.go:394 +0x0
-  6.824_new/src/kvraft.(*KVServer).PutAppend()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:139 +0x26e
-  runtime.call32()
-      /usr/local/go/src/runtime/asm_amd64.s:539 +0x3a
-  reflect.Value.Call()
-      /usr/local/go/src/reflect/value.go:321 +0xd3
-  6.824_new/src/labrpc.(*Service).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:503 +0x811
-  6.824_new/src/labrpc.(*Server).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:427 +0x607
-  6.824_new/src/labrpc.(*Network).processReq.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:247 +0x93
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+labgob warning: Decoding into a non-default variable/field Err may not work
+  ... Passed --  26.5  7 17766  258
+--- FAIL: TestPersistPartitionUnreliableLinearizable3A (26.53s)
+    test_test.go:474: history is not linearizable
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	26.538s
+sleep for a while
 
-Goroutine 16 (running) created at:
-  6.824_new/src/kvraft.StartKVServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:261 +0x801
-  6.824_new/src/kvraft.(*config).StartServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:315 +0x8b5
-  6.824_new/src/kvraft.make_config()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:382 +0x538
-  6.824_new/src/kvraft.TestSnapshotRPC3B()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/test_test.go:661 +0x6a
-  testing.tRunner()
-      /usr/local/go/src/testing/testing.go:909 +0x199
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+labgob warning: Decoding into a non-default variable/field Err may not work
+  ... Passed --  28.8  7 19958  245
+--- FAIL: TestPersistPartitionUnreliableLinearizable3A (28.82s)
+    test_test.go:474: history is not linearizable
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	28.830s
+sleep for a while
 
-Goroutine 64 (running) created at:
-  6.824_new/src/labrpc.(*Network).processReq()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:246 +0x174
-==================
-==================
-WARNING: DATA RACE
-Write at 0x00c0000e83a8 by goroutine 18:
-  6.824_new/src/kvraft.StartKVServer.func2()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:1317 +0x2c7
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+labgob warning: Decoding into a non-default variable/field Err may not work
+  ... Passed --  26.7  7 16068  250
+--- FAIL: TestPersistPartitionUnreliableLinearizable3A (26.71s)
+    test_test.go:474: history is not linearizable
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	26.715s
+sleep for a while
 
-Previous read at 0x00c0000e83a8 by goroutine 56:
-  6.824_new/src/raft.(*Raft).heartbeat2.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:825 +0xcd7
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+labgob warning: Decoding into a non-default variable/field Err may not work
+  ... Passed --  27.1  7 18761  201
+--- FAIL: TestPersistPartitionUnreliableLinearizable3A (27.08s)
+    test_test.go:474: history is not linearizable
+FAIL
+exit status 1
+FAIL	6.824_new/src/kvraft	27.084s
+sleep for a while
 
-Goroutine 18 (running) created at:
-  6.824_new/src/kvraft.StartKVServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:327 +0x865
-  6.824_new/src/kvraft.(*config).StartServer()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:315 +0x8b5
-  6.824_new/src/kvraft.make_config()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/config.go:382 +0x538
-  6.824_new/src/kvraft.TestSnapshotRPC3B()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/test_test.go:661 +0x6a
-  testing.tRunner()
-      /usr/local/go/src/testing/testing.go:909 +0x199
-
-Goroutine 56 (running) created at:
-  6.824_new/src/raft.(*Raft).heartbeat2()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:725 +0x20b
-  6.824_new/src/raft.(*Raft).LeaderElection()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:709 +0x6f1
-  6.824_new/src/raft.Make.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:1033 +0x192
-==================
-==================
-WARNING: DATA RACE
-Write at 0x00c0000e8308 by goroutine 49:
-  6.824_new/src/raft.(*Raft).PushBackLogs()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:1294 +0x1d3
-  6.824_new/src/raft.(*Raft).Start()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:580 +0x156
-  6.824_new/src/kvraft.(*KVServer).PutAppend()
-      /home/xiaogouguohe/go/src/6.824_new/src/kvraft/server.go:118 +0x1ac
-  runtime.call32()
-      /usr/local/go/src/runtime/asm_amd64.s:539 +0x3a
-  reflect.Value.Call()
-      /usr/local/go/src/reflect/value.go:321 +0xd3
-  6.824_new/src/labrpc.(*Service).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:503 +0x811
-  6.824_new/src/labrpc.(*Server).dispatch()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:427 +0x607
-  6.824_new/src/labrpc.(*Network).processReq.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:247 +0x93
-
-Previous read at 0x00c0000e8308 by goroutine 70:
-  6.824_new/src/raft.(*Raft).heartbeat2.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:751 +0x202
-
-Goroutine 49 (running) created at:
-  6.824_new/src/labrpc.(*Network).processReq()
-      /home/xiaogouguohe/go/src/6.824_new/src/labrpc/labrpc.go:246 +0x174
-
-Goroutine 70 (running) created at:
-  6.824_new/src/raft.(*Raft).heartbeat2()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:725 +0x20b
-  6.824_new/src/raft.(*Raft).LeaderElection()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:709 +0x6f1
-  6.824_new/src/raft.Make.func1()
-      /home/xiaogouguohe/go/src/6.824_new/src/raft/raft.go:1033 +0x192
-==================
+Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+labgob warning: Decoding into a non-default variable/field Err may not work
 signal: interrupt
-FAIL	6.824_new/src/kvraft	4.865s
+FAIL	6.824_new/src/kvraft	9.701s
