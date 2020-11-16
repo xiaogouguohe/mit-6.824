@@ -1,11 +1,11 @@
-Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+Test: unreliable net, restarts, many clients (3A) ...
 labgob warning: Decoding into a non-default variable/field Err may not work
-  ... Passed --  25.3  7 17582  229
+  ... Passed --  27.6  5  7608  408
 PASS
-ok  	6.824_new/src/kvraft	25.287s
+ok  	6.824_new/src/kvraft	27.641s
 sleep for a while
 
-Test: unreliable net, restarts, partitions, many clients, linearizability checks (3A) ...
+Test: unreliable net, restarts, many clients (3A) ...
 labgob warning: Decoding into a non-default variable/field Err may not work
 signal: interrupt
-FAIL	6.824_new/src/kvraft	6.308s
+FAIL	6.824_new/src/kvraft	2.989s

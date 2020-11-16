@@ -12,9 +12,9 @@ do
   #go test -run TestManyPartitionsManyClients3A >> out
   #go test -run TestPersistOneClient3A >> out
   #go test -run TestPersistConcurrent3A >> out
-  #go test -run TestPersistConcurrentUnreliable3A >> out
+  go test -run TestPersistConcurrentUnreliable3A >> out
   #go test -run TestPersistPartition3A >> out
-  go test -run TestPersistPartitionUnreliableLinearizable3A >> out
+  #go test -run TestPersistPartitionUnreliableLinearizable3A >> out
   #go test -run TestSnapshotRPC3B -race >> out
   #go test -run TestSnapshotSize3B >> out
   #go test -run TestSnapshotRecover3B >> out
