@@ -249,7 +249,7 @@ func (rf *Raft) readPersist(data []byte) {
 		return
 	} else {
 		rf.voteMu.Lock()
-		fmt.Println("in func readPersist, term:", term, "votedFor", votedFor, "logs:", logs, "lastApplied:", lastApplied)
+		//fmt.Println("in func readPersist, term:", term, "votedFor", votedFor, "logs:", logs, "lastApplied:", lastApplied)
 		rf.currentTerm = term
 		rf.votedFor = votedFor
 		rf.logs = logs
@@ -980,7 +980,7 @@ func (rf *Raft) commitLogs() {
 		}
 		//rf.persist()
 		rf.lastApplied = i
-		rf.persist()
+		//rf.persist()
 		rf.voteMu.Unlock()
 		//rf.SetLastApplied(i)
 	}
@@ -1013,7 +1013,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	if len(persister.ReadRaftState()) > 0 {
 		rf.readPersist(persister.ReadRaftState())
 	} else {
-		fmt.Println("in func Make, raftState is empty")
+		//fmt.Println("in func Make, raftState is empty")
 		rf.voteMu.Lock()
 		rf.currentTerm = 0
 		rf.votedFor = -1
@@ -1298,7 +1298,7 @@ func (rf *Raft) GetCommitIndex() int32 {
 	return atomic.LoadInt32(&rf.commitIndex)
 }
 
-func (rf *Raft) GetLogsBeforeCommitIndex(server int) []LogEntry {
+func (rf *Raft) GetLogsBeforeCommitIndex() []LogEntry {
 	rf.voteMu.RLock()
 	defer rf.voteMu.RUnlock()
 
@@ -1389,7 +1389,7 @@ func (rf *Raft) GetLogsBetweenAfterSnapshotAndLastApplied() []LogEntry {
 	rf.voteMu.Lock()
 	defer rf.voteMu.Unlock()
 
-	return rf.logs[rf.afterSnapshotIndex: rf.lastApplied]
+	return rf.logs[rf.afterSnapshotIndex: rf.lastApplied + 1]
 }
 
 /*func (rf* Raft) GetSingleEntryTerm (index int32) LogEntry{

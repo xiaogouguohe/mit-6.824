@@ -2,7 +2,6 @@ package kvraft
 
 import (
 	"6.824_new/src/porcupine"
-	"fmt"
 )
 import "6.824_new/src/models"
 import "testing"
@@ -269,7 +268,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 		if crash {
 			// log.Printf("shutdown servers\n")
 			for i := 0; i < nservers; i++ {
-				fmt.Println("in func test, before crash i:", i, "saved:", cfg.saved[i].ReadSnapshot())
+				//fmt.Println("in func test, before crash i:", i, "saved:", cfg.saved[i].ReadSnapshot())
 				//fmt.Println("in func test, before crash i:", i, "snapshot:", cfg.kvservers[i].rf.GetPersister().ReadSnapshot())
 				cfg.ShutdownServer(i)
 				//fmt.Println("in func test, after crash i:", i, "snapshot:", cfg.saved[i].ReadSnapshot())
@@ -280,7 +279,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			// log.Printf("restart servers\n")
 			// crash and re-start all
 			for i := 0; i < nservers; i++ {
-				fmt.Println("in func test, start i:", i, "snapshot:", cfg.saved[i].ReadSnapshot())
+				//fmt.Println("in func test, start i:", i, "snapshot:", cfg.saved[i].ReadSnapshot())
 				cfg.StartServer(i)
 			}
 			cfg.ConnectAll()
@@ -301,7 +300,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			v := Get(cfg, ck, key)
 			//fmt.Println("in func test, after Get")
 			//fmt.Println("in func test, v:", v)
-			fmt.Println("in func test, i:", i, "j:", j, "key:", key, "v:", v)
+			//fmt.Println("in func test, i:", i, "j:", j, "key:", key, "v:", v)
 			checkClntAppends(t, i, v, j)
 		}
 

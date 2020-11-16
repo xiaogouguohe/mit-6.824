@@ -223,9 +223,10 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.putAppendOps = make(map[OpUnique]bool)
 
 	//logs := kv.rf.GetLogsBeforeCommitIndex(kv.rf.GetItself())
-	afterSnapshotIndex := kv.rf.GetAfterSnapshotIndex()
-	fmt.Println("in func StartKVServer, me:", me, "afterSnapshotIndex:", afterSnapshotIndex)
-	logs := kv.rf.GetLogsBetweenAfterSnapshotAndLastApplied()
+	//afterSnapshotIndex := kv.rf.GetAfterSnapshotIndex()
+	//fmt.Println("in func StartKVServer, me:", me, "afterSnapshotIndex:", afterSnapshotIndex)
+	//logs := kv.rf.GetLogsBetweenAfterSnapshotAndLastApplied()
+	logs := kv.rf.GetLogsBeforeCommitIndex()
 	kv.applyIndex = -1
 
 	kv.dataMu.Lock()
