@@ -215,18 +215,22 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.applyCh = make(chan raft.ApplyMsg)
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
 
+	//fmt.Println("in func StartKVServer, kv.me:", me, "rf.me:", kv.rf.GetItself())
+
 	// You may need initialization code here.
 	kv.data = make(map[string]string)
 	kv.putAppendChs = make(map[OpUnique]chan raft.ApplyMsg)
 	kv.putAppendOps = make(map[OpUnique]bool)
 
 	//logs := kv.rf.GetLogsBeforeCommitIndex(kv.rf.GetItself())
-	logs := kv.rf.GetLogsBehindAfterSnapshotIndex(kv.rf.GetItself())
+	afterSnapshotIndex := kv.rf.GetAfterSnapshotIndex()
+	fmt.Println("in func StartKVServer, me:", me, "afterSnapshotIndex:", afterSnapshotIndex)
+	logs := kv.rf.GetLogsBetweenAfterSnapshotAndLastApplied()
 	kv.applyIndex = -1
 
 	kv.dataMu.Lock()
 
-	if maxraftstate > -1 {
+	if maxraftstate > -1 { // masraftstate大小有限制，说明有snapshot的部分
 		dbdata := persister.ReadSnapshot()
 		//fmt.Println("in func StartKVServer, me:", kv.rf.GetItself(), "dbdata:", dbdata)
 
@@ -248,7 +252,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	//fmt.Println("in func StartKVServer, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
 	kv.dataMu.Unlock()
 
-	for i := 0; i < len(logs); i++ {
+	for i := 0; i < len(logs); i++ { // 不能直接这样恢复，因为logs当中可能有重复日志
 		log := logs[i]
 		op, _ := log.Command.(Op)
 		if op.Ope == "Put" {

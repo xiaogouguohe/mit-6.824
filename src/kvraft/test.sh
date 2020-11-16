@@ -14,10 +14,10 @@ do
   #go test -run TestPersistConcurrent3A >> out
   #go test -run TestPersistConcurrentUnreliable3A >> out
   #go test -run TestPersistPartition3A >> out
-  go test -run TestPersistPartitionUnreliableLinearizable3A >> out
+  #go test -run TestPersistPartitionUnreliableLinearizable3A >> out
   #go test -run TestSnapshotRPC3B >> out
   #go test -run TestSnapshotSize3B >> out
-  #go test -run TestSnapshotRecover3B >> out
+  go test -run TestSnapshotRecover3B >> out
   sleep 1s
   echo "sleep for a while\n" >> out
 done

@@ -165,6 +165,7 @@ func (rf *Raft) persist() {
 	e.Encode(rf.currentTerm)
 	e.Encode(rf.votedFor)
 	e.Encode(rf.logs)
+	e.Encode(rf.lastApplied)
 
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
@@ -241,13 +242,19 @@ func (rf *Raft) readPersist(data []byte) {
 	var term int
 	var votedFor int
 	var logs []LogEntry
+	var lastApplied int32
 
-	if d.Decode(&term) != nil || d.Decode(&votedFor) != nil || d.Decode(&logs) != nil {
+	if d.Decode(&term) != nil || d.Decode(&votedFor) != nil || d.Decode(&logs) != nil || d.Decode(&lastApplied) != nil {
 		//fmt.Println("in func readPersist, decode error")
 		return
 	} else {
-		rf.SetVoteState(term, votedFor)
-		rf.AppendLogs(0, logs)
+		rf.voteMu.Lock()
+		fmt.Println("in func readPersist, term:", term, "votedFor", votedFor, "logs:", logs, "lastApplied:", lastApplied)
+		rf.currentTerm = term
+		rf.votedFor = votedFor
+		rf.logs = logs
+		rf.lastApplied = lastApplied
+		rf.voteMu.Unlock()
 		//fmt.Println("in func readPersist, after decode, term:", rf.GetCurrentTerm(), "votedFor:", rf.GetVotedFor(), "logs:", rf.GetLogs(0))
 	}
 
@@ -439,7 +446,7 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 	if args.LastIncludeIndex > rf.GetLastLogIndex() || int(args.LastIncludeTerm) > rf.logs[args.LastIncludeIndex].Term { // 快照全部替换
 		//fmt.Println("in func INstallSnapshot, all should change, begin")
 		rf.persister.SaveStateAndSnapshot(args.Data, []byte{})
-		rf.persister = rf.persister.Copy()
+		//rf.persister = rf.persister.Copy()
 		rf.SetAfterSnapshotIndex(args.LastIncludeIndex + 1)
 		rf.logs = make([]LogEntry, rf.GetAfterSnapshotIndex())
 		//rf.voteMu.Unlock()
@@ -458,7 +465,7 @@ func (rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapsho
 		logData := w.Bytes()
 
 		rf.persister.SaveStateAndSnapshot(args.Data, logData)
-		rf.persister = rf.persister.Copy()
+		//rf.persister = rf.persister.Copy()
 		//fmt.Println("in func INstallSnapshot, pre should change, done")
 	}
 }
@@ -965,16 +972,20 @@ func (rf *Raft) commitLogs() {
 
 	for i := lastApplied + 1; i <= commitIndex; i++ {
 		//fmt.Println("in func commitLogs, rf:", rf.me, "commitIndex:", commitIndex, "commandIndex:", i, "command", rf.logs[i].Command)
-		rf.voteMu.RLock()
+		rf.voteMu.Lock()
 		rf.applyCh <- ApplyMsg{
 			CommandIndex: int(i + 1),
 			Command: rf.logs[i].Command,
 			CommandValid: true,
 		}
-		rf.voteMu.RUnlock()
+		//rf.persist()
+		rf.lastApplied = i
+		rf.persist()
+		rf.voteMu.Unlock()
+		//rf.SetLastApplied(i)
 	}
 
-	rf.SetLastApplied(commitIndex)
+	//rf.SetLastApplied(commitIndex)
 	//rf.SetCommitIndex(commitIndex + 1)
 }
 //
@@ -999,11 +1010,22 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// Your initialization code here (2A, 2B, 2C).
 	//rf.SetVoteState(0, -1)
-	rf.readPersist(persister.ReadRaftState())
+	if len(persister.ReadRaftState()) > 0 {
+		rf.readPersist(persister.ReadRaftState())
+	} else {
+		fmt.Println("in func Make, raftState is empty")
+		rf.voteMu.Lock()
+		rf.currentTerm = 0
+		rf.votedFor = -1
+		rf.logs = make([]LogEntry, 0)
+		rf.lastApplied = -1
+		rf.persist()
+		rf.voteMu.Unlock()
+	}
 	rf.SetCertainState(FOLLOWER)
 
 	rf.SetCommitIndex(-1)
-	rf.SetLastApplied(-1)
+	//rf.SetLastApplied(-1)
 
 	rf.nextIndexMu.Lock()
 	rf.nextIndex = make([]int32, len(rf.peers))
@@ -1069,10 +1091,11 @@ func (rf *Raft) SetVoteState(term int, votedFor int) {
 	if rf.currentTerm < term {
 		rf.currentTerm = term
 		rf.votedFor = votedFor
+		rf.persist()
 	}
 
 	//fmt.Println("in func SetVoteState")
-	rf.persist()
+	//rf.persist()
 }
 
 func (rf* Raft) GetCurrentTerm() int {
@@ -1214,7 +1237,11 @@ func (rf* Raft) GetLastApplied() int32 {
 }
 
 func (rf* Raft) SetLastApplied(lastApplied int32) {
+	//rf.voteMu.Lock()
+	//defer rf.voteMu.Unlock()
+
 	atomic.StoreInt32(&rf.lastApplied, lastApplied)
+	//rf.persist()
 }
 
 func (rf *Raft) GetNextIndex(server int) int32 {
@@ -1278,6 +1305,16 @@ func (rf *Raft) GetLogsBeforeCommitIndex(server int) []LogEntry {
 	commitIndex := rf.GetCommitIndex()
 	return rf.logs[0: commitIndex + 1]
 }
+
+func (rf *Raft) GetLogsAfterCommitIndex(server int) []LogEntry {
+	rf.voteMu.RLock()
+	defer rf.voteMu.RUnlock()
+
+	commitIndex := rf.GetCommitIndex()
+	return rf.logs[commitIndex + 1:]
+}
+
+
 
 func (rf *Raft) GetLogsBehindAfterSnapshotIndex(server int) []LogEntry {
 	rf.voteMu.RLock()
@@ -1346,6 +1383,13 @@ func (rf* Raft) GetAfterSnapshotIndex() int32 {
 	defer rf.voteMu.RUnlock()
 
 	return rf.afterSnapshotIndex
+}
+
+func (rf *Raft) GetLogsBetweenAfterSnapshotAndLastApplied() []LogEntry {
+	rf.voteMu.Lock()
+	defer rf.voteMu.Unlock()
+
+	return rf.logs[rf.afterSnapshotIndex: rf.lastApplied]
 }
 
 /*func (rf* Raft) GetSingleEntryTerm (index int32) LogEntry{
