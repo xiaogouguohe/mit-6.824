@@ -2,6 +2,7 @@ package kvraft
 
 import (
 	"6.824_new/src/porcupine"
+	"fmt"
 )
 import "6.824_new/src/models"
 import "testing"
@@ -268,7 +269,7 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 		if crash {
 			// log.Printf("shutdown servers\n")
 			for i := 0; i < nservers; i++ {
-				//fmt.Println("in func test, before crash i:", i, "saved:", cfg.saved[i].ReadSnapshot())
+				fmt.Println("in func test, before crash i:", i, "saved:", cfg.saved[i].ReadSnapshot())
 				//fmt.Println("in func test, before crash i:", i, "snapshot:", cfg.kvservers[i].rf.GetPersister().ReadSnapshot())
 				cfg.ShutdownServer(i)
 				//fmt.Println("in func test, after crash i:", i, "snapshot:", cfg.saved[i].ReadSnapshot())
@@ -303,6 +304,9 @@ func GenericTest(t *testing.T, part string, nclients int, unreliable bool, crash
 			//fmt.Println("in func test, i:", i, "j:", j, "key:", key, "v:", v)
 			checkClntAppends(t, i, v, j)
 		}
+
+		fmt.Println("before raftstate, sleep for 2s")
+		time.Sleep(2 * time.Second)
 
 		if maxraftstate > 0 {
 			// Check maximum after the servers have processed all client
@@ -688,7 +692,7 @@ func TestSnapshotRPC3B(t *testing.T) {
 		time.Sleep(electionTimeout)
 		Put(cfg, ck1, "b", "B")
 	}
-	//fmt.Println("in func test, 111")
+	fmt.Println("in func test, 111")
 
 	// check that the majority partition has thrown away
 	// most of its log entries.
@@ -703,11 +707,11 @@ func TestSnapshotRPC3B(t *testing.T) {
 	//fmt.Println("in func test, after re-partition")
 	{
 		ck1 := cfg.makeClient([]int{0, 2})
-		//fmt.Println("in func test, 555")
+		fmt.Println("in func test, 555")
 		Put(cfg, ck1, "c", "C")
-		//fmt.Println("in func test, 222")
+		fmt.Println("in func test, 222")
 		Put(cfg, ck1, "d", "D")
-		//fmt.Println("in func test, 333")
+		fmt.Println("in func test, 333")
 		check(cfg, t, ck1, "a", "A")
 		check(cfg, t, ck1, "b", "B")
 		check(cfg, t, ck1, "1", "1")
@@ -770,7 +774,7 @@ func TestSnapshotSize3B(t *testing.T) {
 
 func TestSnapshotRecover3B(t *testing.T) {
 	// Test: restarts, snapshots, one client (3B) ...
-	GenericTest(t, "3B", 1, false, true, false, -1)
+	GenericTest(t, "3B", 1, false, true, false, 1000)
 }
 
 func TestMapDecode3B(t *testing.T) {

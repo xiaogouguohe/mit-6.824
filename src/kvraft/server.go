@@ -60,6 +60,11 @@ type KVServer struct {
 	putAppendOpsMu sync.RWMutex
 
 	applyIndex int32
+
+	curOpUnis map[string]int32
+	curOpUnisMu sync.RWMutex
+
+	tmp OpUnique
 }
 
 
@@ -96,7 +101,7 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 			//fmt.Println("in func server's Get, reply.Value:", reply.Value)
 			kv.dataMu.Unlock()
 
-		case <- time.After(time.Duration(400 * time.Millisecond)):
+		case <- time.After(time.Duration(300 * time.Millisecond)):
 			//fmt.Println("in func server's Get, time out, args:", args)
 			reply.Err = "time out"
 		}
@@ -142,7 +147,7 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 			//fmt.Println("in func server's putAppend, kv:", kv.me, "OpUni:", args.OpUni, "get from channel")
 			reply.Err = OK
 
-		case <- time.After(time.Duration(500 * time.Millisecond)):
+		case <- time.After(time.Duration(300 * time.Millisecond)):
 			//fmt.Println("in func server's PutAppend, time out, args:", args)
 			reply.Err = "time out"
 		}
@@ -225,9 +230,11 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	//logs := kv.rf.GetLogsBeforeCommitIndex(kv.rf.GetItself())
 	//afterSnapshotIndex := kv.rf.GetAfterSnapshotIndex()
 	//fmt.Println("in func StartKVServer, me:", me, "afterSnapshotIndex:", afterSnapshotIndex)
-	//logs := kv.rf.GetLogsBetweenAfterSnapshotAndLastApplied()
-	logs := kv.rf.GetLogsBeforeCommitIndex()
+	logs := kv.rf.GetLogsBetweenAfterSnapshotAndLastApplied()
+	//logs := kv.rf.GetLogsBeforeCommitIndex()
 	kv.applyIndex = -1
+
+	kv.curOpUnis = make(map[string]int32)
 
 	kv.dataMu.Lock()
 
@@ -246,33 +253,83 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 				//fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
 				//return
 			} else {
-				fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "decode error, error:", err)
+				fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "decode data error, error:", err)
 			}
+
+			err = d.Decode(&kv.curOpUnis)
+			if err == nil {
+				//fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
+				//return
+			} else {
+				fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "decode curOpUnis error, error:", err)
+			}
+			fmt.Println("in func StartKVServer, curOpUnis:")
+			for k, v := range(kv.curOpUnis) {
+				fmt.Println("k is:", k, "v is:", v)
+			}
+
+			err = d.Decode(&kv.tmp)
+			if err == nil {
+				//fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
+				//return
+			} else {
+				fmt.Println("in func readPersist, me:", kv.rf.GetItself(), "decode tmp error, error:", err)
+			}
+			fmt.Println("in func StartKVServer, me:", me, "tmp:", kv.tmp)
 		}
 	}
 	//fmt.Println("in func StartKVServer, me:", kv.rf.GetItself(), "after decode, kv.data", kv.data)
-	kv.dataMu.Unlock()
+	//kv.dataMu.Unlock()
 
 	for i := 0; i < len(logs); i++ { // 不能直接这样恢复，因为logs当中可能有重复日志
 		log := logs[i]
 		op, _ := log.Command.(Op)
 		if op.Ope == "Put" {
-			kv.dataMu.Lock()
-			kv.data[op.Key] = op.Value
-			kv.dataMu.Unlock()
+			kv.putAppendOpsMu.Lock()
+			if _, ok := kv.putAppendOps[op.OpUni]; ok {
+				kv.putAppendOpsMu.Unlock()
+			} else {
+				kv.putAppendOps[op.OpUni] = true
+				kv.putAppendOpsMu.Unlock()
+				if kv.curOpUnis[op.OpUni.ClerkName] < op.OpUni.Seq {
+					kv.curOpUnis[op.OpUni.ClerkName] = op.OpUni.Seq
+					//kv.dataMu.Lock()
+					kv.data[op.Key] = op.Value
+					kv.tmp = op.OpUni
+					//kv.dataMu.Unlock()
+				}
+			}
 		} else if op.Ope == "Append" {
-			kv.dataMu.Lock()
-			kv.data[op.Key] += op.Value
-			kv.dataMu.Unlock()
+			kv.putAppendOpsMu.Lock()
+			if _, ok := kv.putAppendOps[op.OpUni]; ok {
+				kv.putAppendOpsMu.Unlock()
+			} else {
+				kv.putAppendOps[op.OpUni] = true
+				kv.putAppendOpsMu.Unlock()
+				if kv.curOpUnis[op.OpUni.ClerkName] < op.OpUni.Seq {
+					kv.curOpUnis[op.OpUni.ClerkName] = op.OpUni.Seq
+					//kv.dataMu.Lock()
+					kv.data[op.Key] += op.Value
+					kv.tmp = op.OpUni
+					//kv.dataMu.Unlock()
+				}
+			}
 		}
 	}
+	fmt.Println("in func StartKVServer, finish recover log, me:", me, "before, data:", kv.data)
+	fmt.Println("in func StartKVServer, finish recover log, me:", me, "sleep for 2s")
+	fmt.Println("in func StartKVServer, finish recover log, me:", me, "after , data:", kv.data)
+	time.Sleep(2 * time.Second)
+	kv.dataMu.Unlock()
 
 	go func() {
 		for {
 			if kv.killed() {
 				break
 			}
+			//fmt.Println("in func StartKVServer, before get from applyCh")
 			applyMsg := <- kv.applyCh
+			//fmt.Println("in func StartKVServer, after  get from applyCh, applyMsg:", applyMsg)
 			op, _ := applyMsg.Command.(Op)
 			kv.dataMu.Lock()
 			atomic.StoreInt32(&kv.applyIndex, int32(applyMsg.CommandIndex) - 1)
@@ -305,15 +362,23 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 				kv.putAppendOpsMu.Unlock()
 
 				if op.Ope == "Put" {
-					kv.dataMu.Lock()
-					kv.data[op.Key] = op.Value
-					kv.dataMu.Unlock()
+					if kv.curOpUnis[op.OpUni.ClerkName] < op.OpUni.Seq {
+						kv.curOpUnis[op.OpUni.ClerkName] = op.OpUni.Seq
+						kv.dataMu.Lock()
+						kv.data[op.Key] = op.Value
+						kv.tmp = op.OpUni
+						kv.dataMu.Unlock()
+					}
 				} else if op.Ope == "Append" {
 					//fmt.Println("in func StartKVServer, is Append, kv:", kv.me, "Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "before add")
-					kv.dataMu.Lock()
-					kv.data[op.Key] += op.Value
-					//fmt.Println("in func StartKVServer, is Append, kv:", kv.me, "Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "after add")
-					kv.dataMu.Unlock()
+					if kv.curOpUnis[op.OpUni.ClerkName] < op.OpUni.Seq {
+						kv.curOpUnis[op.OpUni.ClerkName] = op.OpUni.Seq
+						kv.dataMu.Lock()
+						kv.data[op.Key] += op.Value
+						kv.tmp = op.OpUni
+						//fmt.Println("in func StartKVServer, is Append, kv:", kv.me, "Key:", op.Key, "kv.data[args.Key]:", kv.data[op.Key], "args.Value", op.Value, "after add")
+						kv.dataMu.Unlock()
+					}
 				}
 
 			}
@@ -332,70 +397,44 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 		}
 	}()
+
 	if maxraftstate > -1 {
 		go func() {
 			for {
 				if kv.killed() {
 					break
 				}
-				//fmt.Println("in func snapshot, server:", kv.me, "snapshot's size:", persister.RaftStateSize())
+				//fmt.Println("in func snapshot, me:", kv.me, "snapshot's size:", persister.RaftStateSize())
 				if maxraftstate <= persister.RaftStateSize() {
+					logsAfterLastApplied := make([]raft.LogEntry, 0)
+					rfdata := kv.rf.DoSomething(logsAfterLastApplied)
+					//fmt.Println("in func snapshot, me:", kv.me, "solve snapshot")
 					kv.dataMu.Lock()
 					w := new(bytes.Buffer)
 					e := labgob.NewEncoder(w)
 
 					e.Encode(kv.data)
+					e.Encode(kv.curOpUnis)
+					e.Encode(kv.tmp)
 					//fmt.Println("in func StartKVServer, kv.data:", kv.data)
 
-					applyIndex := kv.applyIndex
+					//applyIndex := kv.applyIndex
 					kv.dataMu.Unlock()
 
+					//kv.rf.LockVoteMu()
+					//lastApplied := kv.rf.GetLastApplied()
+					//logsAfterLastApplied := kv.rf.GetLogs(lastApplied)
+
+					e.Encode(logsAfterLastApplied)
 					dbdata := w.Bytes()
-					//kv.rf.PersistFromTo(kv.rf.GetAfterSnapshotIndex(), kv.rf.GetLastLogIndex() + 1)
 
-					w2 := new(bytes.Buffer)
-					e2 := labgob.NewEncoder(w2)
-					afterSnapshotIndex := kv.rf.GetAfterSnapshotIndex()
-					kv.rf.SetAfterSnapshotIndex(applyIndex + 1)
-					logs := kv.rf.GetLogsFromTo(afterSnapshotIndex, applyIndex + 1)
-					e2.Encode(kv.rf.GetCurrentTerm())
-					e2.Encode(kv.rf.GetVotedFor())
-					e2.Encode(logs)
-					rfdata := w2.Bytes()
+					//fmt.Println("in func StartKVServer, SetAfterSnapshotIndex, lastApplied:", lastApplied)
+					//rfdata := kv.rf.RaftStateToSnapshot(lastApplied)
 					persister.SaveStateAndSnapshot(rfdata, dbdata)
-					//fmt.Println("in func StartKVServer, persister in kv:", persister.ReadSnapshot())
-					//fmt.Println("in func StartKVServer, persister in rf:", kv.rf.GetPersister().ReadSnapshot())
-					//persister = persister.Copy()
-
-					/*fmt.Println("test decode, me:", kv.rf.GetItself(), "begin")
-					r := bytes.NewBuffer(persister.ReadSnapshot())
-					d := labgob.NewDecoder(r)
-
-					fmt.Println("test decode, me:", kv.rf.GetItself(), "dbdata:", dbdata)
-					fmt.Println("test decode, me:", kv.rf.GetItself(), "snapshot:", persister.ReadSnapshot())
-					tmpData := make(map[string]string)
-					err := d.Decode(&tmpData)
-					if err == nil {
-						fmt.Println("test decode, me:", kv.rf.GetItself(), "tmpData:", tmpData)
-					} else {
-						fmt.Println("test decode, me:", kv.rf.GetItself(), "decode dbdata error, error:", err)
-					}*/
-
-					/*r2 := bytes.NewBuffer(rfdata)
-					d2 := labgob.NewDecoder(r2)
-
-					var term int
-					var votedFor int
-					var logss []raft.LogEntry
-					if d2.Decode(&term) != nil || d.Decode(&votedFor) != nil || d.Decode(&logss) != nil {
-						fmt.Println("test decode, me:", kv.rf.GetItself(), "term:", term, "votedFor:", votedFor, "logss:", logss)
-					} else {
-						fmt.Println("test decode, me:", kv.rf.GetItself(), "decode kv.rfstate error")
-					}*/
 
 
 				}
-				time.Sleep(10 * time.Millisecond)
+				time.Sleep(100 * time.Millisecond)
 			}
 
 		}()
