@@ -35,7 +35,10 @@ type GetReply struct {
 	Value string
 }
 
+/* 一次客户端请求的唯一标识 */
 type OpUnique struct {
+	/* 客户端名字 */
 	ClerkName string
+	/* 请求的序列号，在每个客户端中依次递增 */
 	Seq int32
 }

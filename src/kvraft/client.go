@@ -8,13 +8,15 @@ import (
 import "crypto/rand"
 import "math/big"
 
-
+/* 发起请求的客户端 */
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
 
+	/* 这个客户端的当前请求 */
 	opUni OpUnique
 	opUniMu sync.RWMutex
+	/* 客户端的唯一标识 */
 	name string
 }
 
@@ -29,13 +31,14 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	// You'll have to add code here.
+	/* 给客户端起名 */
 	ck.name = randstring(20)
 	ck.opUniMu.Lock()
+	/* 客户端的请求序列从100开始 */
 	ck.opUni = OpUnique{
 		ClerkName: ck.name,
 		Seq:       100,
 	}
-	//fmt.Println("in func MakeClerk, opUni:", ck.opUni)
 	ck.opUniMu.Unlock()
 	return ck
 }
@@ -52,17 +55,18 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 //
+/* 客户端发起 Get 请求 */
 func (ck *Clerk) Get(key string) string {
 
 	// You will have to modify this function.
 	//return ""
 
-	//atomic.AddInt32(&ck.seq, 1) //还是有并发问题
 	ck.opUniMu.Lock()
 	opUni := ck.opUni
+	/* 客户端请求序列 +1 */
 	ck.opUni.Seq++
 	ck.opUniMu.Unlock()
-	//fmt.Println("in func client's Get, opUni:", opUni)
+	/* 客户端轮训每个服务器节点 */
 	for i := 0; ; i = (i + 1) % len(ck.servers) {
 		args := GetArgs{
 			Key: key,
@@ -79,6 +83,7 @@ func (ck *Clerk) Get(key string) string {
 			okCh <- ok
 		}()
 
+		/* 等 500 ms, 如果还没有ok，视为 rpc 超时*/
 		select{
 		case ok = <- okCh:
 
@@ -86,8 +91,7 @@ func (ck *Clerk) Get(key string) string {
 
 		}
 
-		//fmt.Println("in func client's Get, ok:", ok, "server:", i, "Key:", key, "Value:", reply.Value, "opUni:", opUni,
-		//	"reply.Err:", reply.Err)
+		/* rpc 调用不超时，且 Get 正确值 */
 		if ok && reply.Err == OK {
 			return reply.Value
 		}
@@ -105,16 +109,15 @@ func (ck *Clerk) Get(key string) string {
 // must match the declared types of the RPC handler function's
 // arguments. and reply must be passed as a pointer.
 //
+/* 参考上面的 Get */
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
 
-	//fmt.Println("in func client's PutAppend, len(ck.servers):", len(ck.servers))
 	//atomic.AddInt32(&ck.seq, 1) //还是有并发问题
 	ck.opUniMu.Lock()
 	opUni := ck.opUni
 	ck.opUni.Seq++
 	ck.opUniMu.Unlock()
-	//fmt.Println("in func client's PutAppend, opUni:", opUni)
 	for i := 0; ; i = (i + 1) % len(ck.servers) {
 		args := PutAppendArgs{
 			Key:   key,
@@ -123,7 +126,6 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 			OpUni:   opUni,
 
 		}
-		//fmt.Println("in func client's PutAppend, seq:", ck.seq)
 		reply := PutAppendReply{
 			Err: "initial",
 		}
@@ -140,10 +142,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 		case <- time.After(500 * time.Millisecond):
 
 		}
-		//fmt.Println("in func client's PutAppend, ok:", ok, "server:", i, "Key:", key, "Value:", value, "Op:", op, "opUni:", opUni,
-		//	"reply.Err:", reply.Err)
 		if ok && reply.Err == OK {
-			//fmt.Println("in func client's PutAppend, i:", i, "ok and reply.Err is nil")
 			break
 		}
 	}

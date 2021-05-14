@@ -289,7 +289,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 		return
 	}
 
-	rf.UpdateLastRecvTime()
+	// rf.UpdateLastRecvTime()
 
 	if rf.isLogNew(args) {
 		reply.VoteGranted = false
@@ -300,6 +300,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {   
 	if votedFor == -1 || votedFor == args.Candidate {
 		rf.SetVotedFor(args.Candidate)
 		reply.VoteGranted = true
+		rf.UpdateLastRecvTime()
 	}
 }
 
@@ -320,12 +321,16 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	//lastLogTerm := rf.GetLastLogTerm()
 	commitIndex := rf.GetCommitIndex()
 
+	/* rf 的上一条日志的任期 */
 	termOfPrevLogIndexInRf := rf.GetSingleEntry(args.PrevLogIndex).Term
 
+	/* args 的上一条日志索引大于 rf 的日志长度 */
 	if args.PrevLogIndex > logLen /*|| args.LeaderCommit > logLen - 1*/ {
 		reply.Succ = false
 		reply.CommitIndex = commitIndex
 		reply.Term = args.Term
+
+	/* args 的上一条日志索引大于等于 0，且 args 的上一条日志任期不等于 rf 的上一条日志任期 */
 	} else if args.PrevLogIndex >= 0 && args.PrevLogTerm != int32(termOfPrevLogIndexInRf)/*lastLogTerm*/ {
 		reply.Succ = false
 		reply.CommitIndex = commitIndex
@@ -337,7 +342,14 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		}
 		reply.ConflictIndex = i
 	} else {
-		reply.Succ = true
+		//if (args.PrevLogTerm == int32(args.Term)) {
+		//	reply.Succ = true
+		//}
+
+		if (len(args.Entries) == 0 || args.Entries[len(args.Entries) - 1].Term == args.Term) {
+			reply.Succ = true
+		}
+
 		reply.CommitIndex = args.LeaderCommit
 		reply.Term = args.Term
 
@@ -490,6 +502,7 @@ func (rf *Raft) LeaderElection() {
 			replyCount <- -1
 		}()
 
+		rf.UpdateLastRecvTime()
 		for i := 0; i < len(rf.peers); i++ {  //遍历所有节点
 			if i == itself {
 				continue
@@ -776,6 +789,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 			now := time.Now().UnixNano()
 			prev := atomic.LoadInt64(&rf.lastRecvTime)
 			if time.Duration(now - prev) * time.Nanosecond >= rf.electionInterval {
+				//rf.UpdateLastRecvTime()
 				rf.LeaderElection()
 			}
 		}
